@@ -20,6 +20,20 @@ class Api::V1::QuestionsController < ApplicationController
     end
   end
 
+  # PATCH /api/questions/:id
+  def update
+    @question.update(question_params)
+  end
+
+  # DELETE /api/questions/:id
+  def destroy
+    if @question && @question.destroy
+      render json: {message: "question deleted"}
+    else
+      render json: {message: "unable to delete question"}
+    end
+  end
+
   private
     def question_params
       params.permit(:title, :position)
