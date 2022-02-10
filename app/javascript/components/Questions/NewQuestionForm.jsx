@@ -24,7 +24,7 @@ const NewQuestionForm = ({ parentId, siblingCount }) => {
         return;
       });
 
-      navigate(`/surveys/${parentId}/${Date.now().toString()}`);
+      navigate(`/surveys/${parentId}/${Date.now()}`);
       setTitle("");
       inputRef.current.blur();
     } else {
