@@ -4,13 +4,13 @@ import { useNavigate } from "react-router";
 import NewQuestionForm from "./NewQuestionForm";
 import QuestionDisplay from "./QuestionDisplay";
 
-const QuestionsContainer = ({ parentId }) => {
+const QuestionsContainer = ({ parent_id }) => {
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`/api/v1/surveys/${parentId}/questions`);
+      const response = await fetch(`/api/v1/surveys/${parent_id}/questions`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -52,7 +52,7 @@ const QuestionsContainer = ({ parentId }) => {
   return (
     <div className="QuestionsContainer">
       {renderQuestionsContainer()}
-      <NewQuestionForm parentId={parentId} siblingCount={questions.length} />
+      <NewQuestionForm parent_id={parent_id} siblingCount={questions.length} />
     </div>
   );
 };

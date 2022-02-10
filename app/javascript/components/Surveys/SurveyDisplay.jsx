@@ -129,7 +129,7 @@ const SurveyDisplay = () => {
   return (
     <div className="SurveyDisplay">
       {renderSurvey()}
-      <QuestionsContainer parentId={id} />
+      <QuestionsContainer parent_id={id} />
     </div>
   );
 };
