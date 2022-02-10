@@ -1,5 +1,5 @@
 class Api::V1::SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :destroy]
+  before_action :set_survey, only: [:show, :update, :destroy]
   wrap_parameters false
 
   # GET /api/v1/surveys
@@ -26,6 +26,11 @@ class Api::V1::SurveysController < ApplicationController
    else
      render json: {message: "error: survey not created"}
    end
+  end
+
+  # PATCH /api/v1/surveys/:id
+  def update
+    @survey.update(survey_params)
   end
 
   # DELETE /api/v1/surveys/:id

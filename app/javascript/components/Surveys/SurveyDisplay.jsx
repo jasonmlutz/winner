@@ -58,15 +58,16 @@ const SurveyDisplay = () => {
   async function handleEditSubmit(e) {
     e.preventDefault();
     if (title.length) {
+      const token = document.querySelector("[name=csrf-token]").content;
       // db push
       await fetch(`/api/v1/surveys/${id}`, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
         },
         body: JSON.stringify({
           title: title,
-          updatedAt: Date.now(),
         }),
       }).catch((error) => {
         window.alert(error);
