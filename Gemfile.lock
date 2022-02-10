@@ -66,9 +66,6 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    activeuuid (0.6.1)
-      activerecord (>= 3.1)
-      uuidtools
     bindex (0.8.1)
     builder (3.2.4)
     concurrent-ruby (1.1.9)
@@ -177,7 +174,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    uuidtools (2.2.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -193,7 +189,6 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
-  activeuuid
   cssbundling-rails
   debug
   jbuilder
