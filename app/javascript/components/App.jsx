@@ -13,10 +13,15 @@ const App = () => {
       children: [
         { path: "", element: <Home /> },
         { path: "new", element: <NewSurveyForm /> },
-        { path: ":id", element: <SurveyDisplay /> },
+        {
+          path: ":id/",
+          children: [
+            { path: "", element: <SurveyDisplay /> },
+            { path: ":timestamp", element: <SurveyDisplay /> },
+          ],
+        },
       ],
     },
-    { path: "/surveys/:id/:timestamp", element: <SurveyDisplay /> },
   ]);
 
   return <div className="App">{routes}</div>;
