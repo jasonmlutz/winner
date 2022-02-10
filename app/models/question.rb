@@ -4,13 +4,13 @@
 #
 #  id         :uuid             not null, primary key
 #  position   :integer          not null
-#  title      :string
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  parent_id  :uuid
+#  parent_id  :uuid             not null
 #
 class Question < ApplicationRecord
-  validates :title, :parent_id, presence: true
+  validates :position, :title, :parent_id, presence: true
   
   belongs_to :survey, foreign_key: :parent_id
 end
