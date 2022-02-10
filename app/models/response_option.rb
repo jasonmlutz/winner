@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: questions
+# Table name: response_options
 #
 #  id         :uuid             not null, primary key
 #  position   :integer          not null
@@ -9,9 +9,8 @@
 #  updated_at :datetime         not null
 #  parent_id  :uuid             not null
 #
-class Question < ApplicationRecord
-  validates :position, :title, :parent_id, presence: true
+class ResponseOption < ApplicationRecord
+    validates :position, :title, :parent_id, presence: true
   
-  belongs_to :survey, foreign_key: :parent_id
-  has_many :response_options, foreign_key: :parent_id, dependent: :destroy
+  belongs_to :question, foreign_key: :parent_id
 end

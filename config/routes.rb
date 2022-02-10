@@ -5,7 +5,11 @@ Rails.application.routes.draw do
         resources :questions, only: [:create, :index]
       end
 
-      resources :questions, only: [:update, :destroy]
+      resources :questions, only: [:update, :destroy] do
+        resources :response_options, only: [:create, :index]
+      end
+
+      resources :response_options, only: [:update, :destroy]
     end
   end
 
