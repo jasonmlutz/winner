@@ -23,7 +23,7 @@ export async function handleDelete(
   if (family === "questions" || family === "responseOptions") {
     objects.forEach((element) => {
       if (element.position > object.position) {
-        adjustObjectPosition(element.id, family, element.position - 1);
+        await adjustObjectPosition(element.id, family, element.position - 1);
       }
     });
   }
@@ -47,7 +47,14 @@ async function adjustObjectPosition(id, family, newPosition) {
   });
 }
 
-export function handleMove(object, objects, family, navCallback, path, dir) {
+export async function handleMove(
+  object,
+  objects,
+  family,
+  navCallback,
+  path,
+  dir
+) {
   let indexModifier;
   switch (dir) {
     case "up":
@@ -61,13 +68,17 @@ export function handleMove(object, objects, family, navCallback, path, dir) {
       break;
   }
 
-  adjustObjectPosition(object.id, family, object.position + indexModifier);
+  await adjustObjectPosition(
+    object.id,
+    family,
+    object.position + indexModifier
+  );
 
   const adjacentObject = objects.find(
     (element) => element.position === object.position + indexModifier
   );
 
-  adjustObjectPosition(
+  await adjustObjectPosition(
     adjacentObject.id,
     family,
     adjacentObject.position - indexModifier
