@@ -8,8 +8,15 @@ import SurveyDisplay from "./Surveys/SurveyDisplay";
 const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
-    { path: "/surveys/new", element: <NewSurveyForm /> },
-    { path: "/surveys/:id", element: <SurveyDisplay /> },
+    {
+      path: "surveys/",
+      children: [
+        { path: "", element: <Home /> },
+        { path: "new", element: <NewSurveyForm /> },
+        { path: ":id", element: <SurveyDisplay /> },
+      ],
+    },
+    { path: "/surveys/:id/:timestamp", element: <SurveyDisplay /> },
   ]);
 
   return <div className="App">{routes}</div>;
