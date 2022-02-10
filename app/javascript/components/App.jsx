@@ -5,6 +5,8 @@ import Home from "./Home";
 import NewSurveyForm from "./Surveys/NewSurveyForm";
 import SurveyDisplay from "./Surveys/SurveyDisplay";
 
+import NotFound from "./NotFound";
+
 const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
@@ -23,6 +25,8 @@ const App = () => {
       ],
     },
   ]);
+
+  routes = routes || <NotFound pathname={location.pathname} />;
 
   return <div className="App">{routes}</div>;
 };
