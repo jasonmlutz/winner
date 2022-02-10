@@ -9,11 +9,14 @@ const NewSurveyForm = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     if (title.length) {
+      // get the csrf token
+      const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
       await fetch("/api/v1/surveys", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
         },
         body: JSON.stringify({
           title: title,
