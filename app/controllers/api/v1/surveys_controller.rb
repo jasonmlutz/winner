@@ -1,5 +1,6 @@
 class Api::V1::SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :destroy]
+  wrap_parameters false
 
   # GET /api/v1/surveys
   def index
