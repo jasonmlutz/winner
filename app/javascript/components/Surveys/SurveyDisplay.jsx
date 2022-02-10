@@ -74,7 +74,7 @@ const SurveyDisplay = () => {
         return;
       });
 
-      navigate(`/surveys/${id}`);
+      navigate(`/surveys/${id}/${Date.now()}`);
       setEditActive(false);
     } else {
       alert("please name your survey!");
