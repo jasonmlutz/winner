@@ -4,11 +4,11 @@ import { useNavigate } from "react-router";
 import ResponseOptionsContainer from "../ResponseOptions/ResponseOptionsContainer";
 import IconInterface from "../IconInterface";
 
-// import {
-//   handleEditSubmit,
-//   handleMove,
-//   handleDelete,
-// } from "../../resources/ObjectActions";
+import {
+  handleEditSubmit,
+  handleMove,
+  handleDelete,
+} from "../resources/ObjectActions";
 
 const QuestionDisplay = ({ question, questions }) => {
   const [editActive, setEditActive] = useState(false);
@@ -16,7 +16,7 @@ const QuestionDisplay = ({ question, questions }) => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
-  const path = `/surveys/${question.parentId}/${Date.now()}`;
+  const path = `/surveys/${question.parent_id}/${Date.now()}`;
 
   useEffect(() => {
     if (editActive) {
@@ -42,7 +42,7 @@ const QuestionDisplay = ({ question, questions }) => {
             onClick={(e) =>
               handleEditSubmit(
                 e,
-                question._id,
+                question.id,
                 "questions",
                 title,
                 navigate,
@@ -59,8 +59,7 @@ const QuestionDisplay = ({ question, questions }) => {
       return (
         <div className="text__title text__title--medium">
           <div className="text__title--icons-right">{question.title}</div>
-          {<IconInterface />}
-          {/* <IconInterface
+          <IconInterface
             position={question.position}
             siblingCount={questions.length}
             setEditActive={setEditActive}
@@ -74,14 +73,14 @@ const QuestionDisplay = ({ question, questions }) => {
             )}
             handleDelete={handleDelete.bind(
               null,
-              question._id,
+              question.id,
               question,
               questions,
               "questions",
               navigate,
               path
             )}
-          /> */}
+          />
         </div>
       );
     }
@@ -91,8 +90,8 @@ const QuestionDisplay = ({ question, questions }) => {
     <div className="QuestionDisplay">
       {renderQuestion()}
       <ResponseOptionsContainer
-        parentId={question._id}
-        grandparentId={question.parentId}
+        parent_id={question.id}
+        grandparent_id={question.parent_id}
       />
     </div>
   );

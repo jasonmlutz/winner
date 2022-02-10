@@ -1,5 +1,5 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :destroy]
+  before_action :set_question, only: [:show, :destroy, :update]
   before_action :set_survey, only: [:index]
   wrap_parameters false
 

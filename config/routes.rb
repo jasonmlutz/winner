@@ -4,8 +4,11 @@ Rails.application.routes.draw do
       resources :surveys, only: [:index, :show, :create, :destroy, :update] do
         resources :questions, only: [:create, :index]
       end
+
+      resources :questions, only: [:update, :destroy]
     end
   end
+
   root 'app#index'
 
   get '*path', to: 'app#index'
