@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
-// import QuestionsContainer from "../Questions/QuestionsContainer";
+import QuestionsContainer from "../Questions/QuestionsContainer";
 
 const SurveyDisplay = () => {
   const [title, setTitle] = useState("");
@@ -49,20 +49,6 @@ const SurveyDisplay = () => {
       window.alert(error);
       return;
     });
-
-    // await fetch(`/api/v1/surveys/${id}/questions`, {
-    //   method: "DELETE",
-    // }).catch((error) => {
-    //   window.alert(error);
-    //   return;
-    // });
-
-    // await fetch(`/api/v1/surveys/${id}/responseOptions`, {
-    //   method: "DELETE",
-    // }).catch((error) => {
-    //   window.alert(error);
-    //   return;
-    // });
 
     navigate("/");
   }
@@ -139,13 +125,12 @@ const SurveyDisplay = () => {
       );
     }
   };
-  return <div className="SurveyDisplay">{renderSurvey()}</div>;
-  // return (
-  //   <div className="SurveyDisplay">
-  //     {renderSurvey()}
-  //     <QuestionsContainer parentId={id} />
-  //   </div>
-  // );
+  return (
+    <div className="SurveyDisplay">
+      {renderSurvey()}
+      <QuestionsContainer parentId={id} />
+    </div>
+  );
 };
 
 export default SurveyDisplay;

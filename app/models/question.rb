@@ -3,6 +3,7 @@
 # Table name: questions
 #
 #  id         :uuid             not null, primary key
+#  position   :integer          not null
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
