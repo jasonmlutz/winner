@@ -28,7 +28,7 @@ class Api::V1::SurveysController < ApplicationController
    end
   end
 
-  # DELETE /surveys/:id
+  # DELETE /api/v1/surveys/:id
   def destroy
     if @survey && @survey.destroy
       render json: {message: "survey deleted"}
