@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 
-// import ResponseOptionsContainer from "../ResponseOptions/ResponseOptionsContainer";
-// import IconInterface from "../IconInterface";
+import ResponseOptionsContainer from "../ResponseOptions/ResponseOptionsContainer";
+import IconInterface from "../IconInterface";
 
 // import {
 //   handleEditSubmit,
@@ -59,6 +59,7 @@ const QuestionDisplay = ({ question, questions }) => {
       return (
         <div className="text__title text__title--medium">
           <div className="text__title--icons-right">{question.title}</div>
+          {<IconInterface />}
           {/* <IconInterface
             position={question.position}
             siblingCount={questions.length}
@@ -89,10 +90,10 @@ const QuestionDisplay = ({ question, questions }) => {
   return (
     <div className="QuestionDisplay">
       {renderQuestion()}
-      {/* <ResponseOptionsContainer
+      <ResponseOptionsContainer
         parentId={question._id}
         grandparentId={question.parentId}
-      /> */}
+      />
     </div>
   );
 };
