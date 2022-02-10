@@ -1,14 +1,15 @@
 # == Schema Information
 #
-# Table name: surveys
+# Table name: questions
 #
 #  id         :uuid             not null, primary key
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  parent_id  :uuid
 #
-class Survey < ApplicationRecord
-  validates :title, presence: true
+class Question < ApplicationRecord
+  validates :title, :parent_id, presence: true
   
-  has_many :questions, foreign_key: :parent_id, dependent: :destroy
+  belongs_to :survey, foreign_key: :parent_id
 end
