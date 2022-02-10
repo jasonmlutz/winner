@@ -11,7 +11,7 @@ const NewQuestionForm = ({ parentId, siblingCount }) => {
     if (title.length) {
       const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
-      await fetch(`/api/v1/surveys/${parentId}/questions/add`, {
+      await fetch(`/api/v1/surveys/${parentId}/questions/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
