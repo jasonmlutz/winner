@@ -21,7 +21,7 @@ export async function handleDelete(
 
   // surveys don't need this step
   if (family === "questions" || family === "responseOptions") {
-    objects.forEach((element) => {
+    objects.forEach(async (element) => {
       if (element.position > object.position) {
         await adjustObjectPosition(element.id, family, element.position - 1);
       }
