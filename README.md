@@ -20,8 +20,25 @@ Technologies used: Ruby on Rails, Reactjs, Postgres, HTML, CSS
 
 ### API ENDPOINTS
 
-#### Surveys
+#### Survey Creation and Management
 
-#### Questions
+##### Surveys
 
-#### ResponseOptions
+- `POST /api/surveys` - Create a new survey
+- `GET /api/surveys` - Get all surveys
+- `PUT /api/surveys/:id` - Edit the title of an existing survey
+- `DELETE /api/surveys/:id` - Delete an existing survey; Rails associations triggers deletion of associated Question and ResponseOption database entries
+
+##### Questions
+
+- `POST /api/surveys/:survey_id/questions` - Create a new question on a specified survey
+- `GET /api/surveys/:survey_id/questions` - Get all questions on a specified survey
+- `PUT /api/questions/:id` - Edit the title and/or position of an existing question
+- `DELETE /api/questions/:id` - Delete an existing question; Rails associations triggers deletion of associated ResponseOption database entries
+
+##### ResponseOptions
+
+- `POST /api/questions/:question_id/response_options` - Create a new response option to a specified question
+- `GET /api/questions/:question_id/response_options` - Get all response options to a specified question
+- `PUT /api/response_options/:id` - Edit the title and/or position of an existing response option
+- `DELETE /api/response_options/:id` - Delete an existing response option
