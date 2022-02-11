@@ -11,4 +11,5 @@ class Survey < ApplicationRecord
   validates :title, presence: true
   
   has_many :questions, foreign_key: :parent_id, dependent: :destroy
+  has_many :response_options, foreign_key: :grandparent_id, dependent: :destroy
 end
