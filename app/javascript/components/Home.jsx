@@ -23,6 +23,18 @@ const Home = () => {
           Go
         </button>
       </div>
+      <div className="text__title text__title--large text__title--wide">
+        <div className="heading">Register!</div>
+        <button
+          className="input__submit input__submit--large"
+          type="submit"
+          onClick={() => {
+            navigate("/users");
+          }}
+        >
+          Go
+        </button>
+      </div>
     </div>
   );
 };
