@@ -69,6 +69,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    bcrypt (3.1.16)
     bindex (0.8.1)
     builder (3.2.4)
     concurrent-ruby (1.1.9)
@@ -194,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bcrypt (~> 3.1.7)
   cssbundling-rails
   debug
   jbuilder
