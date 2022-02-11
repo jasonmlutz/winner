@@ -81,6 +81,25 @@ body {
   justify-content: space-evenly;
 }
 
+.UsersContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.NewUserForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.NewUserForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .SurveysContainer {
   width: 100%;
   display: flex;
