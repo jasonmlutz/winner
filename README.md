@@ -12,7 +12,7 @@ The main goal of this application is to allow users to create and respond to sur
 
 https://jml-winner.herokuapp.com/
 
-screenshot
+![Screen Shot 2022-02-11 at 9 03 59 AM](https://user-images.githubusercontent.com/6218859/153639970-6d04eea4-0278-4b94-83cc-356a0dfb009e.png)
 
 ## TECH
 
