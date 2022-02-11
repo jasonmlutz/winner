@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
 
     resources :response_options, only: [:update, :destroy]
+
+    resources :users, only: [:index, :create, :show, :destroy]
   end
 
   root 'app#index'
