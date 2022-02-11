@@ -1,24 +1,27 @@
-# README
+# WINNER: Create surveys, pick a winner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The main goal of this application is to allow users to create and respond to surveys. The stack consists of [Ruby on Rails](https://rubyonrails.org/) and [React](https://reactjs.org/) and it is deployed to [Heroku](https://www.heroku.com/).
 
-Things you may want to cover:
+## TABLE OF CONTENTS
 
-* Ruby version
+- [Demo](#Demo)
+- [Tech](#Tech)
+  - [API endpoints](#API-endpoints)
 
-* System dependencies
+## DEMO
 
-* Configuration
+https://jml-winner.herokuapp.com/
 
-* Database creation
+screenshot
 
-* Database initialization
+## TECH
 
-* How to run the test suite
+Technologies used: Ruby on Rails, Reactjs, Postgres, HTML, CSS
 
-* Services (job queues, cache servers, search engines, etc.)
+### API ENDPOINTS
 
-* Deployment instructions
+#### Surveys
 
-* ...
+#### Questions
+
+#### ResponseOptions
