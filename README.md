@@ -6,6 +6,7 @@ The main goal of this application is to allow users to create and respond to sur
 
 - [Demo](#Demo)
 - [Tech](#Tech)
+  - [Sources](#Sources)
   - [API endpoints](#API-endpoints)
 
 ## DEMO
@@ -16,7 +17,11 @@ https://jml-winner.herokuapp.com/
 
 ## TECH
 
-Technologies used: Ruby on Rails, Reactjs, Postgres, HTML, CSS
+Technologies used: Ruby on Rails, Reactjs, Postgres, HTML, CSS.
+
+### SOURCES
+
+The Rails backend for this project was adapted from [Votey](https://github.com/jasonmlutz/votey); the React frontend was adapted from [Survey](https://github.com/jasonmlutz/survey).
 
 ### API ENDPOINTS
 
