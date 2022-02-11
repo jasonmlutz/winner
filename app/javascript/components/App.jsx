@@ -5,11 +5,14 @@ import Home from "./Home";
 import NewSurveyForm from "./Surveys/NewSurveyForm";
 import SurveyDisplay from "./Surveys/SurveyDisplay";
 
+import UsersContainer from "./Users/UsersContainer";
+
 import NotFound from "./NotFound";
 
 const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    { path: "users/", element: <UsersContainer /> },
     {
       path: "surveys/",
       children: [
