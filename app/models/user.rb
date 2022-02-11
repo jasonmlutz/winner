@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  has_many :surveys, foreign_key: :author_id, dependent: :destroy
+
   def protect(protectedKeys = ["password_digest", "created_at", "updated_at"])
     output = {}
     self.attributes.keys.map do |key|
