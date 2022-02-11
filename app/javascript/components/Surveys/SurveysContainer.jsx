@@ -7,7 +7,7 @@ const SurveysContainer = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`/api/v1/surveys/`);
+      const response = await fetch(`/api/surveys/`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;

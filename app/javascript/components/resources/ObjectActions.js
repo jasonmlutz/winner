@@ -1,4 +1,4 @@
-const urlBase = "/api/v1";
+const urlBase = "/api";
 const token = document.querySelector("[name=csrf-token]").content;
 
 export async function handleDelete(

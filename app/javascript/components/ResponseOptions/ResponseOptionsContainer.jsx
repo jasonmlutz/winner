@@ -11,7 +11,7 @@ const ResponseOptionsContainer = ({ parent_id, grandparent_id }) => {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        `/api/v1/questions/${parent_id}/response_options`
+        `/api/questions/${parent_id}/response_options`
       );
 
       if (!response.ok) {

@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
-    namespace :v1 do
-      resources :surveys, only: [:index, :show, :create, :destroy, :update] do
-        resources :questions, only: [:create, :index]
-      end
-
-      resources :questions, only: [:update, :destroy] do
-        resources :response_options, only: [:create, :index]
-      end
-
-      resources :response_options, only: [:update, :destroy]
+    resources :surveys, only: [:index, :show, :create, :destroy, :update] do
+      resources :questions, only: [:create, :index]
     end
+
+    resources :questions, only: [:update, :destroy] do
+      resources :response_options, only: [:create, :index]
+    end
+
+    resources :response_options, only: [:update, :destroy]
   end
 
   root 'app#index'

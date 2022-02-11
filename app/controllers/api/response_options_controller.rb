@@ -1,15 +1,15 @@
-class Api::V1::ResponseOptionsController < ApplicationController
+class Api::ResponseOptionsController < ApplicationController
   before_action :set_response_option, only: [:show, :destroy, :update]
   before_action :set_question, only: [:index]
   wrap_parameters false
 
-  # GET    /api/v1/questions/:question_id/response_options
+  # GET    /api/questions/:question_id/response_options
   def index
     @response_option = @question.response_options.order(position: :asc)
     render json: @response_option
   end
 
-  # POST   /api/v1/questions/:question_id/response_options
+  # POST   /api/questions/:question_id/response_options
   def create
     @response_option = ResponseOption.new(response_option_params)
     @response_option.parent_id = params[:question_id]
@@ -20,13 +20,13 @@ class Api::V1::ResponseOptionsController < ApplicationController
     end
   end
 
-  # PATCH  /api/v1/response_options/:id
-  # PUT    /api/v1/response_options/:id
+  # PATCH  /api/response_options/:id
+  # PUT    /api/response_options/:id
   def update
     @response_option.update(response_option_params)
   end
 
-  # DELETE /api/v1/response_options/:id(.:format)
+  # DELETE /api/response_options/:id(.:format)
   def destroy
     if @response_option && @response_option.destroy
       render json: {message: "response option deleted"}

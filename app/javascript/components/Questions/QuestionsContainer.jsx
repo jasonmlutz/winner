@@ -10,7 +10,7 @@ const QuestionsContainer = ({ parent_id }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`/api/v1/surveys/${parent_id}/questions`);
+      const response = await fetch(`/api/surveys/${parent_id}/questions`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;

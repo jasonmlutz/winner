@@ -1,15 +1,15 @@
-class Api::V1::QuestionsController < ApplicationController
+class Api::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :destroy, :update]
   before_action :set_survey, only: [:index]
   wrap_parameters false
 
-  # GET /api/v1/surveys/:survey_id/questions
+  # GET /api/surveys/:survey_id/questions
   def index
     @questions = @survey.questions.order(position: :asc)
     render json: @questions
   end
 
-  # POST /api/v1/surveys/:survey_id/questions
+  # POST /api/surveys/:survey_id/questions
   def create
     @question = Question.new(question_params)
     @question.parent_id = params[:survey_id]

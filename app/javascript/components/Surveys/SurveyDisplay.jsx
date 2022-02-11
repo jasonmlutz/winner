@@ -14,7 +14,7 @@ const SurveyDisplay = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`/api/v1/surveys/${id}`);
+      const response = await fetch(`/api/surveys/${id}`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -40,7 +40,7 @@ const SurveyDisplay = () => {
 
   async function handleDelete() {
     const token = document.querySelector("[name=csrf-token]").content;
-    await fetch(`/api/v1/surveys/${id}`, {
+    await fetch(`/api/surveys/${id}`, {
       method: "DELETE",
       headers: {
         "X-CSRF-TOKEN": token,
@@ -60,7 +60,7 @@ const SurveyDisplay = () => {
     if (title.length) {
       const token = document.querySelector("[name=csrf-token]").content;
       // db push
-      await fetch(`/api/v1/surveys/${id}`, {
+      await fetch(`/api/surveys/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

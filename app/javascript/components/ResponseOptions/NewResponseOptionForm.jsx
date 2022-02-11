@@ -10,7 +10,7 @@ const NewResponseOptionForm = ({ parent_id, grandparent_id, siblingCount }) => {
     e.preventDefault();
     if (title.length) {
       const token = document.querySelector("[name=csrf-token]").content;
-      await fetch(`/api/v1/questions/${parent_id}/response_options`, {
+      await fetch(`/api/questions/${parent_id}/response_options`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,14 +1,14 @@
-class Api::V1::SurveysController < ApplicationController
+class Api::SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :update, :destroy]
   wrap_parameters false
 
-  # GET /api/v1/surveys
+  # GET /api/surveys
   def index
     @surveys = Survey.all
     render json: @surveys
   end
 
-  # GET /api/v1/surveys/:id
+  # GET /api/surveys/:id
   def show
    if @survey
      render json: @survey
@@ -17,7 +17,7 @@ class Api::V1::SurveysController < ApplicationController
    end
   end
 
-  # POST /api/v1/surveys
+  # POST /api/surveys
   def create
     @survey = Survey.new(survey_params)
 
@@ -28,12 +28,12 @@ class Api::V1::SurveysController < ApplicationController
    end
   end
 
-  # PATCH /api/v1/surveys/:id
+  # PATCH /api/surveys/:id
   def update
     @survey.update(survey_params)
   end
 
-  # DELETE /api/v1/surveys/:id
+  # DELETE /api/surveys/:id
   def destroy
     if @survey && @survey.destroy
       render json: {message: "survey deleted"}
