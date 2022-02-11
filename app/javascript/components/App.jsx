@@ -6,13 +6,20 @@ import NewSurveyForm from "./Surveys/NewSurveyForm";
 import SurveyDisplay from "./Surveys/SurveyDisplay";
 
 import UsersContainer from "./Users/UsersContainer";
+import UserDisplay from "./Users/UserDisplay";
 
 import NotFound from "./NotFound";
 
 const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
-    { path: "users/", element: <UsersContainer /> },
+    {
+      path: "users/",
+      children: [
+        { path: "", element: <UsersContainer /> },
+        { path: ":id/", element: <UserDisplay /> },
+      ],
+    },
     {
       path: "surveys/",
       children: [
