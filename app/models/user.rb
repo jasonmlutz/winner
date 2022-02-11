@@ -12,4 +12,12 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :name, presence: true, uniqueness: true
+
+  def protect(protectedKeys = ["password_digest", "created_at", "updated_at"])
+    output = {}
+    self.attributes.keys.map do |key|
+      output[key] = self[key] unless protectedKeys.include?(key)
+    end
+    output
+  end
 end
