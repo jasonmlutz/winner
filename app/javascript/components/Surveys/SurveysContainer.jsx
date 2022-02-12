@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 const SurveysContainer = () => {
   const [surveys, setSurveys] = useState([]);
+  const [hovered, setHovered] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +39,17 @@ const SurveysContainer = () => {
             {surveys.map((survey) => (
               <li
                 key={survey.id}
-                className="text__icon"
+                className={
+                  hovered === survey.id
+                    ? "text__icon darken-background"
+                    : "text__icon"
+                }
+                onMouseEnter={(e) => {
+                  setHovered(survey.id);
+                }}
+                onMouseLeave={(e) => {
+                  setHovered("");
+                }}
                 onClick={() => {
                   navigate(`/surveys/${survey.id.toString()}`);
                 }}

@@ -57,6 +57,10 @@ body {
   font-family: "Roboto Mono", monospace;
 }
 
+.darken-background {
+  background-color: rgb(0, 0, 0);
+}
+
 .App {
   width: 100%;
   display: flex;
