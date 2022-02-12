@@ -51,6 +51,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'faker'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
