@@ -18,12 +18,8 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  def protect(protectedKeys = ["password_digest", "created_at", "updated_at"])
-    output = {}
-    self.attributes.keys.map do |key|
-      output[key] = self[key] unless protectedKeys.include?(key)
-    end
-    output
+  def protect(protectedKeys = ["session_token", "password_digest", "created_at", "updated_at"])
+    self.attributes.select { |k, v| !protectedKeys.include?(k)}
   end
 
   def self.generate_session_token
