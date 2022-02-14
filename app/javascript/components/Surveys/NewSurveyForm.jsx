@@ -1,40 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const NewSurveyForm = () => {
   const [title, setTitle] = useState("");
-  const [users, setUsers] = useState([]);
-  const [authorId, setAuthorId] = useState();
   const navigate = useNavigate();
   const { currentUser } = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/users`);
-
-      if (!response.ok) {
-        const message = `An error has occurred fetching users: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const users = await response.json();
-      if (!users) {
-        window.alert(`no users found!`);
-        navigate("/users/new");
-        return;
-      }
-
-      setUsers(users);
-    }
-
-    fetchData();
-
-    return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
