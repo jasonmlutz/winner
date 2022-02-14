@@ -19,7 +19,6 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   def expose(*exposedKeys)
-    puts exposedKeys
     exposedKeys.concat(["name", "id"])
     self.attributes.select { |k, v| exposedKeys.include?(k)}
   end
