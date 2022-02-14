@@ -16,6 +16,7 @@ const App = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
+    const sessionToken = sessionStorage.getItem("currentUserToken");
     async function fetchCurrentUser() {
       const response = await fetch(
         `/api/session?session_token=${sessionToken}`
