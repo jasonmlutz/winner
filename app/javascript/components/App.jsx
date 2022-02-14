@@ -4,11 +4,13 @@ import { useRoutes } from "react-router-dom";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 import Home from "./Home";
-import NewSurveyForm from "./Surveys/NewSurveyForm";
-import SurveyDisplay from "./Surveys/SurveyDisplay";
+import NewSessionForm from "./Sessions/NewSessionForm";
 
 import UsersContainer from "./Users/UsersContainer";
 import UserDisplay from "./Users/UserDisplay";
+
+import NewSurveyForm from "./Surveys/NewSurveyForm";
+import SurveyDisplay from "./Surveys/SurveyDisplay";
 
 import NotFound from "./NotFound";
 
@@ -16,7 +18,7 @@ const App = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
-    const sessionToken = sessionStorage.getItem("currentUserToken");
+    const sessionToken = sessionStorage.getItem("sessionToken");
     async function fetchCurrentUser() {
       const response = await fetch(
         `/api/session?session_token=${sessionToken}`
@@ -44,6 +46,7 @@ const App = () => {
 
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    { path: "login/", element: <NewSessionForm /> },
     {
       path: "users/",
       children: [
