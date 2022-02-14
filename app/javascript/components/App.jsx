@@ -1,6 +1,8 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 
+import { CurrentUserProvider } from "./contexts/CurrentUserContext";
+
 import Home from "./Home";
 import NewSurveyForm from "./Surveys/NewSurveyForm";
 import SurveyDisplay from "./Surveys/SurveyDisplay";
@@ -38,7 +40,11 @@ const App = () => {
 
   routes = routes || <NotFound pathname={location.pathname} />;
 
-  return <div className="App">{routes}</div>;
+  return (
+    <div className="App">
+      <CurrentUserProvider>{routes}</CurrentUserProvider>
+    </div>
+  );
 };
 
 export default App;
