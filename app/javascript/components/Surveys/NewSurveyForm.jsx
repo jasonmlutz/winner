@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
+
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const NewSurveyForm = () => {
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState([]);
   const [authorId, setAuthorId] = useState();
   const navigate = useNavigate();
+  const { currentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,7 +38,7 @@ const NewSurveyForm = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (title && authorId) {
+    if (title && currentUser) {
       // get the csrf token
       const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
@@ -47,7 +50,7 @@ const NewSurveyForm = () => {
         },
         body: JSON.stringify({
           title: title,
-          author_id: authorId,
+          author_id: currentUser.id,
         }),
       }).catch((error) => {
         window.alert(error);
@@ -56,7 +59,7 @@ const NewSurveyForm = () => {
 
       navigate(`/`);
     } else {
-      alert("please name your survey and select an author!");
+      alert("please register/login and/or name your survey!");
     }
   }
   return (
@@ -80,22 +83,6 @@ const NewSurveyForm = () => {
           Go
         </button>
       </form>
-      <select
-        className="input__box input__box--large"
-        defaultValue={authorId || "default"}
-        onChange={(e) => {
-          setAuthorId(e.target.value);
-        }}
-      >
-        <option value="default" disabled hidden>
-          --SELECT --
-        </option>
-        {users.map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.name.toUpperCase()}
-          </option>
-        ))}
-      </select>
     </div>
   );
 };
