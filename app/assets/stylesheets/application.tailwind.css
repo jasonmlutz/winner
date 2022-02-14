@@ -234,6 +234,14 @@ body {
   font-size: 20px;
 }
 
+.input__submit--wide {
+  padding: 20px;
+  height: 50px;
+  margin: 12px;
+  border-radius: 50px;
+  font-size: 20px;
+}
+
 .input__submit--medium {
   width: 36px;
   height: 36px;
@@ -328,6 +336,14 @@ body {
 
   .input__submit--large {
     width: 36px;
+    height: 36px;
+    margin: 12px;
+    border-radius: 36px;
+    font-size: 18px;
+  }
+
+  .input__submit--wide {
+    padding: 14px;
     height: 36px;
     margin: 12px;
     border-radius: 36px;
