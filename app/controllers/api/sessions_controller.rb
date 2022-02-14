@@ -9,7 +9,7 @@ class Api::SessionsController < ApplicationController
   # POST /api/session
   def create
     @user = User.find_by(name: params[:name])&.authenticate(params[:password])
-        if @user
+    if @user
       render json: @user.expose("session_token")
     else
       render json: @user.errors
