@@ -5,6 +5,7 @@ import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 import Home from "./Home";
 import NewSessionForm from "./Sessions/NewSessionForm";
+import Logout from "./Sessions/Logout";
 
 import UsersContainer from "./Users/UsersContainer";
 import UserDisplay from "./Users/UserDisplay";
@@ -47,6 +48,7 @@ const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
     { path: "login/", element: <NewSessionForm /> },
+    { path: "logout/", element: <Logout /> },
     {
       path: "users/",
       children: [
