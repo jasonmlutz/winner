@@ -42,7 +42,6 @@ const SurveyDisplay = () => {
 
   useEffect(() => {
     setTitle(survey.title);
-    setAuthorName(survey.author_name);
   }, [survey]);
 
   async function handleDelete() {
@@ -118,7 +117,7 @@ const SurveyDisplay = () => {
     } else {
       return (
         <div className="text__title text__title--large">
-          {title}, by {authorName}
+          {title}, by {survey.author_name}
           <div className="text__icon">
             <AiFillEdit
               onClick={() => {
