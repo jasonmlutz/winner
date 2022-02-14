@@ -44,7 +44,7 @@ class Api::SurveysController < ApplicationController
 
   private
     def survey_params
-      params.permit(:title)
+      params.permit(:title, :author_id)
     end
 
     def set_survey
