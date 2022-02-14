@@ -7,7 +7,6 @@ import QuestionsContainer from "../Questions/QuestionsContainer";
 const SurveyDisplay = () => {
   const [survey, setSurvey] = useState("");
   const [title, setTitle] = useState("");
-  const [authorName, setAuthorName] = useState("");
   const [editActive, setEditActive] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
@@ -87,6 +86,27 @@ const SurveyDisplay = () => {
     }
   }
 
+  async function handlePublish() {
+    alert("check for valid survey");
+    const token = document.querySelector("[name=csrf-token]").content;
+    // db push
+    await fetch(`/api/surveys/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": token,
+      },
+      body: JSON.stringify({
+        publish: true,
+      }),
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+
+    navigate(`/surveys/${id}/${Date.now()}`);
+  }
+
   useEffect(() => {
     if (editActive) {
       inputRef.current.focus();
@@ -116,26 +136,38 @@ const SurveyDisplay = () => {
       );
     } else {
       return (
-        <div className="text__title text__title--large">
-          {title}, by {survey.author_name}
-          <div className="text__icon">
-            <AiFillEdit
-              onClick={() => {
-                setEditActive(true);
-              }}
-            />
+        <>
+          <div className="text__title text__title--large">
+            {title}, by {survey.author_name}.
+            <div className="text__icon">
+              <AiFillEdit
+                onClick={() => {
+                  setEditActive(true);
+                }}
+              />
+            </div>
+            <div className="text__icon">
+              <AiFillDelete onClick={() => handleDelete()} />
+            </div>
           </div>
-          <div className="text__icon">
-            <AiFillDelete onClick={() => handleDelete()} />
+          <div text__title--small>
+            This survey is {survey.publish ? "live." : "not live."}
           </div>
-        </div>
+        </>
       );
     }
   };
+
   return (
     <div className="SurveyDisplay">
       {renderSurvey()}
       <QuestionsContainer parent_id={id} />
+      <button
+        className="input__submit input__submit--wide"
+        onClick={handlePublish}
+      >
+        PUBLISH
+      </button>
     </div>
   );
 };
