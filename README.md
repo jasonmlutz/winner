@@ -38,6 +38,7 @@ The Rails backend for this project was adapted from [Votey](https://github.com/j
 - `GET /api/surveys/:id` - Get a specified survey
 - `PUT /api/surveys/:id` - Edit the title of an existing survey
 - `DELETE /api/surveys/:id` - Delete an existing survey; Rails associations triggers deletion of associated Question and ResponseOption database entries
+- `GET /api/users/:user_id/surveys` - Return all surveys authored by the specified user
 
 ##### Questions
 
@@ -64,6 +65,6 @@ The Rails backend for this project was adapted from [Votey](https://github.com/j
 
 ##### Sessions
 
-- `POST /api/session` - Create a new session when creating a new user or for a returning user.
-- `GET /api/session` - Fetch the user associated with the current session.
-- `DELETE /api/session` - Delete the session, resetting the relevant tokens and facilitating user logout.
+- `POST /api/session` - Create a new session when creating a new user or for a returning user
+- `GET /api/session` - Fetch the user associated with the current session
+- `DELETE /api/session` - Delete the session, resetting the relevant tokens and facilitating user logout

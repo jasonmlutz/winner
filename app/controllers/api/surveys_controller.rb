@@ -2,9 +2,14 @@ class Api::SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :update, :destroy]
   wrap_parameters false
 
+  # GET /api/users/:user_id/surveys
   # GET /api/surveys
   def index
-    @surveys = Survey.all
+    if params[:user_id]
+      @surveys = User.find(params[:user_id]).surveys
+    else
+      @surveys = Survey.all
+    end
     render json: @surveys
   end
 

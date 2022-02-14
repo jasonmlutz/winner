@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
     resources :response_options, only: [:update, :destroy]
 
-    resources :users, only: [:index, :create, :show, :destroy]
+    resources :users, only: [:index, :create, :show, :destroy] do
+      resources :surveys, only: [:index]
+    end
 
     resource :session, only: [:create, :show, :destroy]
   end
