@@ -18,8 +18,10 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  def protect(protectedKeys = ["session_token", "password_digest", "created_at", "updated_at"])
-    self.attributes.select { |k, v| !protectedKeys.include?(k)}
+  def expose(*exposedKeys)
+    puts exposedKeys
+    exposedKeys.concat(["name", "id"])
+    self.attributes.select { |k, v| exposedKeys.include?(k)}
   end
 
   def self.generate_session_token

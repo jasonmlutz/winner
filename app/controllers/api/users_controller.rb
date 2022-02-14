@@ -5,13 +5,13 @@ class Api::UsersController < ApplicationController
 
   # GET /api/users
   def index
-    @users = User.all.map { |user| user.protect }
+    @users = User.all.map { |user| user.expose }
     render json: @users
   end
 
   # GET /api/users/:id(.:format)
   def show
-    render json: @user.protect
+    render json: @user.expose
   end
 
   # POST /api/users(.:format)
@@ -19,7 +19,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user.protect
+      render json: @user.expose
    else
      render json: {message: "error: user not created"}
    end
