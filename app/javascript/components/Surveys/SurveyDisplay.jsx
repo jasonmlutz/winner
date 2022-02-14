@@ -5,7 +5,9 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import QuestionsContainer from "../Questions/QuestionsContainer";
 
 const SurveyDisplay = () => {
+  const [survey, setSurvey] = useState("");
   const [title, setTitle] = useState("");
+  const [authorName, setAuthorName] = useState("");
   const [editActive, setEditActive] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const SurveyDisplay = () => {
         return;
       }
 
-      setTitle(survey.title);
+      setSurvey(survey);
     }
 
     fetchData();
@@ -37,6 +39,11 @@ const SurveyDisplay = () => {
     return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, navigate]);
+
+  useEffect(() => {
+    setTitle(survey.title);
+    setAuthorName(survey.author_name);
+  }, [survey]);
 
   async function handleDelete() {
     const token = document.querySelector("[name=csrf-token]").content;
@@ -111,7 +118,7 @@ const SurveyDisplay = () => {
     } else {
       return (
         <div className="text__title text__title--large">
-          {title}
+          {title}, by {authorName}
           <div className="text__icon">
             <AiFillEdit
               onClick={() => {

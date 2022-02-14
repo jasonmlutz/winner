@@ -11,6 +11,7 @@ class Api::SurveysController < ApplicationController
   # GET /api/surveys/:id
   def show
    if @survey
+    @survey = @survey.attributes.merge("author_name": @survey.author.name)
      render json: @survey
    else
      render json: {message: "error: no survey found"}
