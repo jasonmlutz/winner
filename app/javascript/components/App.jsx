@@ -13,25 +13,13 @@ import UserDisplay from "./Users/UserDisplay";
 import NotFound from "./NotFound";
 
 const App = () => {
-  const { currentUser, setCurrentUser, sessionToken } =
-    useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     async function fetchCurrentUser() {
-      const token = document.querySelector("[name=csrf-token]").content;
-      const response = await fetch(`/api/surveys/${id}`, {
-        method: "GET",
-        headers: {
-          "X-CSRF-TOKEN": token,
-          "Content-Type": "application/json",
-        },
-        body: {
-          session_token: sessionToken,
-        },
-      }).catch((error) => {
-        window.alert(error);
-        return;
-      });
+      const response = await fetch(
+        `/api/session?session_token=${sessionToken}`
+      );
 
       if (!response.ok) {
         const message = `An error has occurred fetching current user: ${response.statusText}`;
@@ -51,7 +39,7 @@ const App = () => {
       fetchCurrentUser();
     }
     return;
-  }, [currentUser, sessionToken]);
+  });
 
   let routes = useRoutes([
     { path: "/", element: <Home /> },

@@ -3,7 +3,7 @@ class Api::SessionsController < ApplicationController
 
   # GET /api/session
   def show
-    render json: @user if @user
+    render json: @user.expose if @user
   end
 
   # POST /api/session

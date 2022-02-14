@@ -15,7 +15,7 @@ const NewUserForm = () => {
       if (password === password_confirmation) {
         const token = document.querySelector("[name=csrf-token]").content;
         // send the post request
-        await fetch(`/api/users`, {
+        const response = await fetch(`/api/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -26,16 +26,26 @@ const NewUserForm = () => {
             password: password,
             password_confirmation: password_confirmation,
           }),
-        }).catch((error) => {
-          window.alert(error);
-          return;
         });
 
-        navigate(`/users`);
+        if (!response.ok) {
+          const message = `An error has occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+
+        const user = await response.json();
+        if (!user) {
+          window.alert(`No user fetched!`);
+          return;
+        }
+
+        sessionStorage.setItem("sessionToken", user.session_token);
         setName("");
         setPassword("");
         setPassword_confirmation("");
         inputRef.current.blur();
+        navigate(`/users/${user.id}`);
       } else {
         alert("password and password_confirmation do not match!");
       }
