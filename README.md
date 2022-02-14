@@ -53,9 +53,17 @@ The Rails backend for this project was adapted from [Votey](https://github.com/j
 - `PUT /api/response_options/:id` - Edit the title and/or position of an existing response option
 - `DELETE /api/response_options/:id` - Delete an existing response option
 
-#### Users
+#### User and Session Management
+
+##### Users
 
 - `POST /api/users` - Create a new user
 - `GET /api/users` - Get all users;
 - `GET /api/users/:id` - Get a specified user
 - `DELETE /api/users` - Delete a specified user
+
+##### Sessions
+
+- `POST /api/session` - Create a new session when creating a new user or for a returning user.
+- `GET /api/session` - Fetch the user associated with the current session.
+- `DELETE /api/session` - Delete the session, resetting the relevant tokens and facilitating user logout.
