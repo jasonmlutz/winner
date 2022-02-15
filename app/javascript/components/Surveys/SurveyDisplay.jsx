@@ -1,16 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 import QuestionsContainer from "../Questions/QuestionsContainer";
 
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
 const SurveyDisplay = () => {
   const [survey, setSurvey] = useState("");
   const [title, setTitle] = useState("");
   const [editActive, setEditActive] = useState(false);
-  const params = useParams();
+
+  const { currentUser } = useContext(CurrentUserContext);
+
   const navigate = useNavigate();
 
+  const params = useParams();
   const id = params.id.toString();
 
   useEffect(() => {
@@ -172,14 +177,20 @@ const SurveyDisplay = () => {
 
   return (
     <div className="SurveyDisplay">
-      {renderSurvey()}
-      <QuestionsContainer parent_id={id} />
-      <button
-        className="input__submit input__submit--large input__submit--wide"
-        onClick={handlePublish}
-      >
-        PUBLISH
-      </button>
+      {currentUser && currentUser.id === survey.author_id ? (
+        <>
+          {renderSurvey()}
+          <QuestionsContainer parent_id={id} />
+          <button
+            className="input__submit input__submit--large input__submit--wide"
+            onClick={handlePublish}
+          >
+            PUBLISH
+          </button>
+        </>
+      ) : (
+        <>you must be logged in as the author to edit this survey</>
+      )}
     </div>
   );
 };
