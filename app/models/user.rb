@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_many :surveys, foreign_key: :author_id, dependent: :destroy
+  has_many :responses, foreign_key: :respondent_id, dependent: :destroy
 
   after_initialize :ensure_session_token
 

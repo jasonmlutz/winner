@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_14_232359) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_15_195542) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.uuid "response_id", null: false
+    t.uuid "response_option_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
@@ -30,6 +37,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_14_232359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "grandparent_id", null: false
+  end
+
+  create_table "responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "respondent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "survey_id", null: false
   end
 
   create_table "surveys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
