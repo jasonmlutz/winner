@@ -3,7 +3,11 @@ class Api::SessionsController < ApplicationController
 
   # GET /api/session
   def show
-    render json: @user.expose if @user
+    if @user
+      render json: @user.expose
+    else
+      render json: {}
+    end
   end
 
   # POST /api/session
