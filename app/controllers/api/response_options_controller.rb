@@ -1,12 +1,19 @@
 class Api::ResponseOptionsController < ApplicationController
-  before_action :set_response_option, only: [:show, :destroy, :update]
-  before_action :set_question, only: [:index]
+  before_action :set_response_option, only: [:destroy, :update]
   wrap_parameters false
 
   # GET    /api/questions/:question_id/response_options
+  # GET    /api/surveys/:survey_id/response_options
   def index
-    @response_option = @question.response_options.order(position: :asc)
-    render json: @response_option
+    if params[:question_id]
+      @question = Question.find(params[:question_id])
+      @response_option = @question.response_options.order(position: :asc)
+      render json: @response_option
+    elsif params[:survey_id]
+      @survey = Survey.find_by(id: params[:survey_id])
+      @response_options = @survey.response_options
+      render json: @response_options
+    end
   end
 
   # POST   /api/questions/:question_id/response_options
@@ -41,9 +48,5 @@ class Api::ResponseOptionsController < ApplicationController
 
     def set_response_option
       @response_option = ResponseOption.find(params[:id])
-    end
-
-    def set_question
-      @question = Question.find(params[:question_id])
     end
 end
