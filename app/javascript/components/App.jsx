@@ -63,7 +63,7 @@ const App = () => {
       children: [
         { path: "", element: <Home /> },
         { path: "new", element: <NewSurveyForm /> },
-        { path: "live/:id", element: <NewResponse /> },
+        { path: "live/:survey_id", element: <NewResponse /> },
         {
           path: "edit/:id/",
           children: [
