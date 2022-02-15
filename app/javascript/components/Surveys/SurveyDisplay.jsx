@@ -150,7 +150,7 @@ const SurveyDisplay = () => {
               <AiFillDelete onClick={() => handleDelete()} />
             </div>
           </div>
-          <div text__title--small>
+          <div className="text__title--small">
             This survey is {survey.publish ? "live." : "not live."}
           </div>
         </>
@@ -163,7 +163,7 @@ const SurveyDisplay = () => {
       {renderSurvey()}
       <QuestionsContainer parent_id={id} />
       <button
-        className="input__submit input__submit--wide"
+        className="input__submit input__submit--large input__submit--wide"
         onClick={handlePublish}
       >
         PUBLISH
