@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
 
     resource :session, only: [:create, :show, :destroy]
+
+    resources :responses, only: [:show, :create, :destroy] do
+      resources :answers, only: [:create, :index]
+    end
   end
 
   root 'app#index'
