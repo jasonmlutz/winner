@@ -175,10 +175,16 @@ const SurveyDisplay = () => {
     }
   };
 
-  return (
-    <div className="SurveyDisplay">
-      {currentUser && currentUser.id === survey.author_id ? (
-        <>
+  if (survey.publish) {
+    return (
+      <div className="SurveyDisplay">
+        This survey is live and may no longer be edited, even by the author.
+      </div>
+    );
+  } else {
+    if (currentUser && currentUser.id === survey.author_id) {
+      return (
+        <div className="SurveyDisplay">
           {renderSurvey()}
           <QuestionsContainer parent_id={id} />
           <button
@@ -187,12 +193,16 @@ const SurveyDisplay = () => {
           >
             PUBLISH
           </button>
-        </>
-      ) : (
-        <>you must be logged in as the author to edit this survey</>
-      )}
-    </div>
-  );
+        </div>
+      );
+    } else {
+      return (
+        <div className="SurveyDisplay">
+          you must be logged in as the author to edit this survey
+        </div>
+      );
+    }
+  }
 };
 
 export default SurveyDisplay;
