@@ -34,29 +34,33 @@ const SurveysContainer = () => {
     if (surveys.length) {
       return (
         <>
-          <div className="heading">Existing surveys</div>
+          <div className="heading">Live surveys</div>
           <ul>
-            {surveys.map((survey) => (
-              <li
-                key={survey.id}
-                className={
-                  hovered === survey.id
-                    ? "text__icon darken-background"
-                    : "text__icon"
-                }
-                onMouseEnter={(e) => {
-                  setHovered(survey.id);
-                }}
-                onMouseLeave={(e) => {
-                  setHovered("");
-                }}
-                onClick={() => {
-                  navigate(`/surveys/${survey.id.toString()}`);
-                }}
-              >
-                {survey.title}
-              </li>
-            ))}
+            {surveys.map((survey) => {
+              if (survey.publish) {
+                return (
+                  <li
+                    key={survey.id}
+                    className={
+                      hovered === survey.id
+                        ? "text__icon darken-background"
+                        : "text__icon"
+                    }
+                    onMouseEnter={(e) => {
+                      setHovered(survey.id);
+                    }}
+                    onMouseLeave={(e) => {
+                      setHovered("");
+                    }}
+                    onClick={() => {
+                      navigate(`/surveys/${survey.id.toString()}`);
+                    }}
+                  >
+                    {survey.title}
+                  </li>
+                );
+              }
+            })}
           </ul>
         </>
       );

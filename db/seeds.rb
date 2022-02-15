@@ -28,10 +28,12 @@ end
 puts "#{User.count} users created"
 
 # create 5 surveys, with a randomly selected author
-(1..5).each do
+# the first two have published = true
+(1..5).each do |i|
   survey = Survey.create(
     title: Faker::Movies::Lebowski.unique.quote,
     author_id: User.all.sample.id,
+    publish: i < 3,
   )
 end
 
