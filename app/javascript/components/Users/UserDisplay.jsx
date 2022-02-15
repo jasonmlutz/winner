@@ -75,7 +75,7 @@ const UserDisplay = () => {
                     onMouseLeave={(e) => {
                       setHovered("");
                     }}
-                    onClick={() => navigate(`/surveys/${survey.id}`)}
+                    onClick={() => navigate(`/surveys/live/${survey.id}`)}
                   >
                     {survey.title}
                   </li>
@@ -103,7 +103,7 @@ const UserDisplay = () => {
                     onMouseLeave={(e) => {
                       setHovered("");
                     }}
-                    onClick={() => navigate(`/surveys/${survey.id}`)}
+                    onClick={() => navigate(`/surveys/edit/${survey.id}`)}
                   >
                     {survey.title}
                   </li>

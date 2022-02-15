@@ -53,7 +53,7 @@ const SurveysContainer = () => {
                       setHovered("");
                     }}
                     onClick={() => {
-                      navigate(`/surveys/${survey.id.toString()}`);
+                      navigate(`/surveys/live/${survey.id.toString()}`);
                     }}
                   >
                     {survey.title}
