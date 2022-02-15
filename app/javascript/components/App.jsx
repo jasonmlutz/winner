@@ -12,7 +12,8 @@ import UserDisplay from "./Users/UserDisplay";
 
 import NewSurveyForm from "./Surveys/NewSurveyForm";
 import SurveyDisplay from "./Surveys/SurveyDisplay";
-import LiveSurveyDisplay from "./Surveys/LiveSurveyDisplay";
+
+import NewResponse from "./Responses/NewResponse";
 
 import NotFound from "./NotFound";
 
@@ -62,7 +63,7 @@ const App = () => {
       children: [
         { path: "", element: <Home /> },
         { path: "new", element: <NewSurveyForm /> },
-        { path: "live/:id", element: <LiveSurveyDisplay /> },
+        { path: "live/:id", element: <NewResponse /> },
         {
           path: "edit/:id/",
           children: [
