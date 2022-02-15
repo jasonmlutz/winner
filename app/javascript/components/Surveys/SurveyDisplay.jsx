@@ -138,7 +138,7 @@ const SurveyDisplay = () => {
       return (
         <>
           <div className="text__title text__title--large">
-            {title}, by {survey.author_name}.
+            {title}
             <div className="text__icon">
               <AiFillEdit
                 onClick={() => {
@@ -149,6 +149,18 @@ const SurveyDisplay = () => {
             <div className="text__icon">
               <AiFillDelete onClick={() => handleDelete()} />
             </div>
+          </div>
+          <div className="text__title--small">
+            Author:{" "}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/users/${survey.author_id}`);
+              }}
+            >
+              {survey.author_name}
+            </a>
           </div>
           <div className="text__title--small">
             This survey is {survey.publish ? "live." : "not live."}
