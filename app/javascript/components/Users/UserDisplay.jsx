@@ -57,26 +57,59 @@ const UserDisplay = () => {
       return (
         <>
           <div className="heading">Surveys Authored:</div>
+          <div className="text__title text__title--medium">Live Surveys:</div>
           <ul>
-            {authoredSurveys.map((survey) => (
-              <li
-                key={survey.id}
-                className={
-                  hovered === survey.id
-                    ? "text__icon darken-background"
-                    : "text__icon"
-                }
-                onMouseEnter={(e) => {
-                  setHovered(survey.id);
-                }}
-                onMouseLeave={(e) => {
-                  setHovered("");
-                }}
-                onClick={() => navigate(`/surveys/${survey.id}`)}
-              >
-                {survey.title}
-              </li>
-            ))}
+            {authoredSurveys.map((survey) => {
+              if (survey.publish) {
+                return (
+                  <li
+                    key={survey.id}
+                    className={
+                      hovered === survey.id
+                        ? "text__icon darken-background"
+                        : "text__icon"
+                    }
+                    onMouseEnter={(e) => {
+                      setHovered(survey.id);
+                    }}
+                    onMouseLeave={(e) => {
+                      setHovered("");
+                    }}
+                    onClick={() => navigate(`/surveys/${survey.id}`)}
+                  >
+                    {survey.title}
+                  </li>
+                );
+              }
+            })}
+          </ul>
+          <div className="text__title text__title--medium">
+            Unpublished Surveys:
+          </div>
+          <ul>
+            {authoredSurveys.map((survey) => {
+              if (!survey.publish) {
+                return (
+                  <li
+                    key={survey.id}
+                    className={
+                      hovered === survey.id
+                        ? "text__icon darken-background"
+                        : "text__icon"
+                    }
+                    onMouseEnter={(e) => {
+                      setHovered(survey.id);
+                    }}
+                    onMouseLeave={(e) => {
+                      setHovered("");
+                    }}
+                    onClick={() => navigate(`/surveys/${survey.id}`)}
+                  >
+                    {survey.title}
+                  </li>
+                );
+              }
+            })}
           </ul>
         </>
       );
