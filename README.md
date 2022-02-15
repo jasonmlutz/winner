@@ -54,6 +54,19 @@ The Rails backend for this project was adapted from [Votey](https://github.com/j
 - `PUT /api/response_options/:id` - Edit the title and/or position of an existing response option
 - `DELETE /api/response_options/:id` - Delete an existing response option
 
+#### Response Creation and Management
+
+##### Responses
+
+- `POST /api/responses` - Create a new response associated to a specified respondent and survey
+- `GET /api/responses/:id` - Get a specified response
+- `DELETE /api/responses/:id` - Delete a specified response
+
+##### Answers
+
+- `POST /api/responses/:response_id/answers` - Add a new answer to a specified response
+- `GET /api/responses/:response_id/answers` - Get all answers in a specified response
+
 #### User and Session Management
 
 ##### Users
