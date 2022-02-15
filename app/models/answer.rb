@@ -2,7 +2,7 @@
 #
 # Table name: answers
 #
-#  id                 :bigint           not null, primary key
+#  id                 :uuid             not null, primary key
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  response_id        :uuid             not null
