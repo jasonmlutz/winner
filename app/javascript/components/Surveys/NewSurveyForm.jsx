@@ -14,7 +14,7 @@ const NewSurveyForm = () => {
       // get the csrf token
       const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
-      await fetch("/api/surveys", {
+      const response = await fetch("/api/surveys", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,12 +24,21 @@ const NewSurveyForm = () => {
           title: title,
           author_id: currentUser.id,
         }),
-      }).catch((error) => {
-        window.alert(error);
-        return;
       });
 
-      navigate(`/`);
+      if (!response.ok) {
+        const message = `An error has occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const survey = await response.json();
+      if (!survey) {
+        window.alert(`Survey not created!`);
+        return;
+      }
+
+      navigate(`/surveys/edit/${survey.id}`);
     } else {
       alert("please register/login and/or name your survey!");
     }
