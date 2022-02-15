@@ -18,6 +18,7 @@ class Api::ResponsesController < ApplicationController
     else
       render json: {message: "error: no response found"}
     end
+  end
 
   # DELETE /api/responses/:id
   def destroy

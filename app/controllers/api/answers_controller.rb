@@ -10,6 +10,7 @@ class Api::AnswersController < ApplicationController
     else
       render json: {message: "unable to create answer"}
     end
+  end
 
   # GET /api/responses/:response_id/answers
   def index
@@ -24,4 +25,5 @@ class Api::AnswersController < ApplicationController
 
     def set_response
       @response = Response.find(params[:response_id])
+    end
 end
