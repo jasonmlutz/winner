@@ -3,13 +3,16 @@ import React, { useState } from "react";
 const Landing = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
+  var mainClasses = "bg-indigo-900 relative overflow-hidden h-screen";
+  mainClasses += menuVisible ? " blur-sm" : "";
+
   const renderMobileMenu = (menuVisible) => {
-    var className =
-      "absolute inset-y-16 right-0 w-40 flex flex-col h-fit bg-slate-800 shadow-2xl";
-    className += menuVisible ? " block" : " hidden";
+    var mobileMenuClasses =
+      "absolute inset-y-16 right-0 w-40 flex flex-col h-fit bg-slate-800 shadow-full";
+    mobileMenuClasses += menuVisible ? " block" : " hidden";
     return (
       <div
-        className={className}
+        className={mobileMenuClasses}
         onMouseLeave={() => {
           setMenuVisible(false);
         }}
@@ -27,12 +30,7 @@ const Landing = () => {
     );
   };
   return (
-    <div className="bg-indigo-900 relative overflow-hidden h-screen">
-      <img
-        src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
-        className="absolute h-full w-full object-cover"
-      />
-      <div className="inset-0 bg-black opacity-25 absolute"></div>
+    <div className="relative overflow-hidden h-screen">
       <header className="absolute top-0 left-0 right-0 z-20">
         <nav className="container mx-auto px-6 md:px-12 py-4">
           <div className="md:flex justify-between items-center">
@@ -95,24 +93,31 @@ const Landing = () => {
           </div>
         </nav>
       </header>
-      <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
-        <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
-          <span className="font-bold uppercase text-yellow-400">Winner!</span>
-          <h1 className="font-bold text-6xl sm:text-7xl text-white leading-tight mt-4">
-            Create surveys,
-            <br />
-            pick a winner
-          </h1>
-          <a
-            href="#"
-            className="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log("CTA clicked!");
-            }}
-          >
-            Get started
-          </a>
+      <div className={mainClasses}>
+        <img
+          src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+          className="absolute h-full w-full object-cover"
+        />
+        <div className="inset-0 bg-black opacity-25 absolute"></div>
+        <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
+          <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
+            <span className="font-bold uppercase text-yellow-400">Winner!</span>
+            <h1 className="font-bold text-6xl sm:text-7xl text-white leading-tight mt-4">
+              Create surveys,
+              <br />
+              pick a winner
+            </h1>
+            <a
+              href="#"
+              className="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log("CTA clicked!");
+              }}
+            >
+              Get started
+            </a>
+          </div>
         </div>
       </div>
     </div>
