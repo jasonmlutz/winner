@@ -24,6 +24,9 @@ class Api::AnswersController < ApplicationController
   # GET /api/responses/:response_id/answers
   def index
     @answers = @response.answers
+    @answers = @answers.to_a.map do |answer|
+      answer = answer.attributes.merge("question_id": answer.question.id)
+    end
     render json: @answers
   end
 
