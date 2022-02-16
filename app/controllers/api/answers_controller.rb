@@ -4,11 +4,20 @@ class Api::AnswersController < ApplicationController
   # POST /api/responses/:response_id/answers
 
   def create
-    @answer = Answer.new(answer_params)
-    if @answer.save
-      render json: @answer
+    success = true
+    params[:response_option_ids].each do |response_option_id|
+      @answer = Answer.new(response_id: params[:response_id], response_option_id: response_option_id)
+      if @answer.save
+        success &&= true
+      else
+        success = false
+      end
+    end
+
+    if success
+      render json: {"message": "success"}
     else
-      render json: {message: "unable to create answer"}
+      render json: {"message": "failed"}
     end
   end
 
@@ -20,7 +29,7 @@ class Api::AnswersController < ApplicationController
 
   private
     def answer_params
-      params.permit(:response_id, :response_option_id)
+      params.permit(:response_id, :response_option_ids)
     end
 
     def set_response
