@@ -4,6 +4,7 @@ import { useRoutes } from "react-router-dom";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 import Home from "./Home";
+import Landing from "./Landing";
 import NewSessionForm from "./Sessions/NewSessionForm";
 import Logout from "./Sessions/Logout";
 
@@ -49,7 +50,7 @@ const App = () => {
   });
 
   let routes = useRoutes([
-    { path: "/", element: <Home /> },
+    { path: "/", element: <Landing /> },
     { path: "login/", element: <NewSessionForm /> },
     { path: "logout/", element: <Logout /> },
     {
