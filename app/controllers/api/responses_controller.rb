@@ -14,6 +14,7 @@ class Api::ResponsesController < ApplicationController
   # GET /api/responses/:id
   def show
     if @response
+      @response = @response.attributes.merge("respondent_name": @response.respondent.name)
       render json: @response
     else
       render json: {message: "error: no response found"}
