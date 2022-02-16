@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -43,29 +44,42 @@ const NewSurveyForm = () => {
       alert("please register/login and/or name your survey!");
     }
   }
-  return (
-    <div className="NewSurveyForm">
-      <div className="heading">Create a survey!</div>
-      <form className="input">
-        <input
-          type="text"
-          placeholder="Enter survey title"
-          className="input__box input__box--large"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-        <button
-          className="input__submit input__submit--right-anchor input__submit--large"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Go
-        </button>
-      </form>
-    </div>
-  );
+
+  if (currentUser) {
+    return (
+      <div className="NewSurveyForm">
+        <div className="heading">Create a survey!</div>
+        <form className="input">
+          <input
+            type="text"
+            placeholder="Enter survey title"
+            className="input__box input__box--large"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <button
+            className="input__submit input__submit--right-anchor input__submit--large"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Go
+          </button>
+        </form>
+      </div>
+    );
+  } else {
+    return (
+      <div className="NewSurveyForm">
+        <div className="heading">Create a survey!</div>
+        <div className="text__title text__title--medium">
+          You must log in to create a survey.{" "}
+          <Link to="/login?source=new-survey">LOG IN</Link>{" "}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default NewSurveyForm;

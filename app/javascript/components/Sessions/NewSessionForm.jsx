@@ -36,10 +36,22 @@ const NewSessionForm = () => {
         window.alert(`No user fetched!`);
         return;
       }
-      console.log(user);
 
       sessionStorage.setItem("sessionToken", user.session_token);
-      navigate(`/users/${user.id}`);
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      let path;
+      console.log(urlParams.get("source"));
+      switch (urlParams.get("source")) {
+        case "new-survey":
+          path = "/surveys/new";
+          break;
+        default:
+          path = `/users/${user.id}`;
+          break;
+      }
+      navigate(path);
     } else {
       alert("password and password_confirmation do not match!");
     }
@@ -47,7 +59,7 @@ const NewSessionForm = () => {
 
   return (
     <div className="NewUserForm">
-      <span className="input__title--medium">Register!</span>
+      <span className="input__title--medium">Log in!</span>
       <form className="input">
         <input
           ref={inputRef}
