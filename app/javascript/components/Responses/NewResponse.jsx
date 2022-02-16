@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
 const NewResponse = () => {
+  const { currentUser } = useContext(CurrentUserContext);
   const params = useParams();
   const survey_id = params.survey_id.toString();
 
@@ -10,6 +13,7 @@ const NewResponse = () => {
   const [survey, setSurvey] = useState({});
   const [questions, setQuestions] = useState({});
   const [responseOptions, setResponseOptions] = useState({});
+  const [answers, setAnswers] = useState({});
 
   async function fetchData(url, callback) {
     const response = await fetch(url);
@@ -44,7 +48,7 @@ const NewResponse = () => {
         {sortedQuestions.map((question) => (
           <li key={question.id}>
             <div className="QuestionDisplay">
-              <div className="text__title text__title--small">
+              <div className="text__title text__title--medium">
                 {question.title}
               </div>
               <div className="ResponseOptionsContainer">
@@ -62,17 +66,92 @@ const NewResponse = () => {
       .filter((element) => element.parent_id === question.id)
       .sort((a, b) => a.position - b.position);
     return (
-      <ul>
+      <form>
         {filteredSortedResponseOptions.map((responseOption) => (
-          <li key={responseOption.id}>
-            <div className="ResponseOptionDisplay text__title text__title--small">
+          <div className="radio" key={responseOption.id}>
+            <label className="ResponseOptionDisplay text__title text__title--small">
+              <input
+                title={responseOption.parent_id}
+                type="radio"
+                value={responseOption.id}
+                checked={
+                  answers[responseOption.parent_id] === responseOption.id
+                }
+                onChange={(e) => {
+                  handleRadioChange(e);
+                }}
+              />
               {responseOption.title}
-            </div>
-          </li>
+            </label>
+          </div>
         ))}
-      </ul>
+      </form>
     );
   };
+
+  const handleRadioChange = (e) => {
+    setAnswers((prevState) => {
+      return {
+        ...prevState,
+        [e.target.title]: e.target.value,
+      };
+    });
+  };
+
+  async function handleSubmit() {
+    if (currentUser) {
+      const token = document.querySelector("[name=csrf-token]").content;
+      // send the post request
+      const createResponseRes = await fetch("/api/responses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        body: JSON.stringify({
+          survey_id: survey.id,
+          respondent_id: currentUser.id,
+        }),
+      });
+
+      if (!createResponseRes.ok) {
+        const message = `An error has occurred: ${createResponseRes.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const response = await createResponseRes.json();
+      if (!response) {
+        window.alert(`response not created!`);
+        return;
+      }
+
+      const res = await fetch(`/api/responses/${response.id}/answers`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        body: JSON.stringify({
+          response_option_ids: Object.values(answers),
+        }),
+      });
+
+      if (!res.ok) {
+        const message = `An error has occurred: ${res.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const data = await res.json();
+      if (!data) {
+        window.alert(`answer to ${answer.question_id} not created!`);
+        return;
+      }
+    } else {
+      window.alert("you must be logged in to submit a response");
+    }
+  }
 
   if (
     Object.keys(survey).length &&
@@ -95,7 +174,10 @@ const NewResponse = () => {
           </a>
           <div className="QuestionsContainer">{renderQuestions()}</div>
         </div>
-        <button className="input__submit input__submit--large input__submit--wide">
+        <button
+          onClick={() => handleSubmit()}
+          className="input__submit input__submit--large input__submit--wide"
+        >
           SUBMIT
         </button>
       </div>
