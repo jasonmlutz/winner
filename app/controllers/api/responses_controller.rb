@@ -21,6 +21,15 @@ class Api::ResponsesController < ApplicationController
     end
   end
 
+  # GET /api/users/:user_id/responses
+  def index
+    @responses = User.find(params[:user_id]).responses
+    @responses = @responses.to_a.map do |response|
+      response = response.attributes.merge("survey_title": response.survey.title)
+    end
+    render json: @responses
+  end
+
   # DELETE /api/responses/:id
   def destroy
     if @response && @response.destroy

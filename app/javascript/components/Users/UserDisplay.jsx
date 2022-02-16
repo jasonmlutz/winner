@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const UserDisplay = () => {
   const [authoredSurveys, setAuthoredSurveys] = useState([]);
+  const [responses, setResponses] = useState([]);
   const [hovered, setHovered] = useState("");
   const [user, setUser] = useState({ name: "" });
   const navigate = useNavigate();
@@ -10,46 +11,28 @@ const UserDisplay = () => {
   const params = useParams();
   const id = params.user_id.toString();
 
+  async function fetchData(url, callback) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const data = await response.json();
+    if (!data) {
+      window.alert(`Objects not found at ${url}!`);
+      return;
+    }
+
+    callback(data);
+  }
+
   useEffect(() => {
-    async function fetchAuthoredSurveys() {
-      const response = await fetch(`/api/users/${id}/surveys`);
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const data = await response.json();
-      if (!data) {
-        window.alert(`this user has authored no surveys`);
-        return;
-      }
-
-      setAuthoredSurveys(data);
-    }
-
-    async function fetchUser() {
-      const response = await fetch(`/api/users/${id}`);
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const data = await response.json();
-      if (!data) {
-        window.alert(`this user has authored no surveys`);
-        return;
-      }
-
-      setUser(data);
-    }
-
-    fetchAuthoredSurveys();
-    fetchUser();
-    return;
+    fetchData(`/api/users/${id}`, setUser);
+    fetchData(`/api/users/${id}/surveys`, setAuthoredSurveys);
+    fetchData(`/api/users/${id}/responses`, setResponses);
   }, [params.user_id, navigate]);
 
   const renderSurveysAuthored = () => {
@@ -118,10 +101,46 @@ const UserDisplay = () => {
     }
   };
 
+  const renderResponses = () => {
+    if (responses.length) {
+      return (
+        <>
+          <div className="heading">Responses Authored:</div>
+          <ul>
+            {responses.map((response) => {
+              return (
+                <li
+                  key={response.id}
+                  className={
+                    hovered === response.id
+                      ? "text__icon darken-background"
+                      : "text__icon"
+                  }
+                  onMouseEnter={(e) => {
+                    setHovered(response.id);
+                  }}
+                  onMouseLeave={(e) => {
+                    setHovered("");
+                  }}
+                  onClick={() => navigate(`/responses/${response.id}`)}
+                >
+                  {response.survey_title}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      );
+    } else {
+      return <div className="heading">No Surveys Authored!</div>;
+    }
+  };
+
   return (
     <div className="UserDisplay">
       <div className="heading">All About {user.name}</div>
       {renderSurveysAuthored()}
+      {renderResponses()}
     </div>
   );
 };

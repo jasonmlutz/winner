@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :create, :show, :destroy] do
       resources :surveys, only: [:index]
+      resources :responses, only: [:index]
     end
 
     resource :session, only: [:create, :show, :destroy]
