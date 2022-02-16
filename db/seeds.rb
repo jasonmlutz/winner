@@ -12,7 +12,7 @@ puts "building seed data"
 puts ""
 
 Faker::Name.unique.clear
-Faker::Movies::Lebowski.unique
+Faker::Movies::Lebowski.unique.clear
 User.destroy_all
 Survey.destroy_all
 puts "reset and clear completed"
@@ -68,9 +68,19 @@ Question.all.each do |question|
   Faker::Movies::StarWars.unique.clear
 end
 
+Survey.all.each_with_index do |survey, index|
+  response = Response.create(survey_id: survey.id, respondent_id: User.all[index].id)
+  survey.questions.each do |question|
+    response_option = question.response_options.sample
+    Answer.create(response_id: response.id, response_option_id: response_option.id)
+  end
+end
+
 puts "#{Survey.count} surveys created"
 puts "#{Question.count} questions created"
 puts "#{ResponseOption.count} response options created"
+puts "#{Response.count} responses created"
+puts "#{Answer.count} answers created"
 puts ""
 puts "complete!"
 

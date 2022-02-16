@@ -15,4 +15,5 @@ class Answer < ApplicationRecord
   belongs_to :response_option, foreign_key: :response_option_id
   has_one :question, through: :response_option
   has_one :survey, through: :question
+  has_one :respondent, class_name: :User, through: :response
 end
