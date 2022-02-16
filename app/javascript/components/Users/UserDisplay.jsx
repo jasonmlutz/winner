@@ -132,7 +132,7 @@ const UserDisplay = () => {
         </>
       );
     } else {
-      return <div className="heading">No Surveys Authored!</div>;
+      return <div className="heading">No Responses Authored!</div>;
     }
   };
 
