@@ -3,20 +3,12 @@ import { useRoutes } from "react-router-dom";
 
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
-import Home from "./Home";
 import Landing from "./Landing";
 import NewSessionForm from "./Sessions/NewSessionForm";
 import NewUserForm from "./Users/NewUserForm";
-import Logout from "./Sessions/Logout";
+import Header from "./Header";
 
-import UsersContainer from "./Users/UsersContainer";
 import UserDisplay from "./Users/UserDisplay";
-
-import NewSurveyForm from "./Surveys/NewSurveyForm";
-import SurveyDisplay from "./Surveys/SurveyDisplay";
-
-import NewResponse from "./Responses/NewResponse";
-import ResponseDisplay from "./Responses/ResponseDisplay";
 
 import NotFound from "./NotFound";
 
@@ -54,6 +46,8 @@ const App = () => {
     { path: "/", element: <Landing /> },
     { path: "register/", element: <NewUserForm /> },
     { path: "login/", element: <NewSessionForm /> },
+    { path: "app/", element: <Header /> },
+    { path: "/users/:user_id/", element: <UserDisplay /> },
     // { path: "logout/", element: <Logout /> },
     // {
     //   path: "users/",
