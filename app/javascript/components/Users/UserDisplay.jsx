@@ -145,11 +145,11 @@ const UserDisplay = () => {
         className="absolute h-full w-full object-cover"
       />
       <Header className="absolute z-20" />
-      {/* <div className="UserDisplay">
+      <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
         <div className="heading">All About {user.name}</div>
         {renderSurveysAuthored()}
         {renderResponses()}
-      </div> */}
+      </div>
       <div className="inset-0 bg-black opacity-75 absolute"></div>
     </div>
   );
