@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { FiPlusCircle } from "react-icons/fi";
 
 import Header from "../Header";
 
@@ -37,120 +38,147 @@ const UserDisplay = () => {
     fetchData(`/api/users/${id}/responses`, setResponses);
   }, [params.user_id, navigate]);
 
-  const renderSurveysAuthored = () => {
-    if (authoredSurveys.length) {
-      return (
-        <>
-          <div className="heading">Surveys Authored:</div>
-          <div className="text__title text__title--medium">Live Surveys:</div>
-          <ul>
-            {authoredSurveys.map((survey) => {
-              if (survey.publish) {
-                return (
-                  <li
-                    key={survey.id}
-                    className={
-                      hovered === survey.id
-                        ? "text__icon darken-background"
-                        : "text__icon"
-                    }
-                    onMouseEnter={(e) => {
-                      setHovered(survey.id);
-                    }}
-                    onMouseLeave={(e) => {
-                      setHovered("");
-                    }}
-                    onClick={() => navigate(`/surveys/live/${survey.id}`)}
-                  >
-                    {survey.title}
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <div className="text__title text__title--medium">
-            Unpublished Surveys:
-          </div>
-          <ul>
-            {authoredSurveys.map((survey) => {
-              if (!survey.publish) {
-                return (
-                  <li
-                    key={survey.id}
-                    className={
-                      hovered === survey.id
-                        ? "text__icon darken-background"
-                        : "text__icon"
-                    }
-                    onMouseEnter={(e) => {
-                      setHovered(survey.id);
-                    }}
-                    onMouseLeave={(e) => {
-                      setHovered("");
-                    }}
-                    onClick={() => navigate(`/surveys/edit/${survey.id}`)}
-                  >
-                    {survey.title}
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        </>
-      );
-    } else {
-      return <div className="heading">No Surveys Authored!</div>;
-    }
-  };
-
-  const renderResponses = () => {
-    if (responses.length) {
-      return (
-        <>
-          <div className="heading">Responses Authored:</div>
-          <ul>
-            {responses.map((response) => {
-              return (
-                <li
-                  key={response.id}
-                  className={
-                    hovered === response.id
-                      ? "text__icon darken-background"
-                      : "text__icon"
-                  }
-                  onMouseEnter={(e) => {
-                    setHovered(response.id);
-                  }}
-                  onMouseLeave={(e) => {
-                    setHovered("");
-                  }}
-                  onClick={() => navigate(`/responses/${response.id}`)}
-                >
-                  {response.survey_title}
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      );
-    } else {
-      return <div className="heading">No Responses Authored!</div>;
-    }
-  };
-
   return (
     <div className="bg-indigo-900 relative overflow-hidden h-screen">
       <img
         src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
         className="absolute h-full w-full object-cover"
       />
-      <Header className="absolute z-20" />
-      <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
-        <div className="heading">All About {user.name}</div>
-        {renderSurveysAuthored()}
-        {renderResponses()}
+      <Header />
+      <div className="flex items-start justify-between relative py-[74px]">
+        <div className="flex flex-col w-full md:space-y-4">
+          <div className="overflow-auto h-screen pb-24 px-4 md:px-6">
+            <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
+              Welcome back,{" "}
+              {user.name.charAt(0).toUpperCase() + user.name.slice(1)}!
+            </h1>
+            <h2 className="text-md text-gray-400">
+              Here's a summary of your activity.
+            </h2>
+            <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">
+              <div className="flex items-center w-full md:w-2/3 space-x-4">
+                <div className="w-1/2">
+                  <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                    <p className="text-2xl text-black dark:text-white font-bold">
+                      {authoredSurveys.length || "0"}
+                    </p>
+                    <p className="text-gray-400 text-sm">
+                      Authored survey{authoredSurveys.length === 1 ? "" : "s"}
+                    </p>
+                    <span className="display lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl">
+                      <FiPlusCircle />
+                    </span>
+                    <span className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-full text-white bg-indigo-500 absolute top-4 right-4">
+                      {authoredSurveys.length
+                        ? "Create another survey!"
+                        : "Create your first survey!"}
+                    </span>
+                  </div>
+                </div>
+                <div className="w-1/2">
+                  <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                    <p className="text-2xl text-black dark:text-white font-bold">
+                      {responses.length || "0"}
+                    </p>
+                    <p className="text-gray-400 text-sm">
+                      Response{responses.length === 1 ? "" : "s"} submitted
+                    </p>
+                    <span className="block lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl">
+                      <FiPlusCircle />
+                    </span>
+                    <span className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-full text-white bg-indigo-500 absolute top-4 right-4">
+                      {responses.length
+                        ? "Respond to your first survey!"
+                        : "Find more live surveys!"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+              <div className="w-full">
+                <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                  <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                    Your Live Surveys
+                  </p>
+                  <div className="flex items-end space-x-2 my-6">
+                    <p className="text-5xl text-black dark:text-white font-bold">
+                      {authoredSurveys.filter((elem) => elem.publish).length}
+                    </p>
+                  </div>
+                  <div className="dark:text-white">
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 1</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 2</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 3</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                  <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                    Your Unpublished Surveys
+                  </p>
+                  <div className="flex items-end space-x-2 my-6">
+                    <p className="text-5xl text-black dark:text-white font-bold">
+                      {authoredSurveys.filter((elem) => !elem.publish).length}
+                    </p>
+                  </div>
+                  <div className="dark:text-white">
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 1</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 2</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 3</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
+                  <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                    Your Responses
+                  </p>
+                  <div className="flex items-end space-x-2 my-6">
+                    <p className="text-5xl text-black dark:text-white font-bold">
+                      12
+                    </p>
+                  </div>
+                  <div className="dark:text-white">
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 1</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 2</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
+                      <p>Line 3</p>
+                      <div className="flex items-end text-xs">34</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="inset-0 bg-black opacity-75 absolute"></div>
     </div>
   );
 };
