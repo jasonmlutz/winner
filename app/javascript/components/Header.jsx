@@ -5,7 +5,7 @@ const Header = () => {
   const [navMenuVisible, setNavMenuVisible] = useState(false);
 
   var userActionMenuClasses =
-    "absolute -left-[86px] top-[50px] md:right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
+    "absolute -right-[86px] top-[50px] md:right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
 
   var navMenuClasses = "md:hidden";
@@ -115,6 +115,7 @@ const Header = () => {
                 className="text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md hover:outline-none"
                 onClick={() => {
                   setNavMenuVisible(!navMenuVisible);
+                  setUserActionMenuVisible(false);
                 }}
               >
                 <svg
