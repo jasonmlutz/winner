@@ -27,20 +27,20 @@ puts "reset and clear completed"
 end
 puts "#{User.count} users created"
 
-# create 5 surveys, with a randomly selected author
-# the first two have published = true
-(1..5).each do |i|
+# create 20 surveys, with a randomly selected author
+# the first 10 have published = true
+(1..20).each do |i|
   survey = Survey.create(
     title: Faker::Movies::Lebowski.unique.quote,
     author_id: User.all.sample.id,
-    publish: i < 3,
+    publish: i < 11,
   )
 end
 
 # loop over all the surveys
 Survey.all.each do |survey|
-  # this survey has between 3 and 5 questions
-  (1..rand(3..5)).each do |i|
+  # this survey has between 2 and 5 questions
+  (1..rand(2..5)).each do |i|
     question = Question.create(
       title: Faker::Movies::HarryPotter.unique.quote,
       position: i,
@@ -54,8 +54,8 @@ end
 
 # loop over all the questions
 Question.all.each do |question|
-  # this question has between 3 and 5 response options
-  (1..rand(3..5)).each do |j|
+  # this question has between 2 and 5 response options
+  (1..rand(2..5)).each do |j|
     ResponseOption.create(
       title: Faker::Movies::StarWars.unique.quote,
       position: j,
@@ -68,11 +68,20 @@ Question.all.each do |question|
   Faker::Movies::StarWars.unique.clear
 end
 
-Survey.all.each_with_index do |survey, index|
-  response = Response.create(survey_id: survey.id, respondent_id: User.all[index].id)
-  survey.questions.each do |question|
-    response_option = question.response_options.sample
-    Answer.create(response_id: response.id, response_option_id: response_option.id)
+# for each published survey
+Survey.all.each do |survey|
+  if survey.publish
+    # each non-author creates a response
+    User.all.each do |user|
+      if user.id != survey.author_id
+        response = Response.create(survey_id: survey.id, respondent_id: user.id)
+        # for each question, select a response option at random
+        survey.questions.each do |question|
+          response_option = question.response_options.sample
+          Answer.create(response_id: response.id, response_option_id: response_option.id)
+        end
+      end
+    end
   end
 end
 
