@@ -9,6 +9,7 @@ import NewUserForm from "./Users/NewUserForm";
 import Header from "./Header";
 
 import UserDisplay from "./Users/UserDisplay";
+import SurveysContainer from "./Surveys/SurveysContainer";
 
 import NotFound from "./NotFound";
 
@@ -48,6 +49,7 @@ const App = () => {
     { path: "login/", element: <NewSessionForm /> },
     { path: "app/", element: <Header /> },
     { path: "/users/:user_id/", element: <UserDisplay /> },
+    { path: "/surveys/", element: <SurveysContainer /> },
     // { path: "logout/", element: <Logout /> },
     // {
     //   path: "users/",
