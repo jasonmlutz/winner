@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
+
+import Header from "../Header";
 
 const SurveysContainer = () => {
   const [surveys, setSurveys] = useState([]);
@@ -69,7 +72,21 @@ const SurveysContainer = () => {
     }
   };
 
-  return <div className="SurveysContainer">{renderSurveys()}</div>;
+  return (
+    <>
+      <Helmet>
+        <title>Surveys - Winner</title>
+      </Helmet>
+      <div className="bg-indigo-900 relative overflow-hidden h-screen">
+        <img
+          src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+          className="absolute h-full w-full object-cover"
+        />
+        <Header />
+        <div className="flex items-start justify-between relative py-[74px]"></div>
+      </div>
+    </>
+  );
 };
 
 export default SurveysContainer;
