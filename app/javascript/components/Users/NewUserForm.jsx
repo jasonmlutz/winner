@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetData } from "react-helmet-async";
+
+const helmetData = new HelmetData({});
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -60,9 +62,9 @@ const NewUserForm = () => {
 
   return (
     <>
-      <Header>
+      <Helmet helmetData={helmetData}>
         <title>Register - Winner</title>
-      </Header>
+      </Helmet>
       <div className="bg-indigo-900 relative overflow-hidden h-screen">
         <img
           src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"

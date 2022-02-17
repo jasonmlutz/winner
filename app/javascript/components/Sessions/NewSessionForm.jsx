@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetData } from "react-helmet-async";
+
+const helmetData = new HelmetData({});
 
 const NewSessionForm = () => {
   const inputRef = useRef();
@@ -60,7 +62,7 @@ const NewSessionForm = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet helmetData={helmetData}>
         <title>Login - Winner</title>
       </Helmet>{" "}
       <div className="bg-indigo-900 relative overflow-hidden h-screen">

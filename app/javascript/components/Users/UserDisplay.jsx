@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiPlusCircle } from "react-icons/fi";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetData } from "react-helmet-async";
+
+const helmetData = new HelmetData({});
 
 import Header from "../Header";
 
@@ -41,7 +43,7 @@ const UserDisplay = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet helmetData={helmetData}>
         <title>{user.name} - Winner</title>
       </Helmet>
       <div className="bg-indigo-900 relative overflow-hidden h-screen">
