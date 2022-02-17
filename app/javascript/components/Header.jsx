@@ -5,11 +5,11 @@ const Header = () => {
   const [navMenuVisible, setNavMenuVisible] = useState(false);
 
   var userActionMenuClasses =
-    "absolute -right-[86px] top-[50px] md:right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
+    "absolute top-[50px] -right-2 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
 
   var navMenuClasses =
-    "absolute right-2 top-[65px] mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
+    "absolute left-2 top-[65px] mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   navMenuClasses += navMenuVisible ? " block" : " hidden";
 
   var extraDarkBackground = userActionMenuVisible || navMenuVisible;
@@ -23,6 +23,68 @@ const Header = () => {
           <div className="max-w-7xl mx-auto px-8">
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">
+                <div className="-mr-2 flex md:hidden">
+                  <button
+                    type="button"
+                    id="nav-menu"
+                    className="text-white hover:text-gray-300 inline-flex items-center justify-center rounded-md hover:outline-none"
+                    onClick={() => {
+                      setNavMenuVisible(!navMenuVisible);
+                    }}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="h-8 w-8"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"></path>
+                    </svg>
+                  </button>
+                  <div
+                    className={navMenuClasses}
+                    onMouseLeave={() => {
+                      setNavMenuVisible(false);
+                    }}
+                  >
+                    <div
+                      className="py-1 "
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="user-actions-menu"
+                    >
+                      <a
+                        href="#"
+                        className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                        role="menuitem"
+                      >
+                        <span className="flex flex-col">
+                          <span>Home-aria</span>
+                        </span>
+                      </a>
+                      <a
+                        href="#"
+                        className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                        role="menuitem"
+                      >
+                        <span className="flex flex-col">
+                          <span>Content-aria</span>
+                        </span>
+                      </a>
+                      <a
+                        href="#"
+                        className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                        role="menuitem"
+                      >
+                        <span className="flex flex-col">
+                          <span>Contact-aria</span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
                 <div className="hidden md:block">
                   <div className="flex items-baseline space-x-4">
                     <a
@@ -116,68 +178,6 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-              <div className="-mr-2 flex md:hidden">
-                <button
-                  type="button"
-                  id="nav-menu"
-                  className="text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md hover:outline-none"
-                  onClick={() => {
-                    setNavMenuVisible(!navMenuVisible);
-                  }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    className="h-8 w-8"
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            className={navMenuClasses}
-            onMouseLeave={() => {
-              setNavMenuVisible(false);
-            }}
-          >
-            <div
-              className="py-1 "
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="user-actions-menu"
-            >
-              <a
-                href="#"
-                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                role="menuitem"
-              >
-                <span className="flex flex-col">
-                  <span>Home-aria</span>
-                </span>
-              </a>
-              <a
-                href="#"
-                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                role="menuitem"
-              >
-                <span className="flex flex-col">
-                  <span>Content-aria</span>
-                </span>
-              </a>
-              <a
-                href="#"
-                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                role="menuitem"
-              >
-                <span className="flex flex-col">
-                  <span>Contact-aria</span>
-                </span>
-              </a>
             </div>
           </div>
         </nav>
