@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const navigate = useNavigate();
 
   var mainClasses = "bg-indigo-900 relative overflow-hidden h-screen";
   mainClasses += menuVisible ? " blur-sm" : "";
@@ -108,11 +110,11 @@ const Landing = () => {
               pick a winner
             </h1>
             <a
-              href="#"
+              href=""
               className="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10"
               onClick={(e) => {
                 e.preventDefault();
-                console.log("CTA clicked!");
+                navigate("/register");
               }}
             >
               Get started

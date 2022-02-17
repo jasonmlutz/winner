@@ -6,6 +6,7 @@ import { CurrentUserContext } from "./contexts/CurrentUserContext";
 import Home from "./Home";
 import Landing from "./Landing";
 import NewSessionForm from "./Sessions/NewSessionForm";
+import NewUserForm from "./Users/NewUserForm";
 import Logout from "./Sessions/Logout";
 
 import UsersContainer from "./Users/UsersContainer";
@@ -47,35 +48,36 @@ const App = () => {
       fetchCurrentUser();
     }
     return;
-  });
+  }, [currentUser]);
 
   let routes = useRoutes([
     { path: "/", element: <Landing /> },
-    { path: "login/", element: <NewSessionForm /> },
-    { path: "logout/", element: <Logout /> },
-    {
-      path: "users/",
-      children: [
-        { path: "", element: <UsersContainer /> },
-        { path: ":user_id/", element: <UserDisplay /> },
-      ],
-    },
-    { path: "responses/:response_id", element: <ResponseDisplay /> },
-    {
-      path: "surveys/",
-      children: [
-        { path: "", element: <Home /> },
-        { path: "new", element: <NewSurveyForm /> },
-        { path: "live/:survey_id", element: <NewResponse /> },
-        {
-          path: "edit/:id/",
-          children: [
-            { path: "", element: <SurveyDisplay /> },
-            { path: ":timestamp", element: <SurveyDisplay /> },
-          ],
-        },
-      ],
-    },
+    { path: "register/", element: <NewUserForm /> },
+    // { path: "login/", element: <NewSessionForm /> },
+    // { path: "logout/", element: <Logout /> },
+    // {
+    //   path: "users/",
+    //   children: [
+    //     { path: "", element: <UsersContainer /> },
+    //     { path: ":user_id/", element: <UserDisplay /> },
+    //   ],
+    // },
+    // { path: "responses/:response_id", element: <ResponseDisplay /> },
+    // {
+    //   path: "surveys/",
+    //   children: [
+    //     { path: "", element: <Home /> },
+    //     { path: "new", element: <NewSurveyForm /> },
+    //     { path: "live/:survey_id", element: <NewResponse /> },
+    //     {
+    //       path: "edit/:id/",
+    //       children: [
+    //         { path: "", element: <SurveyDisplay /> },
+    //         { path: ":timestamp", element: <SurveyDisplay /> },
+    //       ],
+    //     },
+    //   ],
+    // },
   ]);
 
   routes = routes || <NotFound pathname={location.pathname} />;
