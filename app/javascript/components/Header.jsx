@@ -61,7 +61,7 @@ const Header = () => {
                         role="menuitem"
                       >
                         <span className="flex flex-col">
-                          <span>Home-aria</span>
+                          <span>NavMenu1</span>
                         </span>
                       </a>
                       <a
@@ -70,7 +70,7 @@ const Header = () => {
                         role="menuitem"
                       >
                         <span className="flex flex-col">
-                          <span>Content-aria</span>
+                          <span>NavMenu2</span>
                         </span>
                       </a>
                       <a
@@ -79,7 +79,7 @@ const Header = () => {
                         role="menuitem"
                       >
                         <span className="flex flex-col">
-                          <span>Contact-aria</span>
+                          <span>NavMenu3</span>
                         </span>
                       </a>
                     </div>
@@ -91,19 +91,19 @@ const Header = () => {
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Home - md:block
+                      NavMenu1
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Content - md:block
+                      NavMenu2
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Contact - md:block
+                      NavMenu3
                     </a>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ const Header = () => {
                             role="menuitem"
                           >
                             <span className="flex flex-col">
-                              <span>Settings</span>
+                              <span>UserAction1</span>
                             </span>
                           </a>
                           <a
@@ -160,7 +160,7 @@ const Header = () => {
                             role="menuitem"
                           >
                             <span className="flex flex-col">
-                              <span>Account</span>
+                              <span>UserAction2</span>
                             </span>
                           </a>
                           <a
@@ -169,7 +169,7 @@ const Header = () => {
                             role="menuitem"
                           >
                             <span className="flex flex-col">
-                              <span>Logout</span>
+                              <span>UserAction3</span>
                             </span>
                           </a>
                         </div>
