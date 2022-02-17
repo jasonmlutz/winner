@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const NewUserForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
+
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
 
@@ -40,6 +44,7 @@ const NewUserForm = () => {
         }
 
         sessionStorage.setItem("sessionToken", user.session_token);
+        setCurrentUser(user);
         setName("");
         setPassword("");
         setPassword_confirmation("");
