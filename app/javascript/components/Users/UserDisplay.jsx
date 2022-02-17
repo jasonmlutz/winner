@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import Header from "../Header";
+
 const UserDisplay = () => {
   const [authoredSurveys, setAuthoredSurveys] = useState([]);
   const [responses, setResponses] = useState([]);
@@ -137,10 +139,18 @@ const UserDisplay = () => {
   };
 
   return (
-    <div className="UserDisplay">
-      <div className="heading">All About {user.name}</div>
-      {renderSurveysAuthored()}
-      {renderResponses()}
+    <div className="bg-indigo-900 relative overflow-hidden h-screen">
+      <img
+        src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+        className="absolute h-full w-full object-cover"
+      />
+      <Header className="absolute z-20" />
+      {/* <div className="UserDisplay">
+        <div className="heading">All About {user.name}</div>
+        {renderSurveysAuthored()}
+        {renderResponses()}
+      </div> */}
+      <div className="inset-0 bg-black opacity-75 absolute"></div>
     </div>
   );
 };
