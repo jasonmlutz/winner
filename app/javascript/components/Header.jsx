@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Header = () => {
+  const [userActionMenuVisible, setUserActionMenuVisible] = useState(false);
+  const [navMenuVisible, setNavMenuVisible] = useState(false);
+
+  var userActionMenuClasses =
+    "absolute -left-[86px] top-[50px] md:right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
+  userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
+
+  var navMenuClasses = "md:hidden";
+  navMenuClasses += navMenuVisible ? " block" : " hidden";
+
   return (
     <header className="absolute top-0 left-0 right-0 z-20">
-      <nav className="bg-white dark:bg-gray-800  shadow ">
+      <nav className="bg-gray-800  shadow ">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex items-center justify-between h-16">
             <div className=" flex items-center">
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
+                <div className="flex items-baseline space-x-4">
                   <a
-                    className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                     href="/#"
                   >
                     Home
                   </a>
                   <a
-                    className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                     href="/#"
                   >
                     Content
                   </a>
                   <a
-                    className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                     href="/#"
                   >
                     Contact
@@ -37,8 +47,11 @@ const Header = () => {
                     <div>
                       <button
                         type="button"
-                        className="  flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                        className="bg-gray-100 z-20 flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-200 hover:bg-gray-300 hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-offset-gray-100 hover:ring-gray-500"
                         id="options-menu"
+                        onClick={() => {
+                          setUserActionMenuVisible(!userActionMenuVisible);
+                        }}
                       >
                         <svg
                           width="20"
@@ -52,7 +65,12 @@ const Header = () => {
                         </svg>
                       </button>
                     </div>
-                    <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                    <div
+                      className={userActionMenuClasses}
+                      onMouseLeave={() => {
+                        setUserActionMenuVisible(false);
+                      }}
+                    >
                       <div
                         className="py-1 "
                         role="menu"
@@ -61,7 +79,7 @@ const Header = () => {
                       >
                         <a
                           href="#"
-                          className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                          className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                           role="menuitem"
                         >
                           <span className="flex flex-col">
@@ -70,7 +88,7 @@ const Header = () => {
                         </a>
                         <a
                           href="#"
-                          className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                          className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                           role="menuitem"
                         >
                           <span className="flex flex-col">
@@ -79,7 +97,7 @@ const Header = () => {
                         </a>
                         <a
                           href="#"
-                          className="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                          className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                           role="menuitem"
                         >
                           <span className="flex flex-col">
@@ -93,7 +111,12 @@ const Header = () => {
               </div>
             </div>
             <div className="-mr-2 flex md:hidden">
-              <button className="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
+              <button
+                className="text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md hover:outline-none"
+                onClick={() => {
+                  setNavMenuVisible(!navMenuVisible);
+                }}
+              >
                 <svg
                   width="20"
                   height="20"
@@ -108,28 +131,27 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="md:hidden">
+        <div
+          className={navMenuClasses}
+          onMouseLeave={() => {
+            setNavMenuVisible(false);
+          }}
+        >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a
-              className="text-gray-300 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
               href="/#"
             >
               Home
             </a>
             <a
-              className="text-gray-800 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
-              href="/#"
-            >
-              Gallery
-            </a>
-            <a
-              className="text-gray-300 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
               href="/#"
             >
               Content
             </a>
             <a
-              className="text-gray-300 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
               href="/#"
             >
               Contact
