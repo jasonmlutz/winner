@@ -8,7 +8,8 @@ const Header = () => {
     "absolute -right-[86px] top-[50px] md:right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
 
-  var navMenuClasses = "md:hidden";
+  var navMenuClasses =
+    "absolute right-2 top-[65px] mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   navMenuClasses += navMenuVisible ? " block" : " hidden";
 
   var extraDarkBackground = userActionMenuVisible || navMenuVisible;
@@ -28,19 +29,19 @@ const Header = () => {
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Home
+                      Home - md:block
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Content
+                      Content - md:block
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       href="/#"
                     >
-                      Contact
+                      Contact - md:block
                     </a>
                   </div>
                 </div>
@@ -53,7 +54,7 @@ const Header = () => {
                         <button
                           type="button"
                           className="bg-gray-100 z-20 flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-200 hover:bg-gray-300 hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-offset-gray-100 hover:ring-gray-500"
-                          id="options-menu"
+                          id="user-actions-menu"
                           onClick={() => {
                             setUserActionMenuVisible(!userActionMenuVisible);
                           }}
@@ -80,7 +81,7 @@ const Header = () => {
                           className="py-1 "
                           role="menu"
                           aria-orientation="vertical"
-                          aria-labelledby="options-menu"
+                          aria-labelledby="user-actions-menu"
                         >
                           <a
                             href="#"
@@ -117,10 +118,11 @@ const Header = () => {
               </div>
               <div className="-mr-2 flex md:hidden">
                 <button
+                  type="button"
+                  id="nav-menu"
                   className="text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md hover:outline-none"
                   onClick={() => {
                     setNavMenuVisible(!navMenuVisible);
-                    setUserActionMenuVisible(false);
                   }}
                 >
                   <svg
@@ -143,24 +145,38 @@ const Header = () => {
               setNavMenuVisible(false);
             }}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div
+              className="py-1 "
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-actions-menu"
+            >
               <a
-                className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
-                href="/#"
+                href="#"
+                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                role="menuitem"
               >
-                Home
+                <span className="flex flex-col">
+                  <span>Home-aria</span>
+                </span>
               </a>
               <a
-                className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
-                href="/#"
+                href="#"
+                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                role="menuitem"
               >
-                Content
+                <span className="flex flex-col">
+                  <span>Content-aria</span>
+                </span>
               </a>
               <a
-                className="text-gray-300 mr-4 text-right m hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600"
-                href="/#"
+                href="#"
+                className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                role="menuitem"
               >
-                Contact
+                <span className="flex flex-col">
+                  <span>Contact-aria</span>
+                </span>
               </a>
             </div>
           </div>
