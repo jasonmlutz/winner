@@ -58,37 +58,71 @@ const NewSessionForm = () => {
   }
 
   return (
-    <div className="NewUserForm">
-      <span className="input__title--medium">Log in!</span>
-      <form className="input">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="name"
-          className="input__box input__box--medium"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <input
-          ref={inputRef}
-          type="password"
-          placeholder="password"
-          className="input__box input__box--medium"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button
-          className="input__submit input__submit--medium"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          GO
-        </button>
-      </form>
+    <div className="bg-indigo-900 relative overflow-hidden h-screen">
+      <img
+        src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+        className="absolute h-full w-full object-cover"
+      />
+      <div className="inset-0 bg-black opacity-75 absolute"></div>
+      <div className="container mx-auto relative z-10 mt-20 w-4/5 md:w-3/5 lg:w-2/5 xl:w-2/5">
+        <div className="flex flex-col content-center relative z-10">
+          <div className="self-center mb-2 text-xl font-light text-gray-800 dark:text-white">
+            Welcome back!
+          </div>
+          <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
+            Need to crreate an account?{" "}
+            <a
+              href=""
+              className="text-sm text-blue-500 underline hover:text-blue-700"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/register");
+              }}
+            >
+              Register
+            </a>
+          </span>
+          <div className="p-6 mt-8">
+            <form action="#">
+              <div className="flex flex-col mb-2">
+                <div className="relative ">
+                  <input
+                    type="text"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col mb-2">
+                <div className="relative ">
+                  <input
+                    type="password"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="flex w-full my-4">
+                <button
+                  type="submit"
+                  className="py-2 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                  onClick={handleSubmit}
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

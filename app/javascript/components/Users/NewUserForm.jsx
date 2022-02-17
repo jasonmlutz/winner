@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 const NewUserForm = () => {
-  const inputRef = useRef();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
@@ -44,7 +43,6 @@ const NewUserForm = () => {
         setName("");
         setPassword("");
         setPassword_confirmation("");
-        inputRef.current.blur();
         navigate(`/users/${user.id}`);
       } else {
         alert("password and password_confirmation do not match!");
@@ -69,9 +67,12 @@ const NewUserForm = () => {
           <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
             Already have an account?{" "}
             <a
-              href="#"
-              target="_blank"
+              href=""
               className="text-sm text-blue-500 underline hover:text-blue-700"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/login");
+              }}
             >
               Sign in
             </a>
@@ -82,29 +83,49 @@ const NewUserForm = () => {
                 <div className="relative ">
                   <input
                     type="text"
-                    id="create-account-pseudo"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                    name="pseudo"
-                    placeholder="Pseudo"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
                 </div>
               </div>
               <div className="flex flex-col mb-2">
                 <div className="relative ">
                   <input
-                    type="text"
-                    id="create-account-email"
+                    type="password"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                    placeholder="Email"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
               </div>
+              <div className="flex flex-col mb-2">
+                <div className="relative ">
+                  <input
+                    type="password"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    placeholder="Confirm Password"
+                    value={password_confirmation}
+                    onChange={(e) => {
+                      setPassword_confirmation(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+
               <div className="flex w-full my-4">
                 <button
                   type="submit"
                   className="py-2 px-4  bg-purple-600 hover:bg-purple-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                  onClick={handleSubmit}
                 >
-                  Login
+                  Register
                 </button>
               </div>
             </form>
@@ -112,48 +133,6 @@ const NewUserForm = () => {
         </div>
       </div>
     </div>
-    // <div className="NewUserForm">
-    //   <span className="input__title--medium">Register!</span>
-    //   <form className="input">
-    //     <input
-    //       ref={inputRef}
-    //       type="text"
-    //       placeholder="name"
-    //       className="input__box input__box--medium"
-    //       value={name}
-    //       onChange={(e) => {
-    //         setName(e.target.value);
-    //       }}
-    //     />
-    //     <input
-    //       ref={inputRef}
-    //       type="password"
-    //       placeholder="password"
-    //       className="input__box input__box--medium"
-    //       value={password}
-    //       onChange={(e) => {
-    //         setPassword(e.target.value);
-    //       }}
-    //     />
-    //     <input
-    //       ref={inputRef}
-    //       type="password"
-    //       placeholder="password_confirmation"
-    //       className="input__box input__box--medium"
-    //       value={password_confirmation}
-    //       onChange={(e) => {
-    //         setPassword_confirmation(e.target.value);
-    //       }}
-    //     />
-    //     <button
-    //       className="input__submit input__submit--medium"
-    //       type="submit"
-    //       onClick={handleSubmit}
-    //     >
-    //       GO
-    //     </button>
-    //   </form>
-    // </div>
   );
 };
 

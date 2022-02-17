@@ -53,7 +53,7 @@ const App = () => {
   let routes = useRoutes([
     { path: "/", element: <Landing /> },
     { path: "register/", element: <NewUserForm /> },
-    // { path: "login/", element: <NewSessionForm /> },
+    { path: "login/", element: <NewSessionForm /> },
     // { path: "logout/", element: <Logout /> },
     // {
     //   path: "users/",
