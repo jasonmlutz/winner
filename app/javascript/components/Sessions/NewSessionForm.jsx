@@ -63,7 +63,7 @@ const NewSessionForm = () => {
         src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
         className="absolute h-full w-full object-cover"
       />
-      <div className="inset-0 bg-black opacity-75 absolute"></div>
+      <div className="inset-0 bg-black opacity-50 absolute"></div>
       <div className="container mx-auto relative z-10 mt-20 w-4/5 md:w-3/5 lg:w-2/5 xl:w-2/5">
         <div className="flex flex-col content-center relative z-10">
           <div className="self-center mb-2 text-xl font-light text-gray-800 dark:text-white">
