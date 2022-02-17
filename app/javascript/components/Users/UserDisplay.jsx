@@ -65,14 +65,28 @@ const UserDisplay = () => {
                     <p className="text-gray-400 text-sm">
                       Authored survey{authoredSurveys.length === 1 ? "" : "s"}
                     </p>
-                    <span className="display lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl">
+                    <a
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("#");
+                      }}
+                      className="display lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl hover:bg-indigo-700"
+                    >
                       <FiPlusCircle />
-                    </span>
-                    <span className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-full text-white bg-indigo-500 absolute top-4 right-4">
+                    </a>
+                    <a
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("#");
+                      }}
+                      className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 absolute top-4 right-4 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    >
                       {authoredSurveys.length
                         ? "Create another survey!"
                         : "Create your first survey!"}
-                    </span>
+                    </a>
                   </div>
                 </div>
                 <div className="w-1/2">
@@ -83,14 +97,28 @@ const UserDisplay = () => {
                     <p className="text-gray-400 text-sm">
                       Response{responses.length === 1 ? "" : "s"} submitted
                     </p>
-                    <span className="block lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl">
+                    <a
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/surveys");
+                      }}
+                      className="block lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl hover:bg-indigo-700"
+                    >
                       <FiPlusCircle />
-                    </span>
-                    <span className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-full text-white bg-indigo-500 absolute top-4 right-4">
+                    </a>
+                    <a
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/surveys");
+                      }}
+                      className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 absolute top-4 right-4 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    >
                       {responses.length
                         ? "Find more live surveys!"
                         : "Respond to your first survey!"}
-                    </span>
+                    </a>
                   </div>
                 </div>
               </div>
