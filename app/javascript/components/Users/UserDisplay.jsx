@@ -88,15 +88,15 @@ const UserDisplay = () => {
                     </span>
                     <span className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-full text-white bg-indigo-500 absolute top-4 right-4">
                       {responses.length
-                        ? "Respond to your first survey!"
-                        : "Find more live surveys!"}
+                        ? "Find more live surveys!"
+                        : "Respond to your first survey!"}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex items-center space-x-4"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
               <div className="w-full">
                 <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
                   <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
@@ -108,18 +108,19 @@ const UserDisplay = () => {
                     </p>
                   </div>
                   <div className="dark:text-white">
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 1</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 2</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 3</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
+                    {authoredSurveys
+                      .filter((elem) => elem.publish)
+                      .map((survey) => (
+                        <div
+                          key={survey.id}
+                          className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
+                        >
+                          <p>{survey.title}</p>
+                          <div className="flex items-end text-xs">
+                            responses
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -134,18 +135,17 @@ const UserDisplay = () => {
                     </p>
                   </div>
                   <div className="dark:text-white">
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 1</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 2</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 3</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
+                    {authoredSurveys
+                      .filter((elem) => !elem.publish)
+                      .map((survey) => (
+                        <div
+                          key={survey.id}
+                          className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
+                        >
+                          <p>{survey.title}</p>
+                          <div className="flex items-end text-xs">edit</div>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -160,18 +160,15 @@ const UserDisplay = () => {
                     </p>
                   </div>
                   <div className="dark:text-white">
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 1</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 2</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
-                    <div className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200">
-                      <p>Line 3</p>
-                      <div className="flex items-end text-xs">34</div>
-                    </div>
+                    {responses.map((response) => (
+                      <div
+                        key={response.id}
+                        className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
+                      >
+                        <p>{response.survey_title}</p>
+                        <div className="flex items-end text-xs">view</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
