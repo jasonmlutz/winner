@@ -148,6 +148,8 @@ const NewResponse = () => {
         window.alert(`answer to ${answer.question_id} not created!`);
         return;
       }
+
+      navigate(`/responses/${response.id}`);
     } else {
       window.alert("you must be logged in to submit a response");
     }
