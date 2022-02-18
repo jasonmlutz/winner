@@ -24,7 +24,7 @@ const NotFound = ({ pathname }) => {
           </h1>
           <a
             href=""
-            className="text-2xl lg:text-3xl text-center text-white leading-tight my-4"
+            className="text-2xl lg:text-3xl text-center text-white leading-tight my-4 text-blue-500 underline hover:text-blue-700"
             onClick={(e) => {
               e.preventDefault();
               navigate("/");

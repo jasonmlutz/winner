@@ -202,7 +202,7 @@ const NewResponse = () => {
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Author:{" "}
                       <a
-                        className="underline hover:text-white"
+                        className="text-blue-500 underline hover:text-blue-700"
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
@@ -210,6 +210,18 @@ const NewResponse = () => {
                         }}
                       >
                         {survey.author_name}
+                      </a>
+                    </p>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      <a
+                        className="text-blue-500 underline hover:text-blue-700"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/surveys/${survey.id}/responses`);
+                        }}
+                      >
+                        View all responses to this survey
                       </a>
                     </p>
                   </li>

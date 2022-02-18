@@ -177,9 +177,16 @@ const UserDisplay = () => {
                             >
                               {survey.title}
                             </a>
-                            <div className="flex items-end text-xs">
+                            <a
+                              className="text-blue-500 underline hover:text-blue-700 flex items-end text-xs"
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                navigate(`/surveys/${survey.id}/responses`);
+                              }}
+                            >
                               responses
-                            </div>
+                            </a>
                           </div>
                         ))}
                     </div>
@@ -214,7 +221,7 @@ const UserDisplay = () => {
                               {survey.title}
                             </a>
                             <a
-                              className="hover:underline flex items-end text-xs"
+                              className="text-blue-500 underline hover:text-blue-700 flex items-end text-xs"
                               href=""
                               onClick={(e) => {
                                 e.preventDefault();
@@ -255,7 +262,7 @@ const UserDisplay = () => {
                             {response.survey_title}
                           </a>
                           <a
-                            className="flex items-end text-xs hover:underline"
+                            className="flex items-end text-xs text-blue-500 underline hover:text-blue-700"
                             href=""
                             onClick={(e) => {
                               e.preventDefault();

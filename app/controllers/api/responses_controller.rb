@@ -32,6 +32,9 @@ class Api::ResponsesController < ApplicationController
     end
     if params[:survey_id]
       @responses = Survey.find(params[:survey_id]).responses
+      @responses = @responses.to_a.map do |response|
+        response = response.attributes.merge("respondent_name": response.respondent.name, "survey_title": response.survey.title)
+      end
     end
     render json: @responses
   end

@@ -136,7 +136,7 @@ const ResponseDisplay = () => {
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       <a
-                        className="hover:underline"
+                        className="text-blue-500 underline hover:text-blue-700"
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
@@ -149,7 +149,7 @@ const ResponseDisplay = () => {
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Author:{" "}
                       <a
-                        className="underline hover:text-white"
+                        className="text-blue-500 underline hover:text-blue-700"
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
@@ -162,7 +162,7 @@ const ResponseDisplay = () => {
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Respondent:{" "}
                       <a
-                        className="underline hover:text-white"
+                        className="text-blue-500 underline hover:text-blue-700"
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
