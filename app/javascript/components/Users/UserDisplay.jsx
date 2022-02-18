@@ -55,7 +55,7 @@ const UserDisplay = () => {
         <div className="flex items-start justify-between relative py-[74px]">
           <div className="flex flex-col w-full md:space-y-4">
             <div className="overflow-auto h-screen pb-24 px-4 md:px-6">
-              <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
+              <h1 className="text-4xl font-semibold :text-white">
                 Welcome back,{" "}
                 {user.name.charAt(0).toUpperCase() + user.name.slice(1)}!
               </h1>
@@ -65,8 +65,8 @@ const UserDisplay = () => {
               <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">
                 <div className="flex items-center w-full md:w-2/3 space-x-4">
                   <div className="w-1/2">
-                    <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
-                      <p className="text-2xl text-black dark:text-white font-bold">
+                    <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
+                      <p className="text-2xl text-white font-bold">
                         {authoredSurveys.length || "0"}
                       </p>
                       <p className="text-gray-400 text-sm">
@@ -97,8 +97,8 @@ const UserDisplay = () => {
                     </div>
                   </div>
                   <div className="w-1/2">
-                    <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
-                      <p className="text-2xl text-black dark:text-white font-bold">
+                    <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
+                      <p className="text-2xl text-white font-bold">
                         {responses.length || "0"}
                       </p>
                       <p className="text-gray-400 text-sm">
@@ -133,16 +133,16 @@ const UserDisplay = () => {
               <div className="flex items-center space-x-4"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
                 <div className="w-full">
-                  <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
-                    <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                  <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
+                    <p className="text-sm w-max text-white font-semibold border-b border-gray-200">
                       Your Live Surveys
                     </p>
                     <div className="flex items-end space-x-2 my-6">
-                      <p className="text-5xl text-black dark:text-white font-bold">
+                      <p className="text-5xl text-white font-bold">
                         {authoredSurveys.filter((elem) => elem.publish).length}
                       </p>
                     </div>
-                    <div className="dark:text-white">
+                    <div className="text-white">
                       {authoredSurveys
                         .filter((elem) => elem.publish)
                         .map((survey) => (
@@ -160,16 +160,16 @@ const UserDisplay = () => {
                   </div>
                 </div>
                 <div className="w-full">
-                  <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
-                    <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                  <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
+                    <p className="text-sm w-max text-white font-semibold border-b border-gray-200">
                       Your Unpublished Surveys
                     </p>
                     <div className="flex items-end space-x-2 my-6">
-                      <p className="text-5xl text-black dark:text-white font-bold">
+                      <p className="text-5xl text-white font-bold">
                         {authoredSurveys.filter((elem) => !elem.publish).length}
                       </p>
                     </div>
-                    <div className="dark:text-white">
+                    <div className="text-white">
                       {authoredSurveys
                         .filter((elem) => !elem.publish)
                         .map((survey) => (
@@ -185,16 +185,14 @@ const UserDisplay = () => {
                   </div>
                 </div>
                 <div className="w-full">
-                  <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-700 relative">
-                    <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+                  <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
+                    <p className="text-sm w-max text-white font-semibold border-b border-gray-200">
                       Your Responses
                     </p>
                     <div className="flex items-end space-x-2 my-6">
-                      <p className="text-5xl text-black dark:text-white font-bold">
-                        12
-                      </p>
+                      <p className="text-5xl text-white font-bold">12</p>
                     </div>
-                    <div className="dark:text-white">
+                    <div className="text-white">
                       {responses.map((response) => (
                         <div
                           key={response.id}
