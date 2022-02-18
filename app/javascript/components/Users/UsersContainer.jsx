@@ -76,7 +76,7 @@ const UsersContainer = () => {
   return (
     <>
       <Helmet helmetData={helmetData}>
-        <title>users - Winner</title>
+        <title>Users - Winner</title>
       </Helmet>
       <div className="bg-indigo-900 relative overflow-hidden h-screen">
         <img

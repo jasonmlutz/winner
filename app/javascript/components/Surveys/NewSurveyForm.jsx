@@ -67,7 +67,7 @@ const NewSurveyForm = () => {
   return (
     <>
       <Helmet helmetData={helmetData}>
-        <title>Surveys - Winner</title>
+        <title>New Survey - Winner</title>
       </Helmet>
       <div className="bg-indigo-900 relative overflow-hidden h-screen">
         <img

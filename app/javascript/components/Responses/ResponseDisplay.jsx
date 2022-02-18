@@ -116,7 +116,7 @@ const ResponseDisplay = () => {
     return (
       <>
         <Helmet helmetData={helmetData}>
-          <title>Surveys - Winner</title>
+          <title>Response - Winner</title>
         </Helmet>
         <div className="bg-indigo-900 relative overflow-hidden h-screen">
           <img
@@ -185,7 +185,7 @@ const ResponseDisplay = () => {
     return (
       <>
         <Helmet helmetData={helmetData}>
-          <title>Surveys - Winner</title>
+          <title>Response - Winner</title>
         </Helmet>
         <div className="bg-indigo-900 relative overflow-hidden h-screen">
           <img
