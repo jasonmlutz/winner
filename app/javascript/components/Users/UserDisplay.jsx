@@ -10,9 +10,11 @@ import Header from "../Header";
 const UserDisplay = () => {
   const [authoredSurveys, setAuthoredSurveys] = useState([]);
   const [responses, setResponses] = useState([]);
-  const [hovered, setHovered] = useState("");
   const [user, setUser] = useState({ name: "" });
   const navigate = useNavigate();
+
+  const [hideHeader, setHideHeader] = useState(false);
+  var scrollTop = 0;
 
   const params = useParams();
   const id = params.user_id.toString();
@@ -51,11 +53,23 @@ const UserDisplay = () => {
           src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
           className="absolute h-full w-full object-cover"
         />
-        <Header />
-        <div className="flex items-start justify-between relative py-[74px]">
+        <Header hideHeader={hideHeader} />
+        {/* <div className=" relative py-[74px]"> */}
+        <div
+          className="flex items-start justify-between relative py-[74px] h-screen overflow-auto"
+          onScroll={(e) => {
+            console.log(e.target.scrollTop > scrollTop);
+            if (e.target.scrollTop > scrollTop) {
+              setHideHeader(true);
+            } else {
+              setHideHeader(false);
+            }
+            scrollTop = e.target.scrollTop;
+          }}
+        >
           <div className="flex flex-col w-full md:space-y-4">
-            <div className="overflow-auto h-screen pb-24 px-4 md:px-6">
-              <h1 className="text-4xl font-semibold :text-white">
+            <div className="h-screen pb-24 px-4 md:px-6">
+              <h1 className="text-4xl font-semibold text-white">
                 Welcome back,{" "}
                 {user.name.charAt(0).toUpperCase() + user.name.slice(1)}!
               </h1>
@@ -184,7 +198,7 @@ const UserDisplay = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full pb-4">
                   <div className="shadow-lg px-4 py-6 w-full bg-gray-800 relative">
                     <p className="text-sm w-max text-white font-semibold border-b border-gray-200">
                       Your Responses
