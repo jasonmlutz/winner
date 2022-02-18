@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiPlusCircle } from "react-icons/fi";
 import { Helmet, HelmetData } from "react-helmet-async";
@@ -6,18 +6,28 @@ import { Helmet, HelmetData } from "react-helmet-async";
 const helmetData = new HelmetData({});
 
 import Header from "../Header";
+import ScrollToTopButton from "../resources/ScrollToTopButton";
 
 const UserDisplay = () => {
   const [authoredSurveys, setAuthoredSurveys] = useState([]);
   const [responses, setResponses] = useState([]);
   const [user, setUser] = useState({ name: "" });
-  const navigate = useNavigate();
-
   const [hideHeader, setHideHeader] = useState(false);
-  var scrollTop = 0;
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+
+  const navigate = useNavigate();
+  const ref = createRef();
 
   const params = useParams();
   const id = params.user_id.toString();
+
+  // var scrollTop = 0;
+  function handleScroll(e) {
+    setShowScrollTopButton(e.target.scrollTop > 300);
+    setHideHeader(e.target.scrollTop > 300);
+    // setHideHeader(e.target.scrollTop > scrollTop);
+    // scrollTop = e.target.scrollTop;
+  }
 
   async function fetchData(url, callback) {
     const response = await fetch(url);
@@ -54,18 +64,11 @@ const UserDisplay = () => {
           className="absolute h-full w-full object-cover"
         />
         <Header hideHeader={hideHeader} />
-        {/* <div className=" relative py-[74px]"> */}
+        <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
         <div
+          ref={ref}
           className="flex items-start justify-between relative py-[74px] h-screen overflow-auto"
-          onScroll={(e) => {
-            console.log(e.target.scrollTop > scrollTop);
-            if (e.target.scrollTop > scrollTop) {
-              setHideHeader(true);
-            } else {
-              setHideHeader(false);
-            }
-            scrollTop = e.target.scrollTop;
-          }}
+          onScroll={(e) => handleScroll(e)}
         >
           <div className="flex flex-col w-full md:space-y-4">
             <div className="h-screen pb-24 px-4 md:px-6">

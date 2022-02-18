@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import { useNavigate } from "react-router";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
 
 import Header from "../Header";
+import ScrollToTopButton from "../resources/ScrollToTopButton";
 
 const SurveysContainer = () => {
   const [surveys, setSurveys] = useState([{}]);
-  const navigate = useNavigate();
   const [hideHeader, setHideHeader] = useState(false);
-  var scrollTop = 0;
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+
+  const navigate = useNavigate();
+  const ref = createRef();
+
+  // var scrollTop = 0;
+  function handleScroll(e) {
+    setShowScrollTopButton(e.target.scrollTop > 300);
+    setHideHeader(e.target.scrollTop > 300);
+    // setHideHeader(e.target.scrollTop > scrollTop);
+    // scrollTop = e.target.scrollTop;
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -47,17 +58,11 @@ const SurveysContainer = () => {
           className="absolute h-full w-full object-cover"
         />
         <Header hideHeader={hideHeader} />
+        <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
         <div
+          ref={ref}
           className="relative py-[74px] h-screen overflow-auto"
-          onScroll={(e) => {
-            console.log(e.target.scrollTop > scrollTop);
-            if (e.target.scrollTop > scrollTop) {
-              setHideHeader(true);
-            } else {
-              setHideHeader(false);
-            }
-            scrollTop = e.target.scrollTop;
-          }}
+          onScroll={(e) => handleScroll(e)}
         >
           <div className="mx-auto w-full">
             <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
