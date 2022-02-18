@@ -1,9 +1,16 @@
 // import React, { useState, useEffect } from "react";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 const Header = ({ hideHeader = false }) => {
   const [userActionMenuVisible, setUserActionMenuVisible] = useState(false);
   const [navMenuVisible, setNavMenuVisible] = useState(false);
+
+  const { setCurrentUser } = useContext(CurrentUserContext);
+
+  const navigate = useNavigate();
 
   var userActionMenuClasses =
     "absolute top-[50px] -right-2 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
@@ -20,6 +27,30 @@ const Header = ({ hideHeader = false }) => {
   var headerClasses =
     "absolute left-0 right-0 z-20 transition-[top] duration-300 ease-in-out ";
   headerClasses += hideHeader ? "-top-16" : "top-0";
+
+  async function handleLogout() {
+    const token = document.querySelector("[name=csrf-token]").content;
+    const sessionToken = sessionStorage.getItem("sessionToken");
+
+    await fetch(`/api/session`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-TOKEN": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        session_token: sessionToken,
+      }),
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+
+    sessionStorage.setItem("sessionToken", "");
+    setCurrentUser(null);
+    navigate("/");
+    alert("logout successful");
+  }
 
   return (
     <>
@@ -172,9 +203,13 @@ const Header = ({ hideHeader = false }) => {
                             href="#"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                             role="menuitem"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleLogout();
+                            }}
                           >
                             <span className="flex flex-col">
-                              <span>UserAction3</span>
+                              <span>Logout</span>
                             </span>
                           </a>
                         </div>
