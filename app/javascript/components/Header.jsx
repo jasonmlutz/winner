@@ -8,7 +8,7 @@ const Header = ({ hideHeader = false }) => {
   const [userActionMenuVisible, setUserActionMenuVisible] = useState(false);
   const [navMenuVisible, setNavMenuVisible] = useState(false);
 
-  const { setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
 
@@ -92,30 +92,42 @@ const Header = ({ hideHeader = false }) => {
                       aria-labelledby="user-actions-menu"
                     >
                       <a
-                        href="#"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                         role="menuitem"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate("/surveys");
+                        }}
                       >
                         <span className="flex flex-col">
-                          <span>NavMenu1</span>
+                          <span>All Surveys</span>
                         </span>
                       </a>
                       <a
-                        href="#"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                         role="menuitem"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate("/surveys/new");
+                        }}
                       >
                         <span className="flex flex-col">
-                          <span>NavMenu2</span>
+                          <span>Create a Survey</span>
                         </span>
                       </a>
                       <a
-                        href="#"
+                        href=""
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                         role="menuitem"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate("/users");
+                        }}
                       >
                         <span className="flex flex-col">
-                          <span>NavMenu3</span>
+                          <span>All Users</span>
                         </span>
                       </a>
                     </div>
@@ -125,21 +137,33 @@ const Header = ({ hideHeader = false }) => {
                   <div className="flex items-baseline space-x-4">
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href="/#"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/surveys");
+                      }}
                     >
-                      NavMenu1
+                      All Surveys
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href="/#"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/surveys/new");
+                      }}
                     >
-                      NavMenu2
+                      Create a Survey
                     </a>
                     <a
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href="/#"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/users");
+                      }}
                     >
-                      NavMenu3
+                      All Users
                     </a>
                   </div>
                 </div>
@@ -185,12 +209,16 @@ const Header = ({ hideHeader = false }) => {
                             href="#"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                             role="menuitem"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              navigate(`/users/${currentUser.id}`);
+                            }}
                           >
                             <span className="flex flex-col">
-                              <span>UserAction1</span>
+                              <span>My Profile</span>
                             </span>
                           </a>
-                          <a
+                          {/* <a
                             href="#"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                             role="menuitem"
@@ -198,7 +226,7 @@ const Header = ({ hideHeader = false }) => {
                             <span className="flex flex-col">
                               <span>UserAction2</span>
                             </span>
-                          </a>
+                          </a> */}
                           <a
                             href="#"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
