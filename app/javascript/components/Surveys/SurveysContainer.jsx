@@ -9,12 +9,12 @@ import ScrollToTopButton from "../resources/ScrollToTopButton";
 
 const SurveysContainer = () => {
   const [surveys, setSurveys] = useState([{}]);
-  const [hideHeader, setHideHeader] = useState(false);
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
   const navigate = useNavigate();
   const ref = createRef();
 
+  const [hideHeader, setHideHeader] = useState(false);
   // var scrollTop = 0;
   function handleScroll(e) {
     setShowScrollTopButton(e.target.scrollTop > 300);
