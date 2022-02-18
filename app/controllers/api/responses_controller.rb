@@ -22,10 +22,16 @@ class Api::ResponsesController < ApplicationController
   end
 
   # GET /api/users/:user_id/responses
+  # GET /api/surveys/:survey_id/responses
   def index
-    @responses = User.find(params[:user_id]).responses
-    @responses = @responses.to_a.map do |response|
-      response = response.attributes.merge("survey_title": response.survey.title)
+    if params[:user_id]
+      @responses = User.find(params[:user_id]).responses
+      @responses = @responses.to_a.map do |response|
+        response = response.attributes.merge("survey_title": response.survey.title)
+      end
+    end
+    if params[:survey_id]
+      @responses = Survey.find(params[:survey_id]).responses
     end
     render json: @responses
   end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :surveys, only: [:index, :show, :create, :destroy, :update] do
       resources :questions, only: [:create, :index]
       resources :response_options, only: [:index]
+      resources :responses, only: [:index]
     end
 
     resources :questions, only: [:update, :destroy] do

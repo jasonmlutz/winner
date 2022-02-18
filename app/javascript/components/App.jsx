@@ -17,6 +17,7 @@ import SurveyDisplay from "./Surveys/SurveyDisplay";
 
 import NewResponse from "./Responses/NewResponse";
 import ResponseDisplay from "./Responses/ResponseDisplay";
+import ResponsesContainer from "./Responses/ResponsesContainer";
 
 import NotFound from "./NotFound";
 
@@ -68,6 +69,7 @@ const App = () => {
         { path: "", element: <SurveysContainer /> },
         { path: "new", element: <NewSurveyForm /> },
         { path: ":survey_id", element: <NewResponse /> },
+        { path: ":survey_id/responses", element: <ResponsesContainer /> },
         {
           path: "edit/:id/",
           children: [
