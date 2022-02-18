@@ -167,7 +167,16 @@ const UserDisplay = () => {
                             key={survey.id}
                             className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                           >
-                            <p>{survey.title}</p>
+                            <a
+                              className="hover:underline flex items-end text-s"
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                navigate(`/surveys/${survey.id}`);
+                              }}
+                            >
+                              {survey.title}
+                            </a>
                             <div className="flex items-end text-xs">
                               responses
                             </div>
@@ -194,7 +203,16 @@ const UserDisplay = () => {
                             key={survey.id}
                             className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                           >
-                            <p>{survey.title}</p>
+                            <a
+                              className="hover:underline flex items-end text-s"
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                navigate(`/surveys/edit/${survey.id}`);
+                              }}
+                            >
+                              {survey.title}
+                            </a>
                             <a
                               className="hover:underline flex items-end text-xs"
                               href=""
