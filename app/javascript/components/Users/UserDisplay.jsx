@@ -207,7 +207,9 @@ const UserDisplay = () => {
                       Your Responses
                     </p>
                     <div className="flex items-end space-x-2 my-6">
-                      <p className="text-5xl text-white font-bold">12</p>
+                      <p className="text-5xl text-white font-bold">
+                        {responses.length}
+                      </p>
                     </div>
                     <div className="text-white">
                       {responses.map((response) => (
@@ -215,8 +217,26 @@ const UserDisplay = () => {
                           key={response.id}
                           className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                         >
-                          <p>{response.survey_title}</p>
-                          <div className="flex items-end text-xs">view</div>
+                          <a
+                            className="hover:underline"
+                            href=""
+                            onClick={(e) => {
+                              e.preventDefault();
+                              navigate(`/surveys/${response.survey_id}`);
+                            }}
+                          >
+                            {response.survey_title}
+                          </a>
+                          <a
+                            className="flex items-end text-xs hover:underline"
+                            href=""
+                            onClick={(e) => {
+                              e.preventDefault();
+                              navigate(`/responses/${response.id}`);
+                            }}
+                          >
+                            view response
+                          </a>
                         </div>
                       ))}
                     </div>
