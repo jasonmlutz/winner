@@ -45,7 +45,6 @@ const NewSessionForm = () => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       let path;
-      console.log(urlParams.get("source"));
       switch (urlParams.get("source")) {
         case "new-survey":
           path = "/surveys/new";
