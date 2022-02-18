@@ -5,17 +5,6 @@ const Header = ({ hideHeader = false }) => {
   const [userActionMenuVisible, setUserActionMenuVisible] = useState(false);
   const [navMenuVisible, setNavMenuVisible] = useState(false);
 
-  // useEffect(() => {
-  //   function handleScroll() {
-  //     console.log("scrolled!");
-  //   }
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
   var userActionMenuClasses =
     "absolute top-[50px] -right-2 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
