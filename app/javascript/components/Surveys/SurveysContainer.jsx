@@ -9,7 +9,6 @@ import Header from "../Header";
 const SurveysContainer = () => {
   const [surveys, setSurveys] = useState([{}]);
   const navigate = useNavigate();
-  // const [scrollTop, setScrollTop] = useState(0);
   const [hideHeader, setHideHeader] = useState(false);
   var scrollTop = 0;
 
