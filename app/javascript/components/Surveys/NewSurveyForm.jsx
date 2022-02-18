@@ -85,33 +85,36 @@ const NewSurveyForm = () => {
             <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
               <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                 <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
-                  <h3 className="text-lg leading-6 font-medium text-white">
-                    {currentUser ? (
-                      <form className="input">
-                        <input
-                          type="text"
-                          placeholder="Enter survey title"
-                          className="input__box input__box--large"
-                          value={title}
-                          onChange={(e) => {
-                            setTitle(e.target.value);
-                          }}
-                        />
-                        <button
-                          className="input__submit input__submit--right-anchor input__submit--large"
-                          type="submit"
-                          onClick={handleSubmit}
-                        >
-                          Go
-                        </button>
-                      </form>
-                    ) : (
-                      <div>
-                        You must log in to create a survey.{" "}
-                        <Link to="/login?source=new-survey">Sign in</Link>
-                      </div>
-                    )}
-                  </h3>
+                  {currentUser ? (
+                    <form className="flex flex-row">
+                      <input
+                        type="text"
+                        placeholder="Enter survey title"
+                        className="flex-1 text-black rounded-md px-2 mr-2"
+                        value={title}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
+                      />
+                      <button
+                        className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                        type="submit"
+                        onClick={handleSubmit}
+                      >
+                        Go
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="self-center text-md md:text-lg text-center text-gray-500 flex-items-center dark:text-gray-400">
+                      You must log in to create a survey.{" "}
+                      <Link
+                        className="text-sm text-blue-500 underline hover:text-blue-700"
+                        to="/login?source=new-survey"
+                      >
+                        Sign in
+                      </Link>
+                    </div>
+                  )}
                 </li>
               </ul>
             </div>
