@@ -16,7 +16,7 @@ const QuestionDisplay = ({ question, questions }) => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
-  const path = `/surveys/${question.parent_id}/${Date.now()}`;
+  const path = `/surveys/edit/${question.parent_id}/${Date.now()}`;
 
   useEffect(() => {
     if (editActive) {
@@ -25,19 +25,19 @@ const QuestionDisplay = ({ question, questions }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editActive]);
 
-  const renderQuestion = () => {
-    if (editActive) {
-      return (
-        <form className="input">
+  return (
+    <div className="w-full shadow select-none bg-gray-800 rounded-md p-4">
+      {editActive ? (
+        <form className="flex flex-row">
           <input
             type="text"
-            className="input__box input__box--medium"
+            className="flex-1 text-black rounded-md px-2 mr-2"
             ref={inputRef}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <button
-            className="input__submit input__submit--right-anchor input__submit--medium"
+            className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             type="submit"
             onClick={(e) =>
               handleEditSubmit(
@@ -51,44 +51,38 @@ const QuestionDisplay = ({ question, questions }) => {
               )
             }
           >
-            GO
+            Update
           </button>
         </form>
-      );
-    } else {
-      return (
-        <div className="text__title text__title--medium">
-          <div className="text__title--icons-right">{question.title}</div>
-          <IconInterface
-            position={question.position}
-            siblingCount={questions.length}
-            setEditActive={setEditActive}
-            handleMove={handleMove.bind(
-              null,
-              question,
-              questions,
-              "questions",
-              navigate,
-              path
-            )}
-            handleDelete={handleDelete.bind(
-              null,
-              question.id,
-              question,
-              questions,
-              "questions",
-              navigate,
-              path
-            )}
-          />
+      ) : (
+        <div className="px-1 flex flex-row justify-between">
+          <div className="font-medium text-white">{question.title}</div>
+          <div className="flex flex-row text-white text-md">
+            <IconInterface
+              position={question.position}
+              siblingCount={questions.length}
+              setEditActive={setEditActive}
+              handleMove={handleMove.bind(
+                null,
+                question,
+                questions,
+                "questions",
+                navigate,
+                path
+              )}
+              handleDelete={handleDelete.bind(
+                null,
+                question.id,
+                question,
+                questions,
+                "questions",
+                navigate,
+                path
+              )}
+            />
+          </div>
         </div>
-      );
-    }
-  };
-
-  return (
-    <div className="QuestionDisplay">
-      {renderQuestion()}
+      )}
       <ResponseOptionsContainer
         parent_id={question.id}
         grandparent_id={question.parent_id}

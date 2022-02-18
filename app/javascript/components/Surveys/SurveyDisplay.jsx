@@ -224,7 +224,7 @@ const SurveyDisplay = () => {
                           type="submit"
                           onClick={handleEditSubmit}
                         >
-                          Go
+                          Update
                         </button>
                       </form>
                     ) : (
@@ -247,6 +247,7 @@ const SurveyDisplay = () => {
                       </div>
                     )}
                   </li>
+                  <QuestionsContainer parent_id={id} />
                 </ul>
               </div>
             </div>
@@ -255,91 +256,6 @@ const SurveyDisplay = () => {
       </>
     );
   }
-
-  // const renderSurvey = () => {
-  //   if (editActive) {
-  //     return (
-  // <form className="input">
-  //   <input
-  //     type="text"
-  //     className="input__box input__box--medium"
-  //     ref={inputRef}
-  //     value={title}
-  //     onChange={(e) => setTitle(e.target.value)}
-  //   />
-  //   <button
-  //     className="input__submit input__submit--right-anchor input__submit--medium"
-  //     type="submit"
-  //     onClick={handleEditSubmit}
-  //   >
-  //     GO
-  //   </button>
-  // </form>
-  //     );
-  //   } else {
-  //     return (
-  //       <>
-  //         <div className="text__title text__title--large">
-  //           {title}
-  //           <div className="text__icon">
-  // <AiFillEdit
-  //   onClick={() => {
-  //     setEditActive(true);
-  //   }}
-  // />
-  //           </div>
-  //           <div className="text__icon">
-  //             <AiFillDelete onClick={() => handleDelete()} />
-  //           </div>
-  //         </div>
-  //         <div className="text__title--small">
-  //           Author:{" "}
-  //           <a
-  //             href="#"
-  //             onClick={(e) => {
-  //               e.preventDefault();
-  //               navigate(`/users/${survey.author_id}`);
-  //             }}
-  //           >
-  //             {survey.author_name}
-  //           </a>
-  //         </div>
-  //         <div className="text__title--small">
-  //           This survey is {survey.publish ? "live." : "not live."}
-  //         </div>
-  //       </>
-  //     );
-  //   }
-  // };
-
-  // if (survey.publish) {
-  //   return (
-  //     <div className="SurveyDisplay">
-  //       This survey is live and may no longer be edited, even by the author.
-  //     </div>
-  //   );
-  // } else {
-  //   if (currentUser && currentUser.id === survey.author_id) {
-  //     return (
-  //       <div className="SurveyDisplay">
-  //         {renderSurvey()}
-  //         <QuestionsContainer parent_id={id} />
-  //         <button
-  //           className="input__submit input__submit--large input__submit--wide"
-  //           onClick={handlePublish}
-  //         >
-  //           PUBLISH
-  //         </button>
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <div className="SurveyDisplay">
-  //         you must be logged in as the author to edit this survey
-  //       </div>
-  //     );
-  //   }
-  // }
 };
 
 export default SurveyDisplay;

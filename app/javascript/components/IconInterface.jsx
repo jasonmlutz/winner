@@ -14,33 +14,37 @@ const IconInterface = ({
 }) => {
   const renderDownIcon = () => {
     return (
-      <div className="text__icon">
-        <BsFillArrowDownCircleFill onClick={() => handleMove("down")} />
-      </div>
+      <BsFillArrowDownCircleFill
+        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        onClick={() => handleMove("down")}
+      />
     );
   };
 
   const renderUpIcon = () => {
     return (
-      <div className="text__icon">
-        <BsFillArrowUpCircleFill onClick={() => handleMove("up")} />
-      </div>
+      <BsFillArrowUpCircleFill
+        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        onClick={() => handleMove("up")}
+      />
     );
   };
 
   const renderEditIcon = () => {
     return (
-      <div className="text__icon">
-        <AiFillEdit onClick={() => setEditActive(true)} />
-      </div>
+      <AiFillEdit
+        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        onClick={() => setEditActive(true)}
+      />
     );
   };
 
   const renderDeleteIcon = () => {
     return (
-      <div className="text__icon">
-        <AiFillDelete onClick={() => handleDelete()} />
-      </div>
+      <AiFillDelete
+        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        onClick={() => handleDelete()}
+      />
     );
   };
 
@@ -63,7 +67,6 @@ const IconInterface = ({
           return (
             <>
               {renderDownIcon()}
-              <div className="text__icon--empty-placeholder"></div>
               {renderEditIcon()}
               {renderDeleteIcon()}
             </>

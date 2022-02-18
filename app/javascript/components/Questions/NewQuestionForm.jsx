@@ -26,7 +26,7 @@ const NewQuestionForm = ({ parent_id, siblingCount }) => {
         return;
       });
 
-      navigate(`/surveys/${parent_id}/${Date.now()}`);
+      navigate(`/surveys/edit/${parent_id}/${Date.now()}`);
       setTitle("");
       inputRef.current.blur();
     } else {
@@ -35,28 +35,29 @@ const NewQuestionForm = ({ parent_id, siblingCount }) => {
   }
 
   return (
-    <div className="NewQuestionForm">
-      <span className="input__title--medium">Create a new question!</span>
-      <form className="input">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Enter question title"
-          className="input__box input__box--medium"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-        <button
-          className="input__submit input__submit--right-anchor input__submit--medium"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          GO
-        </button>
-      </form>
-    </div>
+    <li className="border-gray-100 flex flex-row mb-2">
+      <div className="w-full shadow select-none bg-gray-800 rounded-md p-4">
+        <form className="flex flex-row">
+          <input
+            className="flex-1 text-black rounded-md px-2 mr-2"
+            ref={inputRef}
+            type="text"
+            placeholder="Create a new question"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <button
+            className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Create
+          </button>
+        </form>
+      </div>
+    </li>
   );
 };
 

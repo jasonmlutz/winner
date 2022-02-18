@@ -15,7 +15,7 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
-  const path = `/surveys/${responseOption.grandparent_id}/${Date.now()}`;
+  const path = `/surveys/edit/${responseOption.grandparent_id}/${Date.now()}`;
 
   useEffect(() => {
     if (editActive) {
@@ -27,16 +27,16 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
   const renderResponseOption = () => {
     if (editActive) {
       return (
-        <form className="input">
+        <form className="flex flex-row">
           <input
             type="text"
-            className="input__box input__box--small"
+            className="flex-1 text-black rounded-md px-2 mr-2"
             ref={inputRef}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <button
-            className="input__submit input__submit--right-anchor input__submit--small"
+            className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             type="submit"
             onClick={(e) =>
               handleEditSubmit(
@@ -50,42 +50,44 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
               )
             }
           >
-            GO
+            Update
           </button>
         </form>
       );
     } else {
       return (
-        <div className="text__title text__title--small">
-          <div className="text__title--icons-right">{responseOption.title}</div>
-          <IconInterface
-            position={responseOption.position}
-            siblingCount={responseOptions.length}
-            setEditActive={setEditActive}
-            handleMove={handleMove.bind(
-              null,
-              responseOption,
-              responseOptions,
-              "response_options",
-              navigate,
-              path
-            )}
-            handleDelete={handleDelete.bind(
-              null,
-              responseOption.id,
-              responseOption,
-              responseOptions,
-              "response_options",
-              navigate,
-              path
-            )}
-          />
+        <div className="px-1 flex flex-row justify-between">
+          <div className="font-small text-white">{responseOption.title}</div>
+          <div className="flex flex-row text-white text-md">
+            <IconInterface
+              position={responseOption.position}
+              siblingCount={responseOptions.length}
+              setEditActive={setEditActive}
+              handleMove={handleMove.bind(
+                null,
+                responseOption,
+                responseOptions,
+                "response_options",
+                navigate,
+                path
+              )}
+              handleDelete={handleDelete.bind(
+                null,
+                responseOption.id,
+                responseOption,
+                responseOptions,
+                "response_options",
+                navigate,
+                path
+              )}
+            />
+          </div>
         </div>
       );
     }
   };
 
-  return <div className="ResponseOptionDisplay">{renderResponseOption()}</div>;
+  return <>{renderResponseOption()}</>;
 };
 
 export default ResponseOptionDisplay;

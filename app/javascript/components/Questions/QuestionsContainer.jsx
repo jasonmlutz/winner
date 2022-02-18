@@ -35,25 +35,19 @@ const QuestionsContainer = ({ parent_id }) => {
   const renderQuestionsContainer = () => {
     if (questions.length) {
       const sortedQuestions = questions.sort((a, b) => a.position - b.position);
-      return (
-        <>
-          <ul>
-            {sortedQuestions.map((question) => (
-              <li key={question.id}>
-                <QuestionDisplay question={question} questions={questions} />
-              </li>
-            ))}
-          </ul>
-        </>
-      );
+      return sortedQuestions.map((question) => (
+        <li className="border-gray-100 flex flex-row mb-2" key={question.id}>
+          <QuestionDisplay question={question} questions={questions} />
+        </li>
+      ));
     }
   };
 
   return (
-    <div className="QuestionsContainer">
+    <>
       {renderQuestionsContainer()}
       <NewQuestionForm parent_id={parent_id} siblingCount={questions.length} />
-    </div>
+    </>
   );
 };
 

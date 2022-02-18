@@ -34,25 +34,23 @@ const NewResponseOptionForm = ({ parent_id, grandparent_id, siblingCount }) => {
   }
 
   return (
-    <div className="NewResponseOptionForm">
-      <form className="input">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Create a new response option!"
-          className="input__box input__box--small"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button
-          className="input__submit input__submit--right-anchor input__submit--small"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          GO
-        </button>
-      </form>
-    </div>
+    <form className="flex flex-row">
+      <input
+        className="flex-1 text-black rounded-md px-2 mr-2"
+        ref={inputRef}
+        type="text"
+        placeholder="Create a new response option"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <button
+        className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+        type="submit"
+        onClick={handleSubmit}
+      >
+        Create
+      </button>
+    </form>
   );
 };
 
