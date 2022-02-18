@@ -1,25 +1,41 @@
+// import React, { useState, useEffect } from "react";
 import React, { useState } from "react";
 
-const Header = () => {
+const Header = ({ hideHeader = false }) => {
   const [userActionMenuVisible, setUserActionMenuVisible] = useState(false);
   const [navMenuVisible, setNavMenuVisible] = useState(false);
+
+  // useEffect(() => {
+  //   function handleScroll() {
+  //     console.log("scrolled!");
+  //   }
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   var userActionMenuClasses =
     "absolute top-[50px] -right-2 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   userActionMenuClasses += userActionMenuVisible ? " block" : " hidden";
 
   var navMenuClasses =
-    "absolute left-2 top-[65px] mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
+    "absolute left-2 top-[64px] mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5";
   navMenuClasses += navMenuVisible ? " block" : " hidden";
 
   var extraDarkBackground = userActionMenuVisible || navMenuVisible;
   var backgroundClasses = "inset-0 bg-black absolute";
   backgroundClasses += extraDarkBackground ? " z-10 opacity-75" : " opacity-50";
 
+  var headerClasses =
+    "absolute left-0 right-0 z-20 transition-[top] duration-300 ease-in-out ";
+  headerClasses += hideHeader ? "-top-16" : "top-0";
+
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-20">
-        <nav className="bg-gray-800  shadow ">
+      <header className={headerClasses}>
+        <nav className="bg-gray-800 shadow">
           <div className="max-w-7xl mx-auto px-8">
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">
