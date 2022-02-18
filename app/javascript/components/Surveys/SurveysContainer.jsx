@@ -72,19 +72,25 @@ const SurveysContainer = () => {
                     key={survey.id}
                     className="border-gray-100 flex flex-row mb-2"
                   >
-                    <div
-                      className="w-full transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg
-              hover:bg-gray-700 select-none cursor-pointer bg-gray-800 rounded-md p-4"
+                    <a
+                      className="w-full"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        console.log(survey.id);
+                      }}
                     >
-                      <div className="px-1 flex flex-col">
-                        <div className="font-medium text-white">
-                          {survey.title}
-                        </div>
-                        <div className="text-sm italic text-gray-100 my-2">
-                          Author: {survey.author_name}
+                      <div className="w-full transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:bg-gray-700 select-none bg-gray-800 rounded-md p-4">
+                        <div className="px-1 flex flex-col">
+                          <div className="font-medium text-white">
+                            {survey.title}
+                          </div>
+                          <div className="text-sm italic text-gray-100 my-2">
+                            Author: {survey.author_name}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   </li>
                 ))}
               </ul>
