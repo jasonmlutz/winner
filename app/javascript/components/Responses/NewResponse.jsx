@@ -264,45 +264,6 @@ const NewResponse = () => {
       </>
     );
   }
-
-  // if (
-  //   Object.keys(survey).length &&
-  //   Object.keys(questions).length &&
-  //   Object.keys(responseOptions).length
-  // ) {
-  //   return (
-  //     <div className="SurveyDisplay">
-  //       <div className="text__title text__title--large">{survey.title}</div>
-  //       <div className="text__title--small">
-  //         Author:{" "}
-  //         <a
-  //           href="#"
-  //           onClick={(e) => {
-  //             e.preventDefault();
-  //             navigate(`/users/${survey.author_id}`);
-  //           }}
-  //         >
-  //           {survey.author_name}
-  //         </a>
-  //         <div className="QuestionsContainer">{renderQuestions()}</div>
-  //       </div>
-  // <button
-  //   onClick={() => handleSubmit()}
-  //   className="input__submit input__submit--large input__submit--wide"
-  // >
-  //   SUBMIT
-  // </button>
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <div className="SurveyDisplay">
-  //       <div className="text__title text__title--small">
-  //         Data not fully loaded for survey
-  //       </div>
-  //     </div>
-  //   );
-  // }
 };
 
 export default NewResponse;
