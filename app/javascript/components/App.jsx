@@ -58,7 +58,7 @@ const App = () => {
       path: "users/",
       children: [
         { path: "", element: <UsersContainer /> },
-        { path: "user_id/", element: <UserDisplay /> },
+        { path: ":user_id/", element: <UserDisplay /> },
       ],
     },
     {
