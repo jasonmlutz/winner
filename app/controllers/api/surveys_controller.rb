@@ -10,6 +10,9 @@ class Api::SurveysController < ApplicationController
     else
       @surveys = Survey.all
     end
+    @surveys = @surveys.to_a.map do |survey|
+      survey = survey.attributes.merge("author_name": survey.author.name)
+    end
     render json: @surveys
   end
 
