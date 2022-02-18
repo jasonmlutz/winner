@@ -77,7 +77,7 @@ const SurveysContainer = () => {
                       href=""
                       onClick={(e) => {
                         e.preventDefault();
-                        console.log(survey.id);
+                        navigate(`/surveys/${survey.id}`);
                       }}
                     >
                       <div className="w-full transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:bg-gray-700 select-none bg-gray-800 rounded-md p-4">
