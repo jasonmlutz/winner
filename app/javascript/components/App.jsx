@@ -13,6 +13,7 @@ import UsersContainer from "./Users/UsersContainer";
 
 import SurveysContainer from "./Surveys/SurveysContainer";
 import NewSurveyForm from "./Surveys/NewSurveyForm";
+import SurveyDisplay from "./Surveys/SurveyDisplay";
 
 import NewResponse from "./Responses/NewResponse";
 import ResponseDisplay from "./Responses/ResponseDisplay";
@@ -47,7 +48,7 @@ const App = () => {
       fetchCurrentUser();
     }
     return;
-  }, [currentUser]);
+  }, [location.pathname]);
 
   let routes = useRoutes([
     { path: "/", element: <Landing /> },
@@ -67,33 +68,16 @@ const App = () => {
         { path: "", element: <SurveysContainer /> },
         { path: "new", element: <NewSurveyForm /> },
         { path: ":survey_id", element: <NewResponse /> },
+        {
+          path: "edit/:id/",
+          children: [
+            { path: "", element: <SurveyDisplay /> },
+            { path: ":timestamp", element: <SurveyDisplay /> },
+          ],
+        },
       ],
     },
     { path: "responses/:response_id", element: <ResponseDisplay /> },
-    // { path: "logout/", element: <Logout /> },
-    // {
-    //   path: "users/",
-    //   children: [
-    //     { path: "", element: <UsersContainer /> },
-    //     { path: ":user_id/", element: <UserDisplay /> },
-    //   ],
-    // },
-    // { path: "responses/:response_id", element: <ResponseDisplay /> },
-    // {
-    //   path: "surveys/",
-    //   children: [
-    //     { path: "", element: <Home /> },
-    //     { path: "new", element: <NewSurveyForm /> },
-    //     { path: "live/:survey_id", element: <NewResponse /> },
-    //     {
-    //       path: "edit/:id/",
-    //       children: [
-    //         { path: "", element: <SurveyDisplay /> },
-    //         { path: ":timestamp", element: <SurveyDisplay /> },
-    //       ],
-    //     },
-    //   ],
-    // },
   ]);
 
   routes = routes || <NotFound pathname={location.pathname} />;
