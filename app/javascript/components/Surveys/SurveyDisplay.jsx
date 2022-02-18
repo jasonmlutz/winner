@@ -143,28 +143,28 @@ const SurveyDisplay = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editActive]);
 
-  return (
-    <>
-      <Helmet helmetData={helmetData}>
-        <title>New Survey - Winner</title>
-      </Helmet>
-      <div className="bg-indigo-900 relative overflow-hidden h-screen">
-        <img
-          src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
-          className="absolute h-full w-full object-cover"
-        />
-        <Header hideHeader={hideHeader} />
-        <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
-        <div
-          ref={ref}
-          className="relative py-[74px] h-screen overflow-auto"
-          onScroll={(e) => handleScroll(e)}
-        >
-          <div className="mx-auto w-full">
-            <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-              <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
-                <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
-                  {survey.publish ? (
+  if (survey.publish) {
+    return (
+      <>
+        <Helmet helmetData={helmetData}>
+          <title>New Survey - Winner</title>
+        </Helmet>
+        <div className="bg-indigo-900 relative overflow-hidden h-screen">
+          <img
+            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+            className="absolute h-full w-full object-cover"
+          />
+          <Header hideHeader={hideHeader} />
+          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
+          <div
+            ref={ref}
+            className="relative py-[74px] h-screen overflow-auto"
+            onScroll={(e) => handleScroll(e)}
+          >
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       This survey is live and may no longer be edited.{" "}
                       <a
@@ -178,38 +178,83 @@ const SurveyDisplay = () => {
                         View live survey
                       </a>
                     </h3>
-                  ) : editActive ? (
-                    <form className="flex flex-row">
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        className="flex-1 text-black rounded-md px-2 mr-2"
-                        value={title}
-                        onChange={(e) => {
-                          setTitle(e.target.value);
-                        }}
-                      />
-                      <button
-                        className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
-                        type="submit"
-                        onClick={handleEditSubmit}
-                      >
-                        Go
-                      </button>
-                    </form>
-                  ) : (
-                    <h3 className="text-lg leading-6 font-medium text-white">
-                      {survey.title}
-                    </h3>
-                  )}
-                </li>
-              </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Helmet helmetData={helmetData}>
+          <title>New Survey - Winner</title>
+        </Helmet>
+        <div className="bg-indigo-900 relative overflow-hidden h-screen">
+          <img
+            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+            className="absolute h-full w-full object-cover"
+          />
+          <Header hideHeader={hideHeader} />
+          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
+          <div
+            ref={ref}
+            className="relative py-[74px] h-screen overflow-auto"
+            onScroll={(e) => handleScroll(e)}
+          >
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
+                    {editActive ? (
+                      <form className="flex flex-row">
+                        <input
+                          ref={inputRef}
+                          type="text"
+                          className="flex-1 text-black rounded-md px-2 mr-2"
+                          value={title}
+                          onChange={(e) => {
+                            setTitle(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                          type="submit"
+                          onClick={handleEditSubmit}
+                        >
+                          Go
+                        </button>
+                      </form>
+                    ) : (
+                      <div className="flex flex-row justify-between">
+                        <h3 className="text-lg leading-6 font-medium text-white">
+                          {survey.title}
+                        </h3>
+                        <div className="flex flex-row text-white text-xl">
+                          <AiFillEdit
+                            className="mx-2 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+                            onClick={() => {
+                              setEditActive(true);
+                            }}
+                          />
+                          <AiFillDelete
+                            className="mx-2 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+                            onClick={() => handleDelete()}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   // const renderSurvey = () => {
   //   if (editActive) {
@@ -237,11 +282,11 @@ const SurveyDisplay = () => {
   //         <div className="text__title text__title--large">
   //           {title}
   //           <div className="text__icon">
-  //             <AiFillEdit
-  //               onClick={() => {
-  //                 setEditActive(true);
-  //               }}
-  //             />
+  // <AiFillEdit
+  //   onClick={() => {
+  //     setEditActive(true);
+  //   }}
+  // />
   //           </div>
   //           <div className="text__icon">
   //             <AiFillDelete onClick={() => handleDelete()} />
