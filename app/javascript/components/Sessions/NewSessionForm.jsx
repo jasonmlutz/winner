@@ -77,7 +77,7 @@ const NewSessionForm = () => {
               Welcome back!
             </div>
             <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
-              Need to crreate an account?{" "}
+              Need to create an account?{" "}
               <a
                 href=""
                 className="text-sm text-blue-500 underline hover:text-blue-700"
