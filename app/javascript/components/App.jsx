@@ -13,6 +13,7 @@ import UserDisplay from "./Users/UserDisplay";
 import SurveysContainer from "./Surveys/SurveysContainer";
 
 import NewResponse from "./Responses/NewResponse";
+import ResponseDisplay from "./Responses/ResponseDisplay";
 
 import NotFound from "./NotFound";
 
@@ -59,6 +60,7 @@ const App = () => {
         { path: ":survey_id", element: <NewResponse /> },
       ],
     },
+    { path: "responses/:response_id", element: <ResponseDisplay /> },
     // { path: "logout/", element: <Logout /> },
     // {
     //   path: "users/",

@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, createRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { Helmet, HelmetData } from "react-helmet-async";
+
+const helmetData = new HelmetData({});
+
+import Header from "../Header";
+import ScrollToTopButton from "../resources/ScrollToTopButton";
 
 const ResponseDisplay = () => {
   const params = useParams();
@@ -10,6 +17,20 @@ const ResponseDisplay = () => {
   const [questions, setQuestions] = useState({});
   const [responseOptions, setResponseOptions] = useState({});
   const [answers, setAnswers] = useState({});
+
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+  const ref = createRef();
+
+  const [hideHeader, setHideHeader] = useState(false);
+  // var scrollTop = 0;
+  function handleScroll(e) {
+    setShowScrollTopButton(e.target.scrollTop > 300);
+    setHideHeader(e.target.scrollTop > 300);
+    // setHideHeader(e.target.scrollTop > scrollTop);
+    // scrollTop = e.target.scrollTop;
+  }
+
+  const navigate = useNavigate();
 
   async function fetchData(url, callback) {
     const response = await fetch(url);
@@ -47,22 +68,18 @@ const ResponseDisplay = () => {
 
   const renderQuestions = () => {
     const sortedQuestions = questions.sort((a, b) => a.position - b.position);
-    return (
-      <ul>
-        {sortedQuestions.map((question) => (
-          <li key={question.id}>
-            <div className="QuestionDisplay">
-              <div className="text__title text__title--medium">
-                {question.title}
-              </div>
-              <div className="ResponseOptionsContainer">
-                {renderResponseOptions(question)}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    );
+    return sortedQuestions.map((question) => (
+      <li key={question.id} className="border-gray-100 flex flex-row mb-2">
+        <div className="w-full shadow select-none bg-gray-800 rounded-md p-4">
+          <div className="px-1 flex flex-col">
+            <div className="font-medium text-white">{question.title}</div>
+          </div>
+          <div className="w-full flex flex-column justify-start w-full bg-gray-500 text-gray-100 rounded-md my-4 p-2">
+            {renderResponseOptions(question)}
+          </div>
+        </div>
+      </li>
+    ));
   };
 
   const renderResponseOptions = (question) => {
@@ -75,13 +92,13 @@ const ResponseDisplay = () => {
     return (
       <ul>
         {filteredSortedResponseOptions.map((responseOption) => {
-          let className =
-            "ResponseOptionDisplay text__title text__title--small";
-          if (responseOption.id === answer.response_option_id) {
-            className += " darken-background";
-          }
+          var className = "py-1 md:py-2 mx-1 md:mx-2";
+          className +=
+            answer.response_option_id === responseOption.id
+              ? " bg-gray-700"
+              : "";
           return (
-            <li key={responseOption.id} className={className}>
+            <li className={className} key={responseOption.id}>
               {responseOption.title}
             </li>
           );
@@ -97,41 +114,105 @@ const ResponseDisplay = () => {
     Object.keys(answers).length
   ) {
     return (
-      <div className="SurveyDisplay">
-        <div className="text__title text__title--large">{survey.title}</div>
-        <div className="text__title--small">
-          Author:{" "}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`/users/${survey.author_id}`);
-            }}
+      <>
+        <Helmet helmetData={helmetData}>
+          <title>Surveys - Winner</title>
+        </Helmet>
+        <div className="bg-indigo-900 relative overflow-hidden h-screen">
+          <img
+            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+            className="absolute h-full w-full object-cover"
+          />
+          <Header hideHeader={hideHeader} />
+          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
+          <div
+            ref={ref}
+            className="relative py-[74px] h-screen overflow-auto"
+            onScroll={(e) => handleScroll(e)}
           >
-            {survey.author_name}
-          </a>
-          <br />
-          Respondent:{" "}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`/users/${response.respondent_id}`);
-            }}
-          >
-            {response.respondent_name}
-          </a>
-          <div className="QuestionsContainer">{renderQuestions()}</div>
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
+                    <h3 className="text-lg leading-6 font-medium text-white">
+                      <a
+                        className="hover:underline"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/surveys/${survey.id}`);
+                        }}
+                      >
+                        {survey.title}
+                      </a>
+                    </h3>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      Author:{" "}
+                      <a
+                        className="underline hover:text-white"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/users/${survey.author_id}`);
+                        }}
+                      >
+                        {survey.author_name}
+                      </a>
+                    </p>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      Respondent:{" "}
+                      <a
+                        className="underline hover:text-white"
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/users/${survey.author_id}`);
+                        }}
+                      >
+                        {response.respondent_name}
+                      </a>
+                    </p>
+                  </li>
+                  {renderQuestions()}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </>
     );
   } else {
     return (
-      <div className="SurveyDisplay">
-        <div className="text__title text__title--small">
-          Data not fully loaded for survey
+      <>
+        <Helmet helmetData={helmetData}>
+          <title>Surveys - Winner</title>
+        </Helmet>
+        <div className="bg-indigo-900 relative overflow-hidden h-screen">
+          <img
+            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+            className="absolute h-full w-full object-cover"
+          />
+          <Header hideHeader={hideHeader} />
+          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
+          <div
+            ref={ref}
+            className="relative py-[74px] h-screen overflow-auto"
+            onScroll={(e) => handleScroll(e)}
+          >
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
+                    <h3 className="text-lg leading-6 font-medium text-white">
+                      {"LOADING ...."}
+                    </h3>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 };
