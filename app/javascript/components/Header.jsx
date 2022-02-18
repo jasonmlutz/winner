@@ -48,7 +48,7 @@ const Header = ({ hideHeader = false }) => {
 
     sessionStorage.setItem("sessionToken", "");
     setCurrentUser(null);
-    navigate("/");
+    navigate("/login");
     alert("logout successful");
   }
 
