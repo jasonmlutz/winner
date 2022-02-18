@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 import IconInterface from "../IconInterface";
 
@@ -36,7 +37,7 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <button
-            className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="hidden md:display px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             type="submit"
             onClick={(e) =>
               handleEditSubmit(
@@ -52,13 +53,30 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
           >
             Update
           </button>
+          <button
+            onClick={(e) =>
+              handleEditSubmit(
+                e,
+                responseOption.id,
+                "response_options",
+                title,
+                navigate,
+                path,
+                setEditActive
+              )
+            }
+            type="submit"
+            className="display md:hidden rounded-full p-0 bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
+          >
+            <AiOutlineCheckCircle />
+          </button>
         </form>
       );
     } else {
       return (
         <div className="px-1 flex flex-row justify-between">
           <div className="font-small text-white">{responseOption.title}</div>
-          <div className="flex flex-row text-white text-md">
+          <div className="flex flex-row text-white text-sm md:text-md">
             <IconInterface
               position={responseOption.position}
               siblingCount={responseOptions.length}

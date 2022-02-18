@@ -36,7 +36,7 @@ const NewQuestionForm = ({ parent_id, siblingCount }) => {
 
   return (
     <li className="border-gray-100 flex flex-row mb-2">
-      <div className="w-full shadow select-none bg-gray-800 rounded-md p-4">
+      <div className="w-full shadow select-none bg-gray-800 rounded-md p-2 md:p-4">
         <form className="flex flex-row">
           <input
             className="flex-1 text-black rounded-md px-2 mr-2"

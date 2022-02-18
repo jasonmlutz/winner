@@ -70,7 +70,7 @@ const ResponseDisplay = () => {
     const sortedQuestions = questions.sort((a, b) => a.position - b.position);
     return sortedQuestions.map((question) => (
       <li key={question.id} className="border-gray-100 flex flex-row mb-2">
-        <div className="w-full shadow select-none bg-gray-800 rounded-md p-4">
+        <div className="w-full shadow select-none bg-gray-800 rounded-md p-2 md:p-4">
           <div className="px-1 flex flex-col">
             <div className="font-medium text-white">{question.title}</div>
           </div>
@@ -131,8 +131,8 @@ const ResponseDisplay = () => {
             onScroll={(e) => handleScroll(e)}
           >
             <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       <a
@@ -200,8 +200,8 @@ const ResponseDisplay = () => {
             onScroll={(e) => handleScroll(e)}
           >
             <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       {"LOADING ...."}

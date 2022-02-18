@@ -93,7 +93,7 @@ const UserDisplay = () => {
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
-                          navigate("#");
+                          navigate("/surveys/new");
                         }}
                         className="display lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl hover:bg-indigo-700"
                       >
@@ -103,7 +103,7 @@ const UserDisplay = () => {
                         href=""
                         onClick={(e) => {
                           e.preventDefault();
-                          navigate("#");
+                          navigate("/surveys/new");
                         }}
                         className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 absolute top-4 right-4 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
                       >

@@ -40,7 +40,7 @@ const ResponseOptionsContainer = ({ parent_id, grandparent_id }) => {
     );
     return (
       <div className="w-full flex flex-column justify-start w-full bg-gray-500 text-gray-100 rounded-md my-4 p-2">
-        <ul>
+        <ul className="w-full">
           {sortedResponseOptions.map((responseOption) => (
             <li className="py-1 md:py-2 mx-1 md:mx-2" key={responseOption.id}>
               <ResponseOptionDisplay
@@ -62,7 +62,15 @@ const ResponseOptionsContainer = ({ parent_id, grandparent_id }) => {
   } else {
     return (
       <div className="w-full flex flex-column justify-start w-full bg-gray-500 text-gray-100 rounded-md my-4 p-2">
-        no response options
+        <ul className="w-full">
+          <li className="py-1 md:py-2 mx-1 md:mx-2">
+            <NewResponseOptionForm
+              parent_id={parent_id}
+              grandparent_id={grandparent_id}
+              siblingCount={responseOptions.length}
+            />
+          </li>
+        </ul>
       </div>
     );
   }

@@ -15,7 +15,7 @@ const IconInterface = ({
   const renderDownIcon = () => {
     return (
       <BsFillArrowDownCircleFill
-        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        className="mx-0.5 md:mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
         onClick={() => handleMove("down")}
       />
     );
@@ -24,7 +24,7 @@ const IconInterface = ({
   const renderUpIcon = () => {
     return (
       <BsFillArrowUpCircleFill
-        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        className="mx-0.5 md:mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
         onClick={() => handleMove("up")}
       />
     );
@@ -33,7 +33,7 @@ const IconInterface = ({
   const renderEditIcon = () => {
     return (
       <AiFillEdit
-        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        className="mx-0.5 md:mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
         onClick={() => setEditActive(true)}
       />
     );
@@ -42,7 +42,7 @@ const IconInterface = ({
   const renderDeleteIcon = () => {
     return (
       <AiFillDelete
-        className="mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
+        className="mx-0.5 md:mx-1 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
         onClick={() => handleDelete()}
       />
     );

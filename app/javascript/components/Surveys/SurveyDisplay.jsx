@@ -8,6 +8,7 @@ import React, {
 import { useParams, useNavigate } from "react-router";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { Helmet, HelmetData } from "react-helmet-async";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const helmetData = new HelmetData({});
 
@@ -84,7 +85,7 @@ const SurveyDisplay = () => {
       return;
     });
 
-    navigate("/");
+    navigate(`/users/${survey.author_id}`);
   }
 
   const inputRef = useRef(null);
@@ -162,8 +163,8 @@ const SurveyDisplay = () => {
             onScroll={(e) => handleScroll(e)}
           >
             <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       This survey is live and may no longer be edited.{" "}
@@ -205,8 +206,8 @@ const SurveyDisplay = () => {
             onScroll={(e) => handleScroll(e)}
           >
             <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     {editActive ? (
                       <form className="flex flex-row">
@@ -220,11 +221,18 @@ const SurveyDisplay = () => {
                           }}
                         />
                         <button
-                          className="px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                          className="hidden md:display px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
                           type="submit"
                           onClick={handleEditSubmit}
                         >
                           Update
+                        </button>
+                        <button
+                          onClick={handleEditSubmit}
+                          type="submit"
+                          className="display md:hidden rounded-full p-0 bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
+                        >
+                          <AiOutlineCheckCircle />
                         </button>
                       </form>
                     ) : (

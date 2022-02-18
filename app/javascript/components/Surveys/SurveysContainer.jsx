@@ -65,8 +65,8 @@ const SurveysContainer = () => {
           onScroll={(e) => handleScroll(e)}
         >
           <div className="mx-auto w-full">
-            <div className="pb-24 md:pt-12 px-4 md:px-6 flex flex-col items-center">
-              <ul className="flex flex-col w-11/12 sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+            <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+              <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                 {surveys.map((survey) => (
                   <li
                     key={survey.id}
