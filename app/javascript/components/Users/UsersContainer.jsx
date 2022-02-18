@@ -48,31 +48,6 @@ const UsersContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
-  const renderUsersContainer = () => {
-    if (users.length) {
-      return (
-        <>
-          <div className="text__title--medium">Existing users</div>
-          <ul>
-            {users.map((user) => (
-              <li
-                key={user.id}
-                className="text__icon"
-                onClick={() => {
-                  navigate(`/users/${user.id.toString()}`);
-                }}
-              >
-                {user.name}
-              </li>
-            ))}
-          </ul>
-        </>
-      );
-    } else {
-      return <div className="heading">No users!</div>;
-    }
-  };
-
   return (
     <>
       <Helmet helmetData={helmetData}>
