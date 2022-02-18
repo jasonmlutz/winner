@@ -195,7 +195,16 @@ const UserDisplay = () => {
                             className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                           >
                             <p>{survey.title}</p>
-                            <div className="flex items-end text-xs">edit</div>
+                            <a
+                              className="hover:underline flex items-end text-xs"
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                navigate(`/surveys/edit/${survey.id}`);
+                              }}
+                            >
+                              edit
+                            </a>
                           </div>
                         ))}
                     </div>
