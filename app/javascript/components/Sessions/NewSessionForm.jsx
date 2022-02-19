@@ -28,6 +28,11 @@ const NewSessionForm = () => {
     }
   };
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let path;
+  const source = urlParams.get("source");
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (validateFields()) {
@@ -57,12 +62,7 @@ const NewSessionForm = () => {
         return;
       }
 
-      sessionStorage.setItem("sessionToken", user.session_token);
-
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      let path;
-      switch (urlParams.get("source")) {
+      switch (source) {
         case "new-survey":
           path = "/surveys/new";
           break;
@@ -70,6 +70,8 @@ const NewSessionForm = () => {
           path = `/users/${user.id}`;
           break;
       }
+
+      sessionStorage.setItem("sessionToken", user.session_token);
       navigate(path);
     }
   }
@@ -97,7 +99,10 @@ const NewSessionForm = () => {
                 className="text-sm text-blue-500 underline hover:text-white"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/register");
+                  navigate(
+                    "/register" +
+                      (source === "new-survey" ? "?source=new-survey" : "")
+                  );
                 }}
               >
                 Register

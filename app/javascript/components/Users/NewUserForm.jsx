@@ -39,6 +39,11 @@ const NewUserForm = () => {
     }
   };
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let path;
+  const source = urlParams.get("source");
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (validateFields()) {
@@ -69,12 +74,18 @@ const NewUserForm = () => {
         return;
       }
 
+      switch (urlParams.get("source")) {
+        case "new-survey":
+          path = "/surveys/new";
+          break;
+        default:
+          path = `/users/${user.id}`;
+          break;
+      }
+
       sessionStorage.setItem("sessionToken", user.session_token);
       setCurrentUser(user);
-      setName("");
-      setPassword("");
-      setPassword_confirmation("");
-      navigate(`/users/${user.id}`);
+      navigate(path);
     }
   }
 
@@ -101,7 +112,10 @@ const NewUserForm = () => {
                 className="text-sm text-blue-500 underline hover:text-white"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/login");
+                  navigate(
+                    "/login" +
+                      (source === "new-survey" ? "?source=new-survey" : "")
+                  );
                 }}
               >
                 Sign in
