@@ -5,6 +5,7 @@ The main goal of this application is to allow users to create and respond to sur
 ## TABLE OF CONTENTS
 
 - [Demo](#Demo)
+- [Features](#Features)
 - [Tech](#Tech)
   - [Sources](#Sources)
   - [API endpoints](#API-endpoints)
