@@ -11,9 +11,26 @@ const NewSessionForm = () => {
 
   const navigate = useNavigate();
 
+  const validateFields = () => {
+    var message = "";
+    if (!name) {
+      message += "Please enter your name. ";
+    }
+
+    if (!password) {
+      message += "Please enter your password. ";
+    }
+    if (message.length) {
+      window.alert(message);
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (name && password) {
+    if (validateFields()) {
       const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
       const response = await fetch(`/api/session`, {
@@ -54,8 +71,6 @@ const NewSessionForm = () => {
           break;
       }
       navigate(path);
-    } else {
-      alert("please complete both fields");
     }
   }
 
