@@ -15,48 +15,66 @@ const NewUserForm = () => {
 
   const navigate = useNavigate();
 
+  const validateFields = () => {
+    var message = "";
+    if (name.length === 0) {
+      message += "Please select a name. ";
+    }
+
+    if (password.length === 0 || password_confirmation.length === 0) {
+      message += "Please complete both password fields. ";
+    }
+    if (password !== password_confirmation) {
+      message += "Passwords must match. ";
+    }
+    if (password.length < 6) {
+      message += "Password must be at least 6 characters long.";
+    }
+
+    if (message.length) {
+      window.alert(message);
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (name && password && password_confirmation) {
-      if (password === password_confirmation) {
-        const token = document.querySelector("[name=csrf-token]").content;
-        // send the post request
-        const response = await fetch(`/api/users`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": token,
-          },
-          body: JSON.stringify({
-            name: name,
-            password: password,
-            password_confirmation: password_confirmation,
-          }),
-        });
+    if (validateFields()) {
+      const token = document.querySelector("[name=csrf-token]").content;
+      // send the post request
+      const response = await fetch(`/api/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        body: JSON.stringify({
+          name: name,
+          password: password,
+          password_confirmation: password_confirmation,
+        }),
+      });
 
-        if (!response.ok) {
-          const message = `An error has occurred: ${response.statusText}`;
-          window.alert(message);
-          return;
-        }
-
-        const user = await response.json();
-        if (!user) {
-          window.alert(`No user fetched!`);
-          return;
-        }
-
-        sessionStorage.setItem("sessionToken", user.session_token);
-        setCurrentUser(user);
-        setName("");
-        setPassword("");
-        setPassword_confirmation("");
-        navigate(`/users/${user.id}`);
-      } else {
-        alert("password and password_confirmation do not match!");
+      if (!response.ok) {
+        const message = `An error has occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
       }
-    } else {
-      alert("please complete all three fields!");
+
+      const user = await response.json();
+      if (!user) {
+        window.alert(`No user fetched!`);
+        return;
+      }
+
+      sessionStorage.setItem("sessionToken", user.session_token);
+      setCurrentUser(user);
+      setName("");
+      setPassword("");
+      setPassword_confirmation("");
+      navigate(`/users/${user.id}`);
     }
   }
 
@@ -80,7 +98,7 @@ const NewUserForm = () => {
               Already have an account?{" "}
               <a
                 href=""
-                className="text-sm text-blue-500 underline hover:text-blue-700"
+                className="text-sm text-blue-500 underline hover:text-white"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/login");

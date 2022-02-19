@@ -79,7 +79,7 @@ const NewSessionForm = () => {
               Need to create an account?{" "}
               <a
                 href=""
-                className="text-sm text-blue-500 underline hover:text-blue-700"
+                className="text-sm text-blue-500 underline hover:text-white"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/register");
