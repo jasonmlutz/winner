@@ -17,11 +17,11 @@ const NewUserForm = () => {
 
   const validateFields = () => {
     var message = "";
-    if (name.length === 0) {
+    if (!name) {
       message += "Please select a name. ";
     }
 
-    if (password.length === 0 || password_confirmation.length === 0) {
+    if (!password || !password_confirmation) {
       message += "Please complete both password fields. ";
     }
     if (password !== password_confirmation) {
