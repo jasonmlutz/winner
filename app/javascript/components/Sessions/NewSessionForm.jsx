@@ -62,6 +62,11 @@ const NewSessionForm = () => {
         return;
       }
 
+      if (user.error) {
+        window.alert(user.error);
+        return;
+      }
+
       switch (source) {
         case "new-survey":
           path = "/surveys/new";

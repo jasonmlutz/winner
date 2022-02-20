@@ -12,11 +12,11 @@ class Api::SessionsController < ApplicationController
 
   # POST /api/session
   def create
-    @user = User.find_by(name: params[:name])&.authenticate(params[:password])
-    if @user
-      render json: @user.expose("session_token")
+    @user = User.find_by(name: params[:name])
+    if @user && @user == @user.authenticate(params[:password])
+      render json: @user.expose
     else
-      render json: @user.errors
+      render json: {error: "name and/or password incorrect"}
     end
   end
 
