@@ -7,85 +7,83 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const helmetData = new HelmetData({});
 
 const NewSessionForm = () => {
+  const { currentUser } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
   const inputRef = useRef();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const { currentUser } = useContext(CurrentUserContext);
-
-  const navigate = useNavigate();
-
-  const validateFields = () => {
-    var message = "";
-    if (!name) {
-      message += "Please enter your name. ";
-    }
-
-    if (!password) {
-      message += "Please enter your password. ";
-    }
-    if (message.length) {
-      window.alert(message);
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  let path;
-  const source = urlParams.get("source");
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (validateFields()) {
-      const token = document.querySelector("[name=csrf-token]").content;
-      // send the post request
-      const response = await fetch(`/api/session`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": token,
-        },
-        body: JSON.stringify({
-          name: name,
-          password: password,
-        }),
-      });
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const user = await response.json();
-      if (!user) {
-        window.alert(`No user fetched!`);
-        return;
-      }
-
-      if (user.error) {
-        window.alert(user.error);
-        return;
-      }
-
-      switch (source) {
-        case "new-survey":
-          path = "/surveys/new";
-          break;
-        default:
-          path = `/users/${user.id}`;
-          break;
-      }
-
-      sessionStorage.setItem("sessionToken", user.session_token);
-      navigate(path);
-    }
-  }
-
   if (!currentUser) {
+    const validateFields = () => {
+      var message = "";
+      if (!name) {
+        message += "Please enter your name. ";
+      }
+
+      if (!password) {
+        message += "Please enter your password. ";
+      }
+      if (message.length) {
+        window.alert(message);
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let path;
+    const source = urlParams.get("source");
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (validateFields()) {
+        const token = document.querySelector("[name=csrf-token]").content;
+        // send the post request
+        const response = await fetch(`/api/session`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": token,
+          },
+          body: JSON.stringify({
+            name: name,
+            password: password,
+          }),
+        });
+
+        if (!response.ok) {
+          const message = `An error has occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+
+        const user = await response.json();
+        if (!user) {
+          window.alert(`No user fetched!`);
+          return;
+        }
+
+        if (user.error) {
+          window.alert(user.error);
+          return;
+        }
+
+        switch (source) {
+          case "new-survey":
+            path = "/surveys/new";
+            break;
+          default:
+            path = `/users/${user.id}`;
+            break;
+        }
+
+        sessionStorage.setItem("sessionToken", user.session_token);
+        navigate(path);
+      }
+    }
+
     return (
       <>
         <Helmet helmetData={helmetData}>
