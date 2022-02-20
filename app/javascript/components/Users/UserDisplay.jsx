@@ -300,7 +300,7 @@ const UserDisplay = () => {
     );
   } else {
     if (user.error === "record(s) not found") {
-      return <NotFound pathname={location.pathname} />;
+      return <NotFound path={"/users"} />;
     } else {
       return (
         <>

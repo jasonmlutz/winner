@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const NotFound = ({ pathname }) => {
+const NotFound = ({ path = "/" }) => {
   const navigate = useNavigate();
 
   return (
@@ -27,10 +27,10 @@ const NotFound = ({ pathname }) => {
             className="text-2xl lg:text-3xl text-center text-white leading-tight my-4 text-blue-500 underline hover:text-blue-700"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/");
+              navigate(path);
             }}
           >
-            Take me home!
+            Get me out of here!
           </a>
         </div>
       </div>
