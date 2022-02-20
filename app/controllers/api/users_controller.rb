@@ -11,7 +11,11 @@ class Api::UsersController < ApplicationController
 
   # GET /api/users/:id(.:format)
   def show
-    render json: @user.expose
+    if @user
+      render json: @user.expose
+    else
+      render json: {error: "record(s) not found"}
+    end
   end
 
   # POST /api/users(.:format)
@@ -40,7 +44,7 @@ class Api::UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   def authenticate_user
