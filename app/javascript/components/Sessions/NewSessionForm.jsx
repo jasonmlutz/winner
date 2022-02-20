@@ -7,7 +7,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const helmetData = new HelmetData({});
 
 const NewSessionForm = () => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const inputRef = useRef();
   const [name, setName] = useState("");
@@ -80,6 +80,7 @@ const NewSessionForm = () => {
         }
 
         sessionStorage.setItem("sessionToken", user.session_token);
+        setCurrentUser(user);
         navigate(path);
       }
     }

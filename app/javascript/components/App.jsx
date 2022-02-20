@@ -49,7 +49,7 @@ const App = () => {
       fetchCurrentUser();
     }
     return;
-  }, [location.pathname]);
+  }, [currentUser]);
 
   let routes = useRoutes([
     { path: "/", element: <Landing /> },

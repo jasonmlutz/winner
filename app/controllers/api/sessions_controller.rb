@@ -14,7 +14,7 @@ class Api::SessionsController < ApplicationController
   def create
     @user = User.find_by(name: params[:name])
     if @user && @user == @user.authenticate(params[:password])
-      render json: @user.expose
+      render json: @user.expose("session_token")
     else
       render json: {error: "name and/or password incorrect"}
     end
