@@ -74,6 +74,13 @@ const NewUserForm = () => {
         return;
       }
 
+      if (user.error) {
+        window.alert(user.error);
+        setPassword("");
+        setPassword_confirmation("");
+        return;
+      }
+
       switch (urlParams.get("source")) {
         case "new-survey":
           path = "/surveys/new";
