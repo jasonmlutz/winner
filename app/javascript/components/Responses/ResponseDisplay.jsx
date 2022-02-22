@@ -243,7 +243,7 @@ const ResponseDisplay = () => {
     }
   } else {
     // fetch in progress (or bad server error); render loading
-    return <>LOADING ...</>;
+    return renderLoading();
   }
 };
 
