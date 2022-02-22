@@ -53,9 +53,9 @@ const App = () => {
   if (currentUser.id) {
     // there is a valid current user
     routes = useRoutes([
-      { path: "/", element: <Landing /> },
-      { path: "register/", element: <NewUserForm /> },
-      { path: "login/", element: <NewSessionForm /> },
+      { path: "/", element: <Profile /> },
+      { path: "register/", element: <Profile /> },
+      { path: "login/", element: <Profile /> },
       { path: "profile/", element: <Profile /> },
       {
         path: "users/",
