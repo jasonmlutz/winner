@@ -169,8 +169,14 @@ const NewResponse = () => {
 
   if (survey) {
     // fetch returned (possible empty object)
-    if (survey.id && questions && responseOptions) {
-      // valid survey returned; others returned (possibly empty) objects
+    if (survey.id) {
+      // valid survey returned
+      if (questions && responseOptions) {
+        // dependents also loaded; render!
+      } else {
+        // at least one dependent not yet loaded; loading!
+        return <>LOADING ....</>;
+      }
       // render the response
       return (
         <>
