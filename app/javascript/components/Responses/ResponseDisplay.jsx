@@ -107,6 +107,64 @@ const ResponseDisplay = () => {
     );
   };
 
+  const renderLoading = () => {
+    return (
+      <>
+        <Helmet helmetData={helmetData}>
+          <title>loading ...</title>
+        </Helmet>
+        <div className="bg-indigo-900 relative overflow-hidden h-screen">
+          <img
+            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+            className="absolute h-full w-full object-cover"
+          />
+          <Header hideHeader={hideHeader} />
+          <div className="relative py-[74px] h-screen overflow-auto">
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 opacity-90 animate-pulse shadow mb-2 rounded-md h-[100px]">
+                    <h3 className="text-lg leading-6 font-medium text-white">
+                      <div className="text-blue-500 underline hover:text-blue-700">
+                        {""}
+                      </div>
+                    </h3>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      <div className="text-blue-500 underline hover:text-blue-700">
+                        {""}
+                      </div>
+                    </p>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      <div className="text-blue-500 underline hover:text-blue-700">
+                        {""}
+                      </div>
+                    </p>
+                  </li>
+                  <li className="border-gray-100 flex flex-row mb-2">
+                    <div className="w-full shadow select-none bg-gray-800 opacity-90 animate-pulse rounded-md p-2 md:p-4 h-[100px]">
+                      <div className="px-1 flex flex-col">
+                        <div className="font-medium text-white">{""}</div>
+                      </div>
+                      <div className="w-full flex flex-column justify-start w-full bg-gray-500 text-gray-100 rounded-md my-4 p-2 h-[60px]"></div>
+                    </div>
+                  </li>
+                  <li className="border-gray-100 flex flex-row mb-2">
+                    <div className="w-full shadow select-none bg-gray-800 opacity-90 animate-pulse rounded-md p-2 md:p-4 h-[100px]">
+                      <div className="px-1 flex flex-col">
+                        <div className="font-medium text-white">{""}</div>
+                      </div>
+                      <div className="w-full flex flex-column justify-start w-full bg-gray-500 text-gray-100 rounded-md my-4 p-2 h-[60px]"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   if (response) {
     // the fetch returned a (possibly empty) response object
     if (response.id) {
@@ -171,7 +229,7 @@ const ResponseDisplay = () => {
         );
       } else {
         // one or more objects still loading; render loading
-        return <>LOADING ...</>;
+        return renderLoading();
       }
     } else {
       // no valid response returned; 404
