@@ -25,7 +25,7 @@ class Api::SurveysController < ApplicationController
     @survey = @survey.attributes.merge("author_name": @survey.author.name)
      render json: @survey
    else
-     render json: {message: "error: no survey found"}
+     render json: {error: "record(s) not found"}
    end
   end
 
