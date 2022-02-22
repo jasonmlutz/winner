@@ -5,8 +5,12 @@ class Api::QuestionsController < ApplicationController
 
   # GET /api/surveys/:survey_id/questions
   def index
-    @questions = @survey.questions.order(position: :asc)
-    render json: @questions
+    if @survey
+      @questions = @survey.questions.order(position: :asc)
+      render json: @questions
+    else 
+      render json: {error: "record(s) not found"}
+    end
   end
 
   # POST /api/surveys/:survey_id/questions
@@ -40,10 +44,10 @@ class Api::QuestionsController < ApplicationController
     end
 
     def set_question
-      @question = Question.find(params[:id])
+      @question = Question.find_by(id: params[:id])
     end
 
     def set_survey
-      @survey = Survey.find(params[:survey_id])
+      @survey = Survey.find_by(id: params[:survey_id])
     end
 end

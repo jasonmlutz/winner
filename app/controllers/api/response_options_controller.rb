@@ -6,13 +6,21 @@ class Api::ResponseOptionsController < ApplicationController
   # GET    /api/surveys/:survey_id/response_options
   def index
     if params[:question_id]
-      @question = Question.find(params[:question_id])
-      @response_option = @question.response_options.order(position: :asc)
-      render json: @response_option
+      @question = Question.find_by(id: params[:question_id])
+      if @question
+        @response_option = @question.response_options.order(position: :asc)
+        render json: @response_option
+      else
+        render json: {error: "record(s) not found"}      
+      end
     elsif params[:survey_id]
       @survey = Survey.find_by(id: params[:survey_id])
+      if @survey
       @response_options = @survey.response_options
       render json: @response_options
+      else
+        render json: {error: "record(s) not found"}      
+      end
     end
   end
 
@@ -47,6 +55,6 @@ class Api::ResponseOptionsController < ApplicationController
     end
 
     def set_response_option
-      @response_option = ResponseOption.find(params[:id])
+      @response_option = ResponseOption.find_by(id: params[:id])
     end
 end

@@ -6,25 +6,23 @@ const helmetData = new HelmetData({});
 
 import Header from "../Header";
 import ScrollToTopButton from "../resources/ScrollToTopButton";
+import NotFound from "../NotFound";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const NewResponse = () => {
-  const [survey, setSurvey] = useState({});
-  const [questions, setQuestions] = useState({});
-  const [responseOptions, setResponseOptions] = useState({});
+  const [survey, setSurvey] = useState(null);
+  const [questions, setQuestions] = useState(null);
+  const [responseOptions, setResponseOptions] = useState(null);
   const [answers, setAnswers] = useState({});
 
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
   const ref = createRef();
 
   const [hideHeader, setHideHeader] = useState(false);
-  // var scrollTop = 0;
   function handleScroll(e) {
     setShowScrollTopButton(e.target.scrollTop > 300);
     setHideHeader(e.target.scrollTop > 300);
-    // setHideHeader(e.target.scrollTop > scrollTop);
-    // scrollTop = e.target.scrollTop;
   }
 
   const { currentUser } = useContext(CurrentUserContext);
@@ -159,7 +157,7 @@ const NewResponse = () => {
 
       const data = await res.json();
       if (!data) {
-        window.alert(`answer to ${answer.question_id} not created!`);
+        window.alert(`answers not created!`);
         return;
       }
 
@@ -169,103 +167,83 @@ const NewResponse = () => {
     }
   }
 
-  if (
-    Object.keys(survey).length &&
-    Object.keys(questions).length &&
-    Object.keys(responseOptions).length
-  ) {
-    return (
-      <>
-        <Helmet helmetData={helmetData}>
-          <title>New Response - Winner</title>
-        </Helmet>
-        <div className="bg-indigo-900 relative overflow-hidden h-screen">
-          <img
-            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
-            className="absolute h-full w-full object-cover"
-          />
-          <Header hideHeader={hideHeader} />
-          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
-          <div
-            ref={ref}
-            className="relative py-[74px] h-screen overflow-auto"
-            onScroll={(e) => handleScroll(e)}
-          >
-            <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
-                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
-                    <h3 className="text-lg leading-6 font-medium text-white">
-                      {survey.title}
-                    </h3>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
-                      Author:{" "}
-                      <Link
-                        className="text-blue-500 underline hover:text-blue-700"
-                        to={`/users/${survey.author_id}`}
+  if (survey) {
+    // fetch returned (possible empty object)
+    if (survey.id && questions && responseOptions) {
+      // valid survey returned; others returned (possibly empty) objects
+      // render the response
+      return (
+        <>
+          <Helmet helmetData={helmetData}>
+            <title>New Response - Winner</title>
+          </Helmet>
+          <div className="bg-indigo-900 relative overflow-hidden h-screen">
+            <img
+              src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
+              className="absolute h-full w-full object-cover"
+            />
+            <Header hideHeader={hideHeader} />
+            <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
+            <div
+              ref={ref}
+              className="relative py-[74px] h-screen overflow-auto"
+              onScroll={(e) => handleScroll(e)}
+            >
+              <div className="mx-auto w-full">
+                <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                  <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                    <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
+                      <h3 className="text-lg leading-6 font-medium text-white">
+                        {survey.title}
+                      </h3>
+                      <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                        Author:{" "}
+                        <Link
+                          className="text-blue-500 underline hover:text-blue-700"
+                          to={`/users/${survey.author_id}`}
+                        >
+                          {survey.author_name}
+                        </Link>
+                      </p>
+                      <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                        <Link
+                          className="text-blue-500 underline hover:text-blue-700"
+                          to={`/surveys/${survey.id}/responses`}
+                        >
+                          View all responses to this survey
+                        </Link>
+                      </p>
+                    </li>
+                    {renderQuestions()}
+                    <li>
+                      <button
+                        type="submit"
+                        className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                        onClick={handleSubmit}
                       >
-                        {survey.author_name}
-                      </Link>
-                    </p>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
-                      <Link
-                        className="text-blue-500 underline hover:text-blue-700"
-                        to={`/surveys/${survey.id}/responses`}
-                      >
-                        View all responses to this survey
-                      </Link>
-                    </p>
-                  </li>
-                  {renderQuestions()}
-                  <li>
-                    <button
-                      type="submit"
-                      className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </button>
-                  </li>
-                </ul>
+                        Submit
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    } else {
+      // no survey found; 404
+      return (
+        <NotFound
+          path="/surveys"
+          notFoundMessage="Survey not found"
+          navLinkMessage="View all surveys"
+        />
+      );
+    }
   } else {
-    return (
-      <>
-        <Helmet helmetData={helmetData}>
-          <title>New Response - Winner</title>
-        </Helmet>
-        <div className="bg-indigo-900 relative overflow-hidden h-screen">
-          <img
-            src="https://raw.githubusercontent.com/Charlie85270/tail-kit/main/public/images/landscape/5.svg"
-            className="absolute h-full w-full object-cover"
-          />
-          <Header hideHeader={hideHeader} />
-          <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
-          <div
-            ref={ref}
-            className="relative py-[74px] h-screen overflow-auto"
-            onScroll={(e) => handleScroll(e)}
-          >
-            <div className="mx-auto w-full">
-              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
-                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
-                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
-                    <h3 className="text-lg leading-6 font-medium text-white">
-                      {"LOADING ...."}
-                    </h3>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+    // fetch in progress (or bad server error); render loading skeleton
+    return <>LOADING ...</>;
   }
 };
 
