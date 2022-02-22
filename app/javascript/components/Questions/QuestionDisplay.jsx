@@ -23,7 +23,6 @@ const QuestionDisplay = ({ question, questions }) => {
     if (editActive) {
       inputRef.current.focus();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editActive]);
 
   return (

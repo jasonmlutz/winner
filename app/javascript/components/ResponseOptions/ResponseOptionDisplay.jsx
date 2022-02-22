@@ -22,7 +22,6 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
     if (editActive) {
       inputRef.current.focus();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editActive]);
 
   const renderResponseOption = () => {

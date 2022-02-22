@@ -56,7 +56,6 @@ const NewResponse = () => {
     fetchData(`/api/surveys/${survey_id}/questions`, setQuestions);
     fetchData(`/api/surveys/${survey_id}/response_options`, setResponseOptions);
     return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderQuestions = () => {

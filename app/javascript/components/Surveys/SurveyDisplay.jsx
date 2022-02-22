@@ -66,7 +66,6 @@ const SurveyDisplay = () => {
     fetchData();
 
     return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, navigate]);
 
   useEffect(() => {
@@ -141,7 +140,6 @@ const SurveyDisplay = () => {
     if (editActive) {
       inputRef.current.focus();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editActive]);
 
   if (survey.publish) {

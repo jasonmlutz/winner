@@ -31,7 +31,6 @@ const ResponseOptionsContainer = ({ parent_id, grandparent_id }) => {
 
     fetchData();
     return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   if (responseOptions.length) {

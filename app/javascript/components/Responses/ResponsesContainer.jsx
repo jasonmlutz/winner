@@ -47,7 +47,6 @@ const ResponsesContainer = () => {
 
     fetchData();
     return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   return (
