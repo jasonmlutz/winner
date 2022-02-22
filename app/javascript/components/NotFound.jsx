@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const NotFound = ({
   path = "/",
-  notFoundMessage = "It's quiet here ....",
-  navLinkMessage = "Get me out of here!",
+  notFoundMessage = "Resource not found",
+  navLinkMessage = "Return home",
 }) => {
   return (
     <div className="bg-indigo-900 relative overflow-hidden h-screen">
@@ -21,9 +21,6 @@ const NotFound = ({
           <p className="font-extrabold text-8xl my-28 text-white animate-bounce">
             404
           </p>
-          <h1 className="font-extrabold text-3xl lg:text-4xl text-center text-white leading-tight mb-4">
-            Too quiet ...
-          </h1>
           <Link
             to={path}
             className="text-2xl lg:text-3xl text-center text-white leading-tight my-4 text-blue-500 underline hover:text-blue-700"
