@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const helmetData = new HelmetData({});
 
-const NewSessionForm = ({ source = "profile", setType, message }) => {
+const NewSessionForm = ({ source = "/profile", setType, message }) => {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const [name, setName] = useState("");

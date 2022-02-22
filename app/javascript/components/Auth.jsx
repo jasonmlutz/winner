@@ -5,7 +5,7 @@ import NewSessionForm from "./Sessions/NewSessionForm";
 
 const Auth = ({
   initialState = "login",
-  source = "profile",
+  source = "/profile",
   message = null,
 }) => {
   const [type, setType] = useState(initialState);

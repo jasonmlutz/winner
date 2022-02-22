@@ -174,7 +174,7 @@ const Header = ({ hideHeader = false }) => {
                           aria-labelledby="user-actions-menu"
                         >
                           <Link
-                            to="profile/"
+                            to="/profile"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                           >
                             <span className="flex flex-col">

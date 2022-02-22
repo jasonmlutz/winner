@@ -6,7 +6,7 @@ const helmetData = new HelmetData({});
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const NewUserForm = ({ source = "profile", setType, message }) => {
+const NewUserForm = ({ source = "/profile", setType, message }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
