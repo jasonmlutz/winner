@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { FiPlusCircle } from "react-icons/fi";
 
 const NewResponseOptionForm = ({ parent_id, grandparent_id, siblingCount }) => {

@@ -5,7 +5,7 @@ import React, {
   useContext,
   createRef,
 } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { Helmet, HelmetData } from "react-helmet-async";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -166,16 +166,12 @@ const SurveyDisplay = () => {
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
                       This survey is live and may no longer be edited.{" "}
-                      <a
-                        href=""
+                      <Link
+                        to={`/surveys/${survey.id}`}
                         className="text-sm text-blue-500 underline hover:text-blue-700"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/surveys/${survey.id}`);
-                        }}
                       >
                         View live survey
-                      </a>
+                      </Link>
                     </h3>
                   </li>
                 </ul>

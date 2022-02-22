@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FiPlusCircle } from "react-icons/fi";
 import { Helmet, HelmetData } from "react-helmet-async";
 
@@ -98,28 +98,20 @@ const Profile = () => {
                           Authored survey
                           {authoredSurveys.length === 1 ? "" : "s"}
                         </p>
-                        <a
-                          href=""
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/surveys/new");
-                          }}
+                        <Link
+                          to={"/surveys/new"}
                           className="display lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl hover:bg-indigo-700"
                         >
                           <FiPlusCircle />
-                        </a>
-                        <a
-                          href=""
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/surveys/new");
-                          }}
+                        </Link>
+                        <Link
+                          to={"/surveys/new"}
                           className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 absolute top-4 right-4 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
                         >
                           {authoredSurveys.length
                             ? "Create another survey!"
                             : "Create your first survey!"}
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="w-1/2">
@@ -130,28 +122,20 @@ const Profile = () => {
                         <p className="text-gray-400 text-sm">
                           Response{responses.length === 1 ? "" : "s"} submitted
                         </p>
-                        <a
-                          href=""
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/surveys");
-                          }}
+                        <Link
+                          to={"/surveys"}
                           className="block lg:hidden rounded-full absolute p-0 bg-indigo-500 top-4 right-4 text-white text-3xl hover:bg-indigo-700"
                         >
                           <FiPlusCircle />
-                        </a>
-                        <a
-                          href=""
-                          onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/surveys");
-                          }}
+                        </Link>
+                        <Link
+                          to={"/surveys"}
                           className="hidden lg:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 absolute top-4 right-4 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
                         >
                           {responses.length
                             ? "Find more live surveys!"
                             : "Respond to your first survey!"}
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -179,26 +163,18 @@ const Profile = () => {
                               key={survey.id}
                               className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                             >
-                              <a
+                              <Link
                                 className="hover:underline flex items-end text-s"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/${survey.id}`);
-                                }}
+                                to={`/surveys/${survey.id}`}
                               >
                                 {survey.title}
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="text-blue-500 underline hover:text-blue-700 flex items-end text-xs"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/${survey.id}/responses`);
-                                }}
+                                to={`/surveys/${survey.id}/responses`}
                               >
                                 responses
-                              </a>
+                              </Link>
                             </div>
                           ))}
                       </div>
@@ -225,26 +201,18 @@ const Profile = () => {
                               key={survey.id}
                               className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                             >
-                              <a
+                              <Link
                                 className="hover:underline flex items-end text-s"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/edit/${survey.id}`);
-                                }}
+                                to={`/surveys/edit/${survey.id}`}
                               >
                                 {survey.title}
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="text-blue-500 underline hover:text-blue-700 flex items-end text-xs"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/edit/${survey.id}`);
-                                }}
+                                to={`/surveys/edit/${survey.id}`}
                               >
                                 edit
-                              </a>
+                              </Link>
                             </div>
                           ))}
                       </div>
@@ -266,26 +234,18 @@ const Profile = () => {
                             key={response.id}
                             className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                           >
-                            <a
+                            <Link
                               className="hover:underline"
-                              href=""
-                              onClick={(e) => {
-                                e.preventDefault();
-                                navigate(`/surveys/${response.survey_id}`);
-                              }}
+                              to={`/surveys/${response.survey_id}`}
                             >
                               {response.survey_title}
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                               className="flex items-end text-xs text-blue-500 underline hover:text-blue-700"
-                              href=""
-                              onClick={(e) => {
-                                e.preventDefault();
-                                navigate(`/responses/${response.id}`);
-                              }}
+                              to={`/responses/${response.id}`}
                             >
                               view response
-                            </a>
+                            </Link>
                           </div>
                         ))}
                       </div>

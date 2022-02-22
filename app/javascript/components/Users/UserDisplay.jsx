@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { FiPlusCircle } from "react-icons/fi";
 import { Helmet, HelmetData } from "react-helmet-async";
 
@@ -107,26 +107,18 @@ const UserDisplay = () => {
                               key={survey.id}
                               className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                             >
-                              <a
+                              <Link
+                                to={`/surveys/${survey.id}`}
                                 className="hover:underline flex items-end text-s"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/${survey.id}`);
-                                }}
                               >
                                 {survey.title}
-                              </a>
-                              <a
+                              </Link>
+                              <Link
+                                to={`/surveys/${survey.id}/responses`}
                                 className="text-blue-500 underline hover:text-blue-700 flex items-end text-xs"
-                                href=""
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate(`/surveys/${survey.id}/responses`);
-                                }}
                               >
                                 responses
-                              </a>
+                              </Link>
                             </div>
                           ))}
                       </div>
@@ -148,26 +140,18 @@ const UserDisplay = () => {
                             key={response.id}
                             className="flex items-center pb-2 mb-2 text-sm sm:space-x-12  justify-between border-b border-gray-200"
                           >
-                            <a
+                            <Link
+                              to={`/surveys/${response.survey_id}`}
                               className="hover:underline"
-                              href=""
-                              onClick={(e) => {
-                                e.preventDefault();
-                                navigate(`/surveys/${response.survey_id}`);
-                              }}
                             >
                               {response.survey_title}
-                            </a>
-                            <a
+                            </Link>
+                            <Link
+                              to={`/responses/${response.id}`}
                               className="flex items-end text-xs text-blue-500 underline hover:text-blue-700"
-                              href=""
-                              onClick={(e) => {
-                                e.preventDefault();
-                                navigate(`/responses/${response.id}`);
-                              }}
                             >
                               view response
-                            </a>
+                            </Link>
                           </div>
                         ))}
                       </div>

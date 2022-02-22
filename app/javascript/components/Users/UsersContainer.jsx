@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
@@ -72,14 +72,7 @@ const UsersContainer = () => {
                     key={user.id}
                     className="border-gray-100 flex flex-row mb-2"
                   >
-                    <a
-                      className="w-full"
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate(`/users/${user.id}`);
-                      }}
-                    >
+                    <Link className="w-full" to={`/users/${user.id}`}>
                       <div className="w-full transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:bg-gray-700 select-none bg-gray-800 rounded-md p-4">
                         <div className="px-1 flex flex-col">
                           <div className="font-medium text-white">
@@ -87,7 +80,7 @@ const UsersContainer = () => {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

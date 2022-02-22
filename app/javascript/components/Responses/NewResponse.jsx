@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
@@ -200,28 +200,20 @@ const NewResponse = () => {
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Author:{" "}
-                      <a
+                      <Link
                         className="text-blue-500 underline hover:text-blue-700"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/users/${survey.author_id}`);
-                        }}
+                        to={`/users/${survey.author_id}`}
                       >
                         {survey.author_name}
-                      </a>
+                      </Link>
                     </p>
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
-                      <a
+                      <Link
                         className="text-blue-500 underline hover:text-blue-700"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/surveys/${survey.id}/responses`);
-                        }}
+                        to={`/surveys/${survey.id}/responses`}
                       >
                         View all responses to this survey
-                      </a>
+                      </Link>
                     </p>
                   </li>
                   {renderQuestions()}

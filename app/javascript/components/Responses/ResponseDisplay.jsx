@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { Helmet, HelmetData } from "react-helmet-async";
 
@@ -135,42 +135,30 @@ const ResponseDisplay = () => {
                 <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
                   <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
                     <h3 className="text-lg leading-6 font-medium text-white">
-                      <a
+                      <Link
                         className="text-blue-500 underline hover:text-blue-700"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/surveys/${survey.id}`);
-                        }}
+                        to={`/surveys/${survey.id}`}
                       >
                         {survey.title}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Author:{" "}
-                      <a
+                      <Link
+                        to={`/users/${survey.author_id}`}
                         className="text-blue-500 underline hover:text-blue-700"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/users/${survey.author_id}`);
-                        }}
                       >
                         {survey.author_name}
-                      </a>
+                      </Link>
                     </p>
                     <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       Respondent:{" "}
-                      <a
+                      <Link
+                        to={`/users/${survey.author_id}`}
                         className="text-blue-500 underline hover:text-blue-700"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(`/users/${survey.author_id}`);
-                        }}
                       >
                         {response.respondent_name}
-                      </a>
+                      </Link>
                     </p>
                   </li>
                   {renderQuestions()}

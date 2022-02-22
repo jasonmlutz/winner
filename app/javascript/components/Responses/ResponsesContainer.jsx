@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
@@ -74,16 +74,12 @@ const ResponsesContainer = () => {
                     Survey: {responses[0].survey_title}
                   </h3>
                   <div className="text-sm text-gray-100 my-2">
-                    <a
-                      href=""
+                    <Link
+                      to={`/surveys/${survey_id}`}
                       className="text-sm text-blue-500 underline hover:text-blue-700"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate(`/surveys/${survey_id}`);
-                      }}
                     >
                       View live survey
-                    </a>
+                    </Link>
                   </div>
                 </li>
                 {responses.map((response) => (
@@ -91,20 +87,13 @@ const ResponsesContainer = () => {
                     key={response.id}
                     className="border-gray-100 flex flex-row mb-2"
                   >
-                    <a
-                      className="w-full"
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate(`/responses/${response.id}`);
-                      }}
-                    >
+                    <Link className="w-full" to={`/responses/${response.id}`}>
                       <div className="w-full transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg hover:bg-gray-700 select-none bg-gray-800 rounded-md p-4">
                         <div className="px-1 font-medium text-white">
                           View the response by {response.respondent_name}
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

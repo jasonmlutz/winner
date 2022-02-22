@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const NewQuestionForm = ({ parent_id, siblingCount }) => {
   const inputRef = useRef();
