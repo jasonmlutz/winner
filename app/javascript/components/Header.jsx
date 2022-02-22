@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
@@ -86,80 +86,53 @@ const Header = ({ hideHeader = false }) => {
                       aria-orientation="vertical"
                       aria-labelledby="user-actions-menu"
                     >
-                      <a
+                      <Link
+                        to="/surveys"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                        role="menuitem"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate("/surveys");
-                        }}
                       >
                         <span className="flex flex-col">
                           <span>All Surveys</span>
                         </span>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
+                        to="/surveys/new"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                        role="menuitem"
-                        href=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate("/surveys/new");
-                        }}
                       >
                         <span className="flex flex-col">
                           <span>Create a Survey</span>
                         </span>
-                      </a>
-                      <a
-                        href=""
+                      </Link>
+                      <Link
+                        to="/users"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                        role="menuitem"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate("/users");
-                        }}
                       >
                         <span className="flex flex-col">
                           <span>All Users</span>
                         </span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="hidden md:block">
                   <div className="flex items-baseline space-x-4">
-                    <a
+                    <Link
+                      to="/surveys"
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate("/surveys");
-                      }}
                     >
                       All Surveys
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate("/surveys/new");
-                      }}
+                      to="/surveys/new"
                     >
                       Create a Survey
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate("/users");
-                      }}
+                      to="/users"
                     >
                       All Users
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -200,32 +173,23 @@ const Header = ({ hideHeader = false }) => {
                           aria-orientation="vertical"
                           aria-labelledby="user-actions-menu"
                         >
-                          <a
-                            href="#"
+                          <Link
+                            to="profile/"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                            role="menuitem"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              navigate(`/profile`);
-                            }}
                           >
                             <span className="flex flex-col">
                               <span>My Profile</span>
                             </span>
-                          </a>
-                          <a
-                            href="#"
-                            className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                          </Link>
+                          <div
+                            className="cursor-pointer block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                             role="menuitem"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleLogout();
-                            }}
+                            onClick={() => handleLogout()}
                           >
                             <span className="flex flex-col">
                               <span>Logout</span>
                             </span>
-                          </a>
+                          </div>
                         </div>
                       </div>
                     </div>
