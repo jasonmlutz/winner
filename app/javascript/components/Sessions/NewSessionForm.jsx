@@ -16,6 +16,7 @@ const NewSessionForm = ({ source = "profile/" }) => {
     const validateFields = () => {
       var message = "";
       if (!name) {
+        ``;
         message += "Please enter your name. ";
       }
 
