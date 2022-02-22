@@ -85,7 +85,7 @@ const SurveyDisplay = () => {
       return;
     });
 
-    navigate(`/users/${survey.author_id}`);
+    navigate("/profile");
   }
 
   const inputRef = useRef(null);
