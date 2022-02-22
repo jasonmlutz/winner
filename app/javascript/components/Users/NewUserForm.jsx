@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const NewUserForm = () => {
+const NewUserForm = ({ source = "profile/" }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
@@ -15,7 +15,7 @@ const NewUserForm = () => {
 
   const navigate = useNavigate();
 
-  if (!currentUser) {
+  if (!currentUser.id) {
     const validateFields = () => {
       var message = "";
       if (!name) {
@@ -39,11 +39,6 @@ const NewUserForm = () => {
         return true;
       }
     };
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let path;
-    const source = urlParams.get("source");
 
     async function handleSubmit(e) {
       e.preventDefault();
@@ -82,18 +77,8 @@ const NewUserForm = () => {
           return;
         }
 
-        switch (urlParams.get("source")) {
-          case "new-survey":
-            path = "/surveys/new";
-            break;
-          default:
-            path = `/users/${user.id}`;
-            break;
-        }
-
-        sessionStorage.setItem("sessionToken", user.session_token);
         setCurrentUser(user);
-        navigate(path);
+        navigate(source);
       }
     }
 
@@ -115,19 +100,12 @@ const NewUserForm = () => {
               </div>
               <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
                 Already have an account?{" "}
-                <a
-                  href=""
+                <Link
                   className="text-sm text-blue-500 underline hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate(
-                      "/login" +
-                        (source === "new-survey" ? "?source=new-survey" : "")
-                    );
-                  }}
+                  to="/login"
                 >
                   Sign in
-                </a>
+                </Link>
               </span>
               <div className="p-6 mt-8">
                 <form action="#">
@@ -187,9 +165,6 @@ const NewUserForm = () => {
         </div>
       </>
     );
-  } else {
-    navigate(`/users/${currentUser.id}`);
-    return null;
   }
 };
 

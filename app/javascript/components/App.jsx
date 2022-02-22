@@ -6,8 +6,8 @@ import { CurrentUserContext } from "./contexts/CurrentUserContext";
 import Landing from "./Landing";
 import NewSessionForm from "./Sessions/NewSessionForm";
 import NewUserForm from "./Users/NewUserForm";
-import Header from "./Header";
 
+import Profile from "./Users/Profile";
 import UserDisplay from "./Users/UserDisplay";
 import UsersContainer from "./Users/UsersContainer";
 
@@ -25,11 +25,8 @@ const App = () => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
-    const sessionToken = sessionStorage.getItem("sessionToken");
     async function fetchCurrentUser() {
-      const response = await fetch(
-        `/api/session?session_token=${sessionToken}`
-      );
+      const response = await fetch(`/api/session`);
 
       if (!response.ok) {
         const message = `An error has occurred fetching current user: ${response.statusText}`;
@@ -38,51 +35,109 @@ const App = () => {
       }
 
       const user = await response.json();
-      if (!user) {
-        window.alert(`no user found with session token ${sessionToken}`);
+      if (!user.id) {
+        return;
       }
 
       setCurrentUser(user);
     }
 
-    if (sessionToken && !currentUser) {
+    if (!currentUser.id) {
       fetchCurrentUser();
     }
     return;
   }, [currentUser]);
 
-  let routes = useRoutes([
-    { path: "/", element: <Landing /> },
-    { path: "register/", element: <NewUserForm /> },
-    { path: "login/", element: <NewSessionForm /> },
-    { path: "app/", element: <Header /> },
-    {
-      path: "users/",
-      children: [
-        { path: "", element: <UsersContainer /> },
-        { path: ":user_id/", element: <UserDisplay /> },
-      ],
-    },
-    {
-      path: "surveys/",
-      children: [
-        { path: "", element: <SurveysContainer /> },
-        { path: "new", element: <NewSurveyForm /> },
-        { path: ":survey_id", element: <NewResponse /> },
-        { path: ":survey_id/responses", element: <ResponsesContainer /> },
-        {
-          path: "edit/:id/",
-          children: [
-            { path: "", element: <SurveyDisplay /> },
-            { path: ":timestamp", element: <SurveyDisplay /> },
-          ],
-        },
-      ],
-    },
-    { path: "responses/:response_id", element: <ResponseDisplay /> },
-  ]);
+  let routes;
 
-  routes = routes || <NotFound pathname={location.pathname} />;
+  if (currentUser.id) {
+    // there is a valid current user
+    routes = useRoutes([
+      { path: "/", element: <Landing /> },
+      { path: "register/", element: <NewUserForm /> },
+      { path: "login/", element: <NewSessionForm /> },
+      { path: "profile/", element: <Profile /> },
+      {
+        path: "users/",
+        children: [
+          { path: "", element: <UsersContainer /> },
+          { path: ":user_id/", element: <UserDisplay /> },
+        ],
+      },
+      {
+        path: "surveys/",
+        children: [
+          { path: "", element: <SurveysContainer /> },
+          { path: "new", element: <NewSurveyForm /> },
+          { path: ":survey_id", element: <NewResponse /> },
+          { path: ":survey_id/responses", element: <ResponsesContainer /> },
+          {
+            path: "edit/:id/",
+            children: [
+              { path: "", element: <SurveyDisplay /> },
+              { path: ":timestamp", element: <SurveyDisplay /> },
+            ],
+          },
+        ],
+      },
+      { path: "responses/:response_id", element: <ResponseDisplay /> },
+      { path: "*", element: <NotFound pathname={location.pathname} /> },
+    ]);
+  } else {
+    // there is no current user
+    routes = useRoutes([
+      { path: "/", element: <Landing /> },
+      { path: "register/", element: <NewUserForm /> },
+      { path: "login/", element: <NewSessionForm /> },
+      {
+        path: "profile/",
+        element: <NewSessionForm source={location.pathname} />,
+      },
+      {
+        path: "users/",
+        children: [
+          { path: "", element: <UsersContainer /> },
+          { path: ":user_id/", element: <UserDisplay /> },
+        ],
+      },
+      {
+        path: "surveys/",
+        children: [
+          { path: "", element: <SurveysContainer /> },
+          {
+            path: "new",
+            element: <NewSessionForm source={location.pathname} />,
+          },
+          {
+            path: ":survey_id",
+            element: <NewSessionForm source={location.pathname} />,
+          },
+          {
+            path: ":survey_id/responses",
+            element: <NewSessionForm source={location.pathname} />,
+          },
+          {
+            path: "edit/:id/",
+            children: [
+              {
+                path: "",
+                element: <NewSessionForm source={location.pathname} />,
+              },
+              {
+                path: ":timestamp",
+                element: <NewSessionForm source={location.pathname} />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "responses/:response_id",
+        element: <NewSessionForm source={location.pathname} />,
+      },
+      { path: "*", element: <NotFound pathname={location.pathname} /> },
+    ]);
+  }
 
   return <div className="App">{routes}</div>;
 };

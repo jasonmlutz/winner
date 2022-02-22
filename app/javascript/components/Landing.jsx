@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import SvgLandscape from "./resources/Landscape";
 
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 const Landing = () => {
-  const navigate = useNavigate();
   const { currentUser } = useContext(CurrentUserContext);
 
-  if (!currentUser) {
+  if (!currentUser.id) {
     return (
       <div className="bg-indigo-900 relative overflow-hidden h-screen">
         <img
@@ -26,23 +25,16 @@ const Landing = () => {
               <br />
               pick a winner
             </h1>
-            <a
-              href=""
+            <Link
+              to="/register"
               className="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("/register");
-              }}
             >
               Get started
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     );
-  } else {
-    navigate(`/users/${currentUser.id}`);
-    return null;
   }
 };
 

@@ -1,19 +1,18 @@
-import React, { useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const helmetData = new HelmetData({});
 
-const NewSessionForm = () => {
+const NewSessionForm = ({ source = "profile/" }) => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
-  const inputRef = useRef();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  if (!currentUser) {
+  if (!currentUser.id) {
     const validateFields = () => {
       var message = "";
       if (!name) {
@@ -30,11 +29,6 @@ const NewSessionForm = () => {
         return true;
       }
     };
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let path;
-    const source = urlParams.get("source");
 
     async function handleSubmit(e) {
       e.preventDefault();
@@ -70,18 +64,8 @@ const NewSessionForm = () => {
           return;
         }
 
-        switch (source) {
-          case "new-survey":
-            path = "/surveys/new";
-            break;
-          default:
-            path = `/users/${user.id}`;
-            break;
-        }
-
-        sessionStorage.setItem("sessionToken", user.session_token);
         setCurrentUser(user);
-        navigate(path);
+        navigate(source);
       }
     }
 
@@ -103,19 +87,12 @@ const NewSessionForm = () => {
               </div>
               <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
                 Need to create an account?{" "}
-                <a
-                  href=""
+                <Link
+                  to="/register"
                   className="text-sm text-blue-500 underline hover:text-white"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate(
-                      "/register" +
-                        (source === "new-survey" ? "?source=new-survey" : "")
-                    );
-                  }}
                 >
                   Register
-                </a>
+                </Link>
               </span>
               <div className="p-6 mt-8">
                 <form action="#">
@@ -161,9 +138,6 @@ const NewSessionForm = () => {
         </div>
       </>
     );
-  } else {
-    navigate(`/users/${currentUser.id}`);
-    return null;
   }
 };
 export default NewSessionForm;

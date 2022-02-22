@@ -30,7 +30,7 @@ const NewSurveyForm = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (title && currentUser) {
+    if (title) {
       // get the csrf token
       const token = document.querySelector("[name=csrf-token]").content;
       // send the post request
@@ -59,8 +59,6 @@ const NewSurveyForm = () => {
       }
 
       navigate(`/surveys/edit/${survey.id}`);
-    } else {
-      alert("please register/login and/or name your survey!");
     }
   }
 

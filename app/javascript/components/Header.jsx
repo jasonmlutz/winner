@@ -30,7 +30,6 @@ const Header = ({ hideHeader = false }) => {
 
   async function handleLogout() {
     const token = document.querySelector("[name=csrf-token]").content;
-    const sessionToken = sessionStorage.getItem("sessionToken");
 
     await fetch(`/api/session`, {
       method: "DELETE",
@@ -38,16 +37,12 @@ const Header = ({ hideHeader = false }) => {
         "X-CSRF-TOKEN": token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        session_token: sessionToken,
-      }),
     }).catch((error) => {
       window.alert(error);
       return;
     });
 
-    sessionStorage.setItem("sessionToken", "");
-    setCurrentUser(null);
+    setCurrentUser({});
     navigate("/login");
     alert("logout successful");
   }
@@ -211,22 +206,13 @@ const Header = ({ hideHeader = false }) => {
                             role="menuitem"
                             onClick={(e) => {
                               e.preventDefault();
-                              navigate(`/users/${currentUser.id}`);
+                              navigate(`/profile`);
                             }}
                           >
                             <span className="flex flex-col">
                               <span>My Profile</span>
                             </span>
                           </a>
-                          {/* <a
-                            href="#"
-                            className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                            role="menuitem"
-                          >
-                            <span className="flex flex-col">
-                              <span>UserAction2</span>
-                            </span>
-                          </a> */}
                           <a
                             href="#"
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"

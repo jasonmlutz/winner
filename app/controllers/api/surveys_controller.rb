@@ -2,11 +2,14 @@ class Api::SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :update, :destroy]
   wrap_parameters false
 
-  # GET /api/users/:user_id/surveys
+  # GET /api/users/:user_id/surveys 
   # GET /api/surveys
   def index
     if params[:user_id]
       @surveys = User.find(params[:user_id]).surveys
+      if current_user.id != params[:user_id]
+        @surveys = @surveys.to_a.select {|survey| survey.publish}
+      end
     else
       @surveys = Survey.all
     end
