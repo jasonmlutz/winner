@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NotFound = ({ path = "/" }) => {
-  const navigate = useNavigate();
-
   return (
     <div className="bg-indigo-900 relative overflow-hidden h-screen">
       <img
