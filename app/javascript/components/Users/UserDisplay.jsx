@@ -209,31 +209,16 @@ const UserDisplay = () => {
                   Loading ...
                 </h1>
                 <h2 className="text-md text-gray-400"></h2>
-                <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">
-                  <div className="flex items-center w-full md:w-2/3 space-x-4">
-                    <div className="w-1/2">
-                      <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[100px]"></div>
-                    </div>
-                    <div className="w-1/2">
-                      <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[100px]"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4"></div>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
                   <div className="w-full">
                     <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[165px]"></div>
                     <div className="text-white"></div>
                   </div>
+                  <div className="w-full pb-4">
+                    <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[165px]"></div>
+                    <div className="text-white"></div>
+                  </div>
                 </div>
-                <div className="w-full">
-                  <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[165px]"></div>
-                  <div className="text-white"></div>
-                </div>
-              </div>
-              <div className="w-full pb-4">
-                <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[165px]"></div>
-                <div className="text-white"></div>
               </div>
             </div>
           </div>

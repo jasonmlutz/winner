@@ -296,7 +296,6 @@ const Profile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4"></div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
                     <div className="w-full">
                       <div className="shadow-lg px-4 py-6 w-full bg-gray-800 opacity-90 rounded animate-pulse relative h-[165px]"></div>
