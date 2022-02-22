@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFound = ({ path = "/" }) => {
+const NotFound = ({
+  path = "/",
+  notFoundMessage = "It's quiet here ....",
+  navLinkMessage = "Get me out of here!",
+}) => {
   return (
     <div className="bg-indigo-900 relative overflow-hidden h-screen">
       <img
@@ -12,7 +16,7 @@ const NotFound = ({ path = "/" }) => {
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
         <div className="w-full font-mono flex flex-col items-center relative z-10">
           <h1 className="font-extrabold text-3xl lg:text-4xl text-center text-white leading-tight mt-4">
-            It's quiet here ....
+            {notFoundMessage}
           </h1>
           <p className="font-extrabold text-8xl my-28 text-white animate-bounce">
             404
@@ -24,7 +28,7 @@ const NotFound = ({ path = "/" }) => {
             to={path}
             className="text-2xl lg:text-3xl text-center text-white leading-tight my-4 text-blue-500 underline hover:text-blue-700"
           >
-            Get me out of here!
+            {navLinkMessage}
           </Link>
         </div>
       </div>
