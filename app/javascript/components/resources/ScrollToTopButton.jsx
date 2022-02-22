@@ -7,19 +7,17 @@ const ScrollToTopButton = React.forwardRef((props, ref) => {
   className += props.visible ? " bottom-4" : " -bottom-16";
   return (
     <div className={className}>
-      <a
-        href=""
-        onClick={(e) => {
-          e.preventDefault();
+      <div
+        onClick={() => {
           ref.current.scrollTo({
             top: 0,
             behavior: "smooth",
           });
         }}
-        className="rounded-full bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
+        className="cursor-pointer rounded-full bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
       >
         <FiArrowUpCircle />
-      </a>
+      </div>
     </div>
   );
 });

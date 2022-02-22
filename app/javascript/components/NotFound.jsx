@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const NotFound = ({ path = "/" }) => {
   const navigate = useNavigate();
@@ -22,16 +22,12 @@ const NotFound = ({ path = "/" }) => {
           <h1 className="font-extrabold text-3xl lg:text-4xl text-center text-white leading-tight mb-4">
             Too quiet ...
           </h1>
-          <a
-            href=""
+          <Link
+            to={path}
             className="text-2xl lg:text-3xl text-center text-white leading-tight my-4 text-blue-500 underline hover:text-blue-700"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(path);
-            }}
           >
             Get me out of here!
-          </a>
+          </Link>
         </div>
       </div>
     </div>
