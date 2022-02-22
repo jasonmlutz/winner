@@ -6,7 +6,7 @@ const helmetData = new HelmetData({});
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const NewUserForm = ({ source = "profile/" }) => {
+const NewUserForm = ({ source = "profile", setType, message }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
@@ -95,16 +95,16 @@ const NewUserForm = ({ source = "profile/" }) => {
         <div className="container mx-auto relative z-10 mt-20 w-4/5 md:w-3/5 lg:w-2/5 xl:w-2/5">
           <div className="flex flex-col content-center relative z-10">
             <div className="self-center mb-2 text-xl font-light text-gray-800 dark:text-white">
-              Create a new account
+              {message || "Create a new account"}
             </div>
             <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
               Already have an account?{" "}
-              <Link
-                className="text-sm text-blue-500 underline hover:text-white"
-                to="/login"
+              <div
+                className="cursor-pointer text-sm text-blue-500 underline hover:text-white"
+                onClick={() => setType("login")}
               >
                 Sign in
-              </Link>
+              </div>
             </span>
             <div className="p-6 mt-8">
               <form action="#">

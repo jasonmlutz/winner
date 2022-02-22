@@ -4,8 +4,7 @@ import { useRoutes } from "react-router-dom";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 import Landing from "./Landing";
-import NewSessionForm from "./Sessions/NewSessionForm";
-import NewUserForm from "./Users/NewUserForm";
+import Auth from "./Auth";
 
 import Profile from "./Users/Profile";
 import UserDisplay from "./Users/UserDisplay";
@@ -87,11 +86,17 @@ const App = () => {
     // there is no current user
     routes = useRoutes([
       { path: "/", element: <Landing /> },
-      { path: "register/", element: <NewUserForm /> },
-      { path: "login/", element: <NewSessionForm /> },
+      { path: "register/", element: <Auth initialState="register" /> },
+      { path: "login/", element: <Auth /> },
+      { path: "auth/", element: <Auth /> },
       {
         path: "profile/",
-        element: <NewSessionForm source={location.pathname} />,
+        element: (
+          <Auth
+            source={location.pathname}
+            message="Account required to access this resource."
+          />
+        ),
       },
       {
         path: "users/",
@@ -106,26 +111,51 @@ const App = () => {
           { path: "", element: <SurveysContainer /> },
           {
             path: "new",
-            element: <NewSessionForm source={location.pathname} />,
+            element: (
+              <Auth
+                source={location.pathname}
+                message="Account required to access this resource."
+              />
+            ),
           },
           {
             path: ":survey_id",
-            element: <NewSessionForm source={location.pathname} />,
+            element: (
+              <Auth
+                source={location.pathname}
+                message="Account required to access this resource."
+              />
+            ),
           },
           {
             path: ":survey_id/responses",
-            element: <NewSessionForm source={location.pathname} />,
+            element: (
+              <Auth
+                source={location.pathname}
+                message="Account required to access this resource."
+              />
+            ),
           },
           {
             path: "edit/:id/",
             children: [
               {
                 path: "",
-                element: <NewSessionForm source={location.pathname} />,
+                element: (
+                  <Auth
+                    source={location.pathname}
+                    message="Account required to access this resource."
+                  />
+                ),
               },
               {
                 path: ":timestamp",
-                element: <NewSessionForm source={location.pathname} />,
+                element: (
+                  <Auth
+                    source={location.pathname}
+                    message="Account required to access this resource."
+                  />
+                ),
               },
             ],
           },
@@ -133,7 +163,12 @@ const App = () => {
       },
       {
         path: "responses/:response_id",
-        element: <NewSessionForm source={location.pathname} />,
+        element: (
+          <Auth
+            source={location.pathname}
+            message="Account required to access this resource."
+          />
+        ),
       },
       { path: "*", element: <NotFound pathname={location.pathname} /> },
     ]);

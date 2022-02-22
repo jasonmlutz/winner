@@ -6,8 +6,8 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const helmetData = new HelmetData({});
 
-const NewSessionForm = ({ source = "profile/" }) => {
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+const NewSessionForm = ({ source = "profile", setType, message }) => {
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -82,16 +82,16 @@ const NewSessionForm = ({ source = "profile/" }) => {
         <div className="container mx-auto relative z-10 mt-20 w-4/5 md:w-3/5 lg:w-2/5 xl:w-2/5">
           <div className="flex flex-col content-center relative z-10">
             <div className="self-center mb-2 text-xl font-light text-gray-800 dark:text-white">
-              Welcome back!
+              {message || "Welcome back!"}
             </div>
             <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
               Need to create an account?{" "}
-              <Link
-                to="/register"
-                className="text-sm text-blue-500 underline hover:text-white"
+              <div
+                onClick={() => setType("register")}
+                className="cursor-pointer text-sm text-blue-500 underline hover:text-white"
               >
                 Register
-              </Link>
+              </div>
             </span>
             <div className="p-6 mt-8">
               <form action="#">
