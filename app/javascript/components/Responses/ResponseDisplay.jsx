@@ -212,7 +212,7 @@ const ResponseDisplay = () => {
                         <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                           Respondent:{" "}
                           <Link
-                            to={`/users/${survey.author_id}`}
+                            to={`/users/${response.respondent_id}`}
                             className="text-blue-500 underline hover:text-blue-700"
                           >
                             {response.respondent_name}
