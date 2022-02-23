@@ -1,6 +1,10 @@
 import React from "react";
 
-const ConfirmationModal = ({ modalVisible = false, setModalVisible }) => {
+const ConfirmationModal = ({
+  modalVisible = false,
+  setModalVisible,
+  message,
+}) => {
   return (
     <div className={"" + (modalVisible ? " block" : " hidden")}>
       <div className="z-30 absolute inset-0 bg-black opacity-50"></div>
@@ -21,7 +25,7 @@ const ConfirmationModal = ({ modalVisible = false, setModalVisible }) => {
               ></path>
             </svg>
             <p class="text-gray-600 dark:text-gray-100 text-md py-2 px-6">
-              Please select a response to each question.
+              {message}
             </p>
             <div class="flex items-center justify-between gap-4 w-full mt-8">
               <button
