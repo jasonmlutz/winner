@@ -36,7 +36,7 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <button
-            className="hidden md:display px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="hidden md:block px-4 py-2 text-xs xl:text-sm rounded-xl text-white bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 transition ease-in duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             type="submit"
             onClick={(e) =>
               handleEditSubmit(
@@ -65,7 +65,7 @@ const ResponseOptionDisplay = ({ responseOption, responseOptions }) => {
               )
             }
             type="submit"
-            className="display md:hidden rounded-full p-0 bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
+            className="block md:hidden rounded-full p-0 bg-indigo-500 text-white text-3xl hover:bg-indigo-700"
           >
             <AiOutlineCheckCircle />
           </button>
