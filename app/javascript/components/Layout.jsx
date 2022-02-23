@@ -3,7 +3,7 @@ import React, { createRef, useState } from "react";
 import Header from "./Header";
 import ScrollToTopButton from "./resources/ScrollToTopButton";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, classes = "" }) => {
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   function handleScroll(e) {
@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
       <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
       <div
         ref={ref}
-        className="relative py-[74px] h-screen overflow-auto"
+        className={"relative py-[74px] h-screen overflow-auto" + classes}
         onScroll={(e) => handleScroll(e)}
       >
         {children}
