@@ -15,7 +15,8 @@ const SurveyDisplay = () => {
   const [survey, setSurvey] = useState(null);
   const [title, setTitle] = useState("");
   const [editActive, setEditActive] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [confirmationModalVisible, setConfirmationModalVisible] =
+    useState(false);
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -164,8 +165,8 @@ const SurveyDisplay = () => {
             <>
               <ConfirmationModal
                 deleteCallback={handleDelete}
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
+                modalVisible={confirmationModalVisible}
+                setModalVisible={setConfirmationModalVisible}
               />
               <Layout>
                 <Helmet helmetData={helmetData}>
