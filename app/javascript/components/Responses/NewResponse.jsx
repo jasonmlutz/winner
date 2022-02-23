@@ -4,6 +4,7 @@ import { Helmet, HelmetData } from "react-helmet-async";
 
 import NotFound from "../NotFound";
 import Layout from "../Layout";
+import InformationModal from "../resources/InformationModal";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -14,6 +15,7 @@ const NewResponse = () => {
   const [questions, setQuestions] = useState(null);
   const [responseOptions, setResponseOptions] = useState(null);
   const [answers, setAnswers] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -158,6 +160,30 @@ const NewResponse = () => {
     }
   }
 
+  const renderSubmitButton = () => {
+    if (Object.keys(answers).length === questions.length) {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4 bg-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg cursor-not-allowed"
+          onClick={() => setModalVisible(true)}
+        >
+          Submit
+        </button>
+      );
+    }
+  };
+
   const renderLoading = () => {
     return (
       <Layout>
@@ -218,49 +244,47 @@ const NewResponse = () => {
       }
       // render the response
       return (
-        <Layout>
-          <Helmet helmetData={helmetData}>
-            <title>New Response - Winner</title>
-          </Helmet>
-          <div className="mx-auto w-full">
-            <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
-              <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
-                <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
-                  <h3 className="text-lg leading-6 font-medium text-white">
-                    {survey.title}
-                  </h3>
-                  <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
-                    Author:{" "}
-                    <Link
-                      className="text-blue-500 underline hover:text-blue-700"
-                      to={`/users/${survey.author_id}`}
-                    >
-                      {survey.author_name}
-                    </Link>
-                  </p>
-                  <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
-                    <Link
-                      className="text-blue-500 underline hover:text-blue-700"
-                      to={`/surveys/${survey.id}/responses`}
-                    >
-                      View all responses to this survey
-                    </Link>
-                  </p>
-                </li>
-                {renderQuestions()}
-                <li>
-                  <button
-                    type="submit"
-                    className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </button>
-                </li>
-              </ul>
+        <>
+          <InformationModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
+          <Layout>
+            <Helmet helmetData={helmetData}>
+              <title>New Response - Winner</title>
+            </Helmet>
+            <div className="mx-auto w-full">
+              <div className="pb-24 md:pt-12 px-2 md:px-6 flex flex-col items-center">
+                <ul className="flex flex-col w-full sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-2/5">
+                  <li className="px-4 py-5 sm:px-6 w-full border bg-gray-800 shadow mb-2 rounded-md">
+                    <h3 className="text-lg leading-6 font-medium text-white">
+                      {survey.title}
+                    </h3>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      Author:{" "}
+                      <Link
+                        className="text-blue-500 underline hover:text-blue-700"
+                        to={`/users/${survey.author_id}`}
+                      >
+                        {survey.author_name}
+                      </Link>
+                    </p>
+                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                      <Link
+                        className="text-blue-500 underline hover:text-blue-700"
+                        to={`/surveys/${survey.id}/responses`}
+                      >
+                        View all responses to this survey
+                      </Link>
+                    </p>
+                  </li>
+                  {renderQuestions()}
+                  <li>{renderSubmitButton()}</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </Layout>
+          </Layout>
+        </>
       );
     } else {
       // no survey found; 404
