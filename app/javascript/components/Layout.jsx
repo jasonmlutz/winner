@@ -23,7 +23,7 @@ const Layout = ({ children, classes = "" }) => {
       <ScrollToTopButton visible={showScrollTopButton} ref={ref} />
       <div
         ref={ref}
-        className={"relative py-[74px] h-screen overflow-auto" + classes}
+        className={"relative pt-[74px] h-screen overflow-auto" + classes}
         onScroll={(e) => handleScroll(e)}
       >
         {children}
