@@ -77,7 +77,7 @@ const SurveysContainer = () => {
   } else {
     // fetch in progress or bad server error; render loading
     return (
-      <>
+      <Layout>
         <Helmet helmetData={helmetData}>
           <title>loading ...</title>
         </Helmet>
@@ -123,7 +123,7 @@ const SurveysContainer = () => {
             </ul>
           </div>
         </div>
-      </>
+      </Layout>
     );
   }
 };
