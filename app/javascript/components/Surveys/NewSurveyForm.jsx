@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
+import Layout from "../Layout";
+
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const NewSurveyForm = () => {
