@@ -26,7 +26,8 @@ class Api::UsersController < ApplicationController
     else
       @user = User.new(user_params)
       if @user.save
-        render json: @user.expose("session_token")
+        session[:current_user_id] = @user.id
+        render json: @user.expose
       else
         render json: {error: "object(s) not created"}
       end

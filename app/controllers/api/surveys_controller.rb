@@ -6,7 +6,7 @@ class Api::SurveysController < ApplicationController
   # GET /api/surveys
   def index
     if params[:user_id]
-      @surveys = User.find(params[:user_id]).surveys
+      @surveys = User.find_by(id: params[:user_id]).surveys
       if current_user.id != params[:user_id]
         @surveys = @surveys.to_a.select {|survey| survey.publish}
       end
