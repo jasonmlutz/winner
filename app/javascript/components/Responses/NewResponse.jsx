@@ -191,17 +191,17 @@ const NewResponse = () => {
                     <h3 className="text-lg leading-6 font-medium text-white">
                       Loading ...
                     </h3>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                    <div className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       {""}
                       <div className="text-blue-500 underline hover:text-blue-700">
                         {""}
                       </div>
-                    </p>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-200 italic">
+                    </div>
+                    <div className="mt-1 max-w-2xl text-sm text-gray-200 italic">
                       <div className="text-blue-500 underline hover:text-blue-700">
                         {""}
                       </div>
-                    </p>
+                    </div>
                   </li>
                   <li className="border-gray-100 flex flex-row mb-2">
                     <div className="w-full shadow select-none bg-gray-800 opacity-90 rounded animate-pulse rounded-md p-2 md:p-4 h-[100px]">
