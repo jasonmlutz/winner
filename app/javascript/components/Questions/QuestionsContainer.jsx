@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import NewQuestionForm from "./NewQuestionForm";
 import QuestionDisplay from "./QuestionDisplay";
 
+import { PublishStatusContext } from "../Surveys/SurveyDisplay";
+
 const QuestionsContainer = ({ parent_id }) => {
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
+  const { setPublishStatus } = useContext(PublishStatusContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,6 +33,12 @@ const QuestionsContainer = ({ parent_id }) => {
     fetchData();
     return;
   }, [navigate]);
+
+  useEffect(() => {
+    setPublishStatus((prevState) => {
+      return { ...prevState, numberOfQuestions: questions.length };
+    });
+  }, [questions.length]);
 
   const renderQuestionsContainer = () => {
     if (questions.length) {

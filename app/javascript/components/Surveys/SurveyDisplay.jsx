@@ -17,7 +17,7 @@ import ConfirmationModal from "../resources/ConfirmationModal";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export const ReadyToPublishContext = createContext();
+export const PublishStatusContext = createContext();
 
 const SurveyDisplay = () => {
   const [survey, setSurvey] = useState(null);
@@ -25,7 +25,10 @@ const SurveyDisplay = () => {
   const [editActive, setEditActive] = useState(false);
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
-  const [readyToPublish, setReadyToPublish] = useState(true);
+  const [publishStatus, setPublishStatus] = useState({
+    numberOfQuestions: 0,
+    responseStatus: {},
+  });
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -138,7 +141,7 @@ const SurveyDisplay = () => {
   }, [editActive]);
 
   const renderPublishButton = () => {
-    if (readyToPublish) {
+    if (publishStatus.numberOfQuestions > 0) {
       return (
         <button
           type="submit"
@@ -257,14 +260,14 @@ const SurveyDisplay = () => {
                           </div>
                         )}
                       </li>
-                      <ReadyToPublishContext.Provider
+                      <PublishStatusContext.Provider
                         value={{
-                          readyToPublish,
-                          setReadyToPublish,
+                          publishStatus,
+                          setPublishStatus,
                         }}
                       >
                         <QuestionsContainer parent_id={id} />
-                      </ReadyToPublishContext.Provider>
+                      </PublishStatusContext.Provider>
                       <li>{renderPublishButton()}</li>
                     </ul>
                   </div>
