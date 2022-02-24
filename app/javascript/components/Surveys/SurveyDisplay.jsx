@@ -8,6 +8,7 @@ import QuestionsContainer from "../Questions/QuestionsContainer";
 import Layout from "../Layout";
 import NotFound from "../NotFound";
 import ConfirmationModal from "../resources/ConfirmationModal";
+import InformationModal from "../resources/InformationModal";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -18,6 +19,7 @@ const SurveyDisplay = () => {
   const [editActive, setEditActive] = useState(false);
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
+  const [informationModalVisible, setInformationModalVisible] = useState(false);
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -129,17 +131,25 @@ const SurveyDisplay = () => {
   }, [editActive]);
 
   const questionsReady = () => {
-    return publishStatus.number_of_questions > 0;
+    if (publishStatus) {
+      return publishStatus.number_of_questions > 0;
+    } else {
+      return false;
+    }
   };
 
   const responseOptionsReady = () => {
-    return Object.values(publishStatus.response_options_status).every(
-      (elem) => elem > 1
-    );
+    if (publishStatus) {
+      return Object.values(publishStatus.response_options_status).every(
+        (elem) => elem > 1
+      );
+    } else {
+      return false;
+    }
   };
 
   const renderPublishButton = () => {
-    if (questionsReady && responseOptionsReady()) {
+    if (questionsReady() && responseOptionsReady()) {
       return (
         <button
           type="submit"
@@ -154,7 +164,9 @@ const SurveyDisplay = () => {
         <button
           type="submit"
           className="py-2 px-4 bg-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg cursor-not-allowed"
-          onClick={() => console.log("submit attempt")}
+          onClick={() => {
+            setInformationModalVisible(true);
+          }}
         >
           Publish
         </button>
@@ -201,6 +213,15 @@ const SurveyDisplay = () => {
                 deleteCallback={handleDelete}
                 modalVisible={confirmationModalVisible}
                 setModalVisible={setConfirmationModalVisible}
+              />
+              <InformationModal
+                modalVisible={informationModalVisible}
+                setModalVisible={setInformationModalVisible}
+                message={
+                  questionsReady()
+                    ? "Each question needs at least two response options"
+                    : "Please add at least one question"
+                }
               />
               <Layout>
                 <Helmet helmetData={helmetData}>
