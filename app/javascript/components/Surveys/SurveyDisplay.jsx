@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  createContext,
+} from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { AiFillEdit, AiFillDelete, AiOutlineCheckCircle } from "react-icons/ai";
 import { Helmet, HelmetData } from "react-helmet-async";
@@ -11,12 +17,15 @@ import ConfirmationModal from "../resources/ConfirmationModal";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
+export const ReadyToPublishContext = createContext();
+
 const SurveyDisplay = () => {
   const [survey, setSurvey] = useState(null);
   const [title, setTitle] = useState("");
   const [editActive, setEditActive] = useState(false);
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
+  const [readyToPublish, setReadyToPublish] = useState(true);
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -128,6 +137,30 @@ const SurveyDisplay = () => {
     }
   }, [editActive]);
 
+  const renderPublishButton = () => {
+    if (readyToPublish) {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+          onClick={handlePublish}
+        >
+          Publish
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4 bg-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg cursor-not-allowed"
+          onClick={() => console.log("submit attempt")}
+        >
+          Publish
+        </button>
+      );
+    }
+  };
+
   if (survey) {
     // the fetch returned a (possibly empty) object
     if (survey.id) {
@@ -224,16 +257,15 @@ const SurveyDisplay = () => {
                           </div>
                         )}
                       </li>
-                      <QuestionsContainer parent_id={id} />
-                      <li>
-                        <button
-                          type="submit"
-                          className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                          onClick={handlePublish}
-                        >
-                          Publish
-                        </button>
-                      </li>
+                      <ReadyToPublishContext.Provider
+                        value={{
+                          readyToPublish,
+                          setReadyToPublish,
+                        }}
+                      >
+                        <QuestionsContainer parent_id={id} />
+                      </ReadyToPublishContext.Provider>
+                      <li>{renderPublishButton()}</li>
                     </ul>
                   </div>
                 </div>
