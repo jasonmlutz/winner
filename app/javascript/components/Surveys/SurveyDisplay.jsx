@@ -104,7 +104,6 @@ const SurveyDisplay = () => {
   }
 
   async function handlePublish() {
-    alert("check for valid survey");
     const token = document.querySelector("[name=csrf-token]").content;
     // db push
     await fetch(`/api/surveys/${id}`, {
