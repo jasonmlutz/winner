@@ -17,7 +17,6 @@ const NewSessionForm = ({ source = "/profile", setType, message }) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(document.location.search);
     const source = searchParams.get("source");
-    console.log(source);
     if (source === "logout") {
       navigate("/login");
       setModalVisible(true);
