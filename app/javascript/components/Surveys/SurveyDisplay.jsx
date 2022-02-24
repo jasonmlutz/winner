@@ -72,7 +72,7 @@ const SurveyDisplay = () => {
       return;
     });
 
-    navigate("/profile");
+    navigate("/profile?source=delete");
   }
 
   const inputRef = useRef(null);
