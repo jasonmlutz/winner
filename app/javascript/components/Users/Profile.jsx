@@ -50,7 +50,7 @@ const Profile = () => {
 
   if (user.id) {
     return (
-      <Layout classes="flex items-start justify-between">
+      <Layout classes=" flex items-start justify-between">
         <Helmet helmetData={helmetData}>
           <title>{user.name} - Winner</title>
         </Helmet>
