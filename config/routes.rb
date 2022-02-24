@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
+    get "publish_status/:id", to: "surveys#publish_status", as: :survey_status
     resources :surveys, only: [:index, :show, :create, :destroy, :update] do
       resources :questions, only: [:create, :index]
       resources :response_options, only: [:index]
       resources :responses, only: [:index]
     end
+
 
     resources :questions, only: [:update, :destroy] do
       resources :response_options, only: [:create, :index]

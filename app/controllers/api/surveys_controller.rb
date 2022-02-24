@@ -1,6 +1,20 @@
 class Api::SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :update, :destroy]
+  before_action :set_survey, only: [:show, :update, :destroy, :publish_status]
   wrap_parameters false
+
+  # GET /api/publish_status/:id(.:format)
+  def publish_status
+    if @survey
+      @questions = @survey.questions
+      response_options_status  = {}
+      @questions.each do |question|
+        response_options_status[question.id] = question.response_options.count
+      end
+      render json: {number_of_questions: @questions.count, response_options_status: response_options_status}
+    else
+      render json: {error: "record(s) not found"}
+    end
+  end
 
   # GET /api/users/:user_id/surveys 
   # GET /api/surveys
