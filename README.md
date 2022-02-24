@@ -7,7 +7,7 @@ The main goal of this application is to allow users to create and respond to sur
 - [Demo](#Demo)
 - [Features](#Features)
 - [Tech](#Tech)
-- [User Interface](#UserInterface)
+- [User Interface](#User-Interface)
 
 ## DEMO
 
