@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-  createContext,
-} from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { AiFillEdit, AiFillDelete, AiOutlineCheckCircle } from "react-icons/ai";
 import { Helmet, HelmetData } from "react-helmet-async";
@@ -17,18 +11,13 @@ import ConfirmationModal from "../resources/ConfirmationModal";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export const PublishStatusContext = createContext();
-
 const SurveyDisplay = () => {
-  const [survey, setSurvey] = useState(null);
   const [title, setTitle] = useState("");
+  const [survey, setSurvey] = useState(null);
+  const [publishStatus, setPublishStatus] = useState(null);
   const [editActive, setEditActive] = useState(false);
   const [confirmationModalVisible, setConfirmationModalVisible] =
     useState(false);
-  const [publishStatus, setPublishStatus] = useState({
-    numberOfQuestions: 0,
-    responseStatus: {},
-  });
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -39,30 +28,29 @@ const SurveyDisplay = () => {
 
   const helmetData = new HelmetData({});
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/surveys/${id}`);
+  async function fetchData(url, callback) {
+    const response = await fetch(url);
 
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const survey = await response.json();
-      if (!survey) {
-        window.alert(`Survey with id ${id} not found`);
-        navigate("/surveys/new");
-        return;
-      }
-
-      setSurvey(survey);
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
     }
 
-    fetchData();
+    const data = await response.json();
+    if (!data) {
+      window.alert(`Objects not found at ${url}!`);
+      return;
+    }
 
+    callback(data);
+  }
+
+  useEffect(() => {
+    fetchData(`/api/surveys/${id}`, setSurvey);
+    fetchData(`/api/publish_status/${id}`, setPublishStatus);
     return;
-  }, [params.id, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     if (survey && survey.title) {
@@ -140,8 +128,18 @@ const SurveyDisplay = () => {
     }
   }, [editActive]);
 
+  const questionsReady = () => {
+    return publishStatus.number_of_questions > 0;
+  };
+
+  const responseOptionsReady = () => {
+    return Object.values(publishStatus.response_options_status).every(
+      (elem) => elem > 1
+    );
+  };
+
   const renderPublishButton = () => {
-    if (publishStatus.numberOfQuestions > 0) {
+    if (questionsReady && responseOptionsReady()) {
       return (
         <button
           type="submit"
@@ -260,14 +258,7 @@ const SurveyDisplay = () => {
                           </div>
                         )}
                       </li>
-                      <PublishStatusContext.Provider
-                        value={{
-                          publishStatus,
-                          setPublishStatus,
-                        }}
-                      >
-                        <QuestionsContainer parent_id={id} />
-                      </PublishStatusContext.Provider>
+                      <QuestionsContainer parent_id={id} />
                       <li>{renderPublishButton()}</li>
                     </ul>
                   </div>
