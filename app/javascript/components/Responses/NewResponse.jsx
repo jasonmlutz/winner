@@ -249,6 +249,7 @@ const NewResponse = () => {
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             message="Please select a response to each question."
+            type="caution"
           />
           <Layout>
             <Helmet helmetData={helmetData}>

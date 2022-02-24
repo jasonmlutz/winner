@@ -222,6 +222,7 @@ const SurveyDisplay = () => {
                     ? "Each question needs at least two response options"
                     : "Please add at least one question"
                 }
+                type="caution"
               />
               <Layout>
                 <Helmet helmetData={helmetData}>
