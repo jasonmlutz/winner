@@ -216,7 +216,9 @@ const SurveyDisplay = () => {
                               />
                               <AiFillDelete
                                 className="mx-2 cursor-pointer hover:text-gray-200 hover:border hover:border-gray-200 hover:rounded-md"
-                                onClick={() => setModalVisible(true)}
+                                onClick={() =>
+                                  setConfirmationModalVisible(true)
+                                }
                               />
                             </div>
                           </div>
