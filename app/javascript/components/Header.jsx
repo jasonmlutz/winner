@@ -1,4 +1,3 @@
-// import React, { useState, useEffect } from "react";
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -43,8 +42,7 @@ const Header = ({ hideHeader = false }) => {
     });
 
     setCurrentUser({});
-    navigate("/login");
-    alert("logout successful");
+    navigate("/login?source=logout");
   }
 
   return (

@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import InformationModal from "../resources/InformationModal";
 
 const helmetData = new HelmetData({});
 
@@ -11,6 +12,17 @@ const NewSessionForm = ({ source = "/profile", setType, message }) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(document.location.search);
+    const source = searchParams.get("source");
+    console.log(source);
+    if (source === "logout") {
+      navigate("/login");
+      setModalVisible(true);
+    }
+  }, []);
 
   const validateFields = () => {
     var message = "";
@@ -70,6 +82,12 @@ const NewSessionForm = ({ source = "/profile", setType, message }) => {
 
   return (
     <>
+      <InformationModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        message={"Logout successful!"}
+        type="check"
+      />
       <Helmet helmetData={helmetData}>
         <title>Login - Winner</title>
       </Helmet>{" "}
