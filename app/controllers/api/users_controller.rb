@@ -3,6 +3,16 @@ class Api::UsersController < ApplicationController
   before_action :authenticate_user, only: [:destroy]
   wrap_parameters false
 
+  # GET /api/check_availability/:name
+  def check_availability
+    @user = User.find_by(name: params[:name])
+    if @user
+      render json: {name_available: false}
+    else
+      render json: {name_available: true}
+    end
+  end
+
   # GET /api/users
   def index
     @users = User.all.map { |user| user.expose }
