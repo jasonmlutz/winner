@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :responses, only: [:index]
     end
 
+    get "check_availability/:name", to: "users#check_availability", as: :user_name_availability
+
     resource :session, only: [:create, :show, :destroy]
 
     resources :responses, only: [:show, :create, :destroy] do
