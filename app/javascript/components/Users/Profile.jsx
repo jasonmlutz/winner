@@ -13,6 +13,7 @@ const Profile = () => {
   const [responses, setResponses] = useState([]);
   const [user, setUser] = useState({ name: "" });
   const [modalVisible, setModalVisible] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
   const helmetData = new HelmetData({});
 
@@ -50,6 +51,11 @@ const Profile = () => {
       navigate("/profile");
       setModalVisible(true);
     }
+    if (source === "register") {
+      setWelcomeMessage("Welcome, ");
+    } else {
+      setWelcomeMessage("Welcome back, ");
+    }
   }, []);
 
   useEffect(() => {
@@ -75,7 +81,7 @@ const Profile = () => {
           <div className="flex flex-col w-full md:space-y-4">
             <div className="h-screen pb-24 px-4 md:px-6">
               <h1 className="text-4xl font-semibold text-white">
-                Welcome back,{" "}
+                {welcomeMessage}
                 {user.name.charAt(0).toUpperCase() + user.name.slice(1)}!
               </h1>
               <h2 className="text-md text-gray-400">

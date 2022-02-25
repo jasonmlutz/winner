@@ -83,7 +83,11 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
     }
 
     setCurrentUser(user);
-    navigate(source);
+    if ((source = "/profile")) {
+      navigate("/profile?source=register");
+    } else {
+      navigate(source);
+    }
   }
 
   async function checkAvailability() {
