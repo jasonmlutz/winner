@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 const helmetData = new HelmetData({});
@@ -10,76 +10,208 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
+  const [nameAvailable, setNameAvailable] = useState(false);
+  const [renderLoadingIcon, setRenderLoadingIcon] = useState(false);
+  const [renderNameStatus, setRenderNameStatus] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [renderPasswordStatus, setRenderPasswordStatus] = useState(false);
 
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
 
-  const validateFields = () => {
-    var message = "";
-    if (!name) {
-      message += "Please select a name. ";
-    }
+  var timeout;
 
-    if (!password || !password_confirmation) {
-      message += "Please complete both password fields. ";
-    }
-    if (password !== password_confirmation) {
-      message += "Passwords must match. ";
-    }
-    if (password.length < 6) {
-      message += "Password must be at least 6 characters long.";
-    }
-
-    if (message.length) {
-      window.alert(message);
-      return false;
+  useEffect(() => {
+    if (name.length) {
+      clearTimeout(timeout);
+      setRenderLoadingIcon(true);
+      setRenderNameStatus(false);
+      timeout = setTimeout(() => {
+        checkAvailability();
+      }, 1000);
     } else {
-      return true;
+      setRenderLoadingIcon(false);
+      setRenderNameStatus(false);
     }
-  };
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [name]);
+
+  useEffect(() => {
+    if (password.length && password_confirmation.length) {
+      setRenderPasswordStatus(true);
+      setPasswordsMatch(password === password_confirmation);
+    }
+  }, [password, password_confirmation]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (validateFields()) {
-      const token = document.querySelector("[name=csrf-token]").content;
-      // send the post request
-      const response = await fetch(`/api/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": token,
-        },
-        body: JSON.stringify({
-          name: name,
-          password: password,
-          password_confirmation: password_confirmation,
-        }),
-      });
+    const token = document.querySelector("[name=csrf-token]").content;
+    // send the post request
+    const response = await fetch(`/api/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": token,
+      },
+      body: JSON.stringify({
+        name: name,
+        password: password,
+        password_confirmation: password_confirmation,
+      }),
+    });
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const user = await response.json();
+    if (!user) {
+      window.alert(`No user fetched!`);
+      return;
+    }
+
+    if (user.error) {
+      window.alert(user.error);
+      setPassword("");
+      setPassword_confirmation("");
+      return;
+    }
+
+    setCurrentUser(user);
+    navigate(source);
+  }
+
+  async function checkAvailability() {
+    if (name) {
+      const response = await fetch(`/api/check_availability/${name}`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
         window.alert(message);
+        setRenderLoadingIcon(false);
         return;
       }
 
-      const user = await response.json();
-      if (!user) {
-        window.alert(`No user fetched!`);
-        return;
+      const data = await response.json();
+      if (data.name_available) {
+        setNameAvailable(true);
+      } else {
+        setNameAvailable(false);
       }
 
-      if (user.error) {
-        window.alert(user.error);
-        setPassword("");
-        setPassword_confirmation("");
-        return;
-      }
-
-      setCurrentUser(user);
-      navigate(source);
+      setRenderLoadingIcon(false);
+      setRenderNameStatus(true);
     }
   }
+
+  const loadingIcon = (
+    <svg
+      className="absolute inset-y-0 right-0 z-20 animate-spin m-[5px] h-8 w-8 text-black"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+  );
+
+  const nameStatus = () => {
+    if (nameAvailable) {
+      return (
+        <div className="flex flex-col mb-2 mx-auto">
+          <div
+            className="bg-green-200 border-green-600 text-green-600 border-l-4 p-2 mx-2"
+            role="alert"
+          >
+            <p>{name} is available!</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col mb-2 mx-auto">
+          <div
+            className="bg-yellow-200 border-yellow-600 text-yellow-600 border-l-4 p-4"
+            role="alert"
+          >
+            <p>{name} is not available!</p>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  const passwordStatus = () => {
+    if (passwordsMatch) {
+      return (
+        <div className="flex flex-col mb-2 mx-auto">
+          <div
+            className="bg-green-200 border-green-600 text-green-600 border-l-4 p-2 mx-2"
+            role="alert"
+          >
+            <p>Passwords match!</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col mb-2 mx-auto">
+          <div
+            className="bg-yellow-200 border-yellow-600 text-yellow-600 border-l-4 p-4"
+            role="alert"
+          >
+            <p>Passwords do not match!</p>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  const renderRegisterButton = () => {
+    if (nameAvailable && passwordsMatch) {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          onClick={handleSubmit}
+        >
+          Register
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="submit"
+          className="py-2 px-4 bg-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg cursor-not-allowed"
+          onClick={(e) => e.preventDefault()}
+        >
+          Register
+        </button>
+      );
+    }
+  };
 
   return (
     <>
@@ -107,7 +239,7 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
               </div>
             </span>
             <div className="p-6 mt-8">
-              <form action="#">
+              <form>
                 <div className="flex flex-col mb-2">
                   <div className="relative ">
                     <input
@@ -119,8 +251,10 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
                         setName(e.target.value);
                       }}
                     />
+                    {renderLoadingIcon ? loadingIcon : null}
                   </div>
                 </div>
+                {renderNameStatus ? nameStatus() : null}
                 <div className="flex flex-col mb-2">
                   <div className="relative ">
                     <input
@@ -147,16 +281,8 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
                     />
                   </div>
                 </div>
-
-                <div className="flex w-full my-4">
-                  <button
-                    type="submit"
-                    className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                    onClick={handleSubmit}
-                  >
-                    Register
-                  </button>
-                </div>
+                {renderPasswordStatus ? passwordStatus() : null}
+                <div className="flex w-full my-4">{renderRegisterButton()}</div>
               </form>
             </div>
           </div>
