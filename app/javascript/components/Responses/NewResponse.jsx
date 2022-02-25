@@ -161,7 +161,11 @@ const NewResponse = () => {
   }
 
   const renderSubmitButton = () => {
-    if (Object.keys(answers).length === questions.length) {
+    if (
+      Object.keys(answers).length === questions.length &&
+      currentUser &&
+      currentUser.id
+    ) {
       return (
         <button
           type="submit"
@@ -248,7 +252,11 @@ const NewResponse = () => {
           <InformationModal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            message="Please select a response to each question."
+            message={
+              currentUser && currentUser.id
+                ? "Please select a response to each question."
+                : "You must login to submit a response to this survey!"
+            }
             type="caution"
           />
           <Layout>
@@ -279,6 +287,18 @@ const NewResponse = () => {
                         View all responses to this survey
                       </Link>
                     </p>
+                  </li>
+                  <li>
+                    <div className="flex flex-col mb-2 mx-auto">
+                      <div
+                        className="bg-yellow-200 border-yellow-600 text-yellow-600 border-l-4 p-4"
+                        role="alert"
+                      >
+                        <p>
+                          You must login to submit a response to this survey!
+                        </p>
+                      </div>
+                    </div>
                   </li>
                   {renderQuestions()}
                   <li>{renderSubmitButton()}</li>

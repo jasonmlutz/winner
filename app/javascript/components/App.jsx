@@ -120,12 +120,7 @@ const App = () => {
           },
           {
             path: ":survey_id",
-            element: (
-              <Auth
-                source={location.pathname}
-                message="Account required to access this resource."
-              />
-            ),
+            element: <NewResponse />,
           },
           {
             path: ":survey_id/responses",
