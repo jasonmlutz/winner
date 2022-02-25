@@ -21,7 +21,7 @@ class Api::SurveysController < ApplicationController
   def index
     if params[:user_id]
       @surveys = User.find_by(id: params[:user_id]).surveys
-      if current_user.id != params[:user_id]
+      if !current_user || (current_user.id != params[:user_id])
         @surveys = @surveys.to_a.select {|survey| survey.publish}
       end
     else

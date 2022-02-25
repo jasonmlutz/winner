@@ -92,14 +92,16 @@ const Header = ({ hideHeader = false }) => {
                           <span>All Surveys</span>
                         </span>
                       </Link>
-                      <Link
-                        to="/surveys/new"
-                        className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                      >
-                        <span className="flex flex-col">
-                          <span>Create a Survey</span>
-                        </span>
-                      </Link>
+                      {currentUser && currentUser.id ? (
+                        <Link
+                          to="/surveys/new"
+                          className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                        >
+                          <span className="flex flex-col">
+                            <span>Create a Survey</span>
+                          </span>
+                        </Link>
+                      ) : null}
                       <Link
                         to="/users"
                         className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
@@ -119,12 +121,14 @@ const Header = ({ hideHeader = false }) => {
                     >
                       All Surveys
                     </Link>
-                    <Link
-                      className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
-                      to="/surveys/new"
-                    >
-                      Create a Survey
-                    </Link>
+                    {currentUser && currentUser.id ? (
+                      <Link
+                        className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
+                        to="/surveys/new"
+                      >
+                        Create a Survey
+                      </Link>
+                    ) : null}
                     <Link
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600"
                       to="/users"
@@ -176,18 +180,24 @@ const Header = ({ hideHeader = false }) => {
                             className="block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
                           >
                             <span className="flex flex-col">
-                              <span>My Profile</span>
+                              <span>
+                                {currentUser && currentUser.id
+                                  ? "My Profile"
+                                  : "Register"}
+                              </span>
                             </span>
                           </Link>
-                          <div
-                            className="cursor-pointer block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
-                            role="menuitem"
-                            onClick={() => handleLogout()}
-                          >
-                            <span className="flex flex-col">
-                              <span>Logout</span>
-                            </span>
-                          </div>
+                          {currentUser && currentUser.id ? (
+                            <div
+                              className="cursor-pointer block block px-4 py-2 text-md text-gray-100 hover:text-white hover:bg-gray-600"
+                              role="menuitem"
+                              onClick={() => handleLogout()}
+                            >
+                              <span className="flex flex-col">
+                                <span>Logout</span>
+                              </span>
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>
