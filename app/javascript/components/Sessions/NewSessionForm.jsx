@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetData } from "react-helmet-async";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -146,6 +146,14 @@ const NewSessionForm = ({ source = "/profile", setType, message }) => {
                   >
                     Login
                   </button>
+                </div>
+                <div className="flex w-full my-4">
+                  <Link
+                    className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg w-auto mx-auto"
+                    to="/surveys"
+                  >
+                    Browse surveys as guest
+                  </Link>
                 </div>
               </form>
             </div>
