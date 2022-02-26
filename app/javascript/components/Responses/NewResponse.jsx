@@ -160,6 +160,23 @@ const NewResponse = () => {
     }
   }
 
+  const renderLoginWarning = () => {
+    if (!currentUser || !currentUser.id) {
+      return (
+        <li>
+          <div className="flex flex-col mb-2 mx-auto">
+            <div
+              className="bg-yellow-200 border-yellow-600 text-yellow-600 border-l-4 p-4"
+              role="alert"
+            >
+              <p>You must login to submit a response to this survey!</p>
+            </div>
+          </div>
+        </li>
+      );
+    }
+  };
+
   const renderSubmitButton = () => {
     if (
       Object.keys(answers).length === questions.length &&
@@ -288,18 +305,7 @@ const NewResponse = () => {
                       </Link>
                     </p>
                   </li>
-                  <li>
-                    <div className="flex flex-col mb-2 mx-auto">
-                      <div
-                        className="bg-yellow-200 border-yellow-600 text-yellow-600 border-l-4 p-4"
-                        role="alert"
-                      >
-                        <p>
-                          You must login to submit a response to this survey!
-                        </p>
-                      </div>
-                    </div>
-                  </li>
+                  {renderLoginWarning()}
                   {renderQuestions()}
                   <li>{renderSubmitButton()}</li>
                 </ul>
