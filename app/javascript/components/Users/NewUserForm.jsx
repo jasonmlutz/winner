@@ -210,6 +210,7 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
           type="submit"
           className="py-2 px-4 bg-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg cursor-not-allowed"
           onClick={(e) => e.preventDefault()}
+          disabled
         >
           Register
         </button>
