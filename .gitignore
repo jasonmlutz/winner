@@ -15,6 +15,9 @@
 /log/*
 /tmp/*
 
+# testing
+/coverage
+
 
 /public/assets
 
