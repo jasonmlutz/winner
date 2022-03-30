@@ -28,8 +28,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "app/javascript/**/*.{js,jsx}",
-      "!app/javascript/controllers/**",
+      "app/javascript/components/**/*.{js,jsx}",
+      "app/javascript/index.jsx",
       "!**/node_modules/**",
       "!**/vendor/**"
     ]
