@@ -40,6 +40,11 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
   }, [name]);
 
   useEffect(() => {
+    // TODO requiring password.length is making it so that
+    // when a single 'keypress' (like ⌘+delete or selectAll+delete)
+    // clears a password field, then it could incorrectly
+    // display that the passwords still match, even though
+    // one is empty and the other is not
     if (password.length && password_confirmation.length) {
       setRenderPasswordStatus(true);
       setPasswordsMatch(password === password_confirmation);
