@@ -1,8 +1,19 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "../App";
+
+import { BrowserRouter } from "react-router-dom";
+import App from "../components/App";
+import { CurrentUserProvider } from "../components/contexts/CurrentUserContext";
 
 jest.mock("react-dom", () => ({ render: jest.fn() }));
+jest.mock("../components/App", () => {
+  return function App() {
+    return <div>APP</div>;
+  };
+});
 
 describe("Application root", () => {
   it("should render without crashing", () => {
@@ -12,7 +23,11 @@ describe("Application root", () => {
     require("../index.jsx");
     expect(ReactDOM.render).toHaveBeenCalledWith(
       <React.StrictMode>
-        <App />
+        <BrowserRouter>
+          <CurrentUserProvider>
+            <App />
+          </CurrentUserProvider>
+        </BrowserRouter>
       </React.StrictMode>,
       div
     );
