@@ -58,21 +58,29 @@ it("displays register-themed messaging", () => {
   expect(screen.getByText(/create a new account/i));
 });
 
-it("renders with register button disabled", () => {
-  act(() => {
-    createRoot(container).render(
-      <BrowserRouter>
-        <CurrentUserProvider>
-          <NewUserForm />
-        </CurrentUserProvider>
-      </BrowserRouter>
-    );
-  });
-  expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
+describe("username validation", () => {
+  test.todo("displays when username is unavailable");
+  test.todo("displays when username is available");
 });
-
-test.todo("informs user when username is unavailable");
-
-test.todo("informs user when username is available");
-
+describe("password validation", () => {
+  test.todo("displays when passwords match ");
+  test.todo("displays when passwords do not match");
+  test.todo(
+    "correctly updates password validation message on ⌘+delete/selectAll+delete"
+  );
+});
+describe("register button", () => {
+  it("disabled on initial render", () => {
+    act(() => {
+      createRoot(container).render(
+        <BrowserRouter>
+          <CurrentUserProvider>
+            <NewUserForm />
+          </CurrentUserProvider>
+        </BrowserRouter>
+      );
+    });
+    expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
+  });
+});
 test.todo("user can register");
