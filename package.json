@@ -17,7 +17,7 @@
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
@@ -34,6 +34,10 @@
       "app/javascript/index.jsx",
       "!**/node_modules/**",
       "!**/vendor/**"
-    ]
+    ],
+    "roots": [
+      "<rootDir>/app/javascript"
+    ],
+    "verbose": true
   }
 }
