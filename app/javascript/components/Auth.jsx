@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import NewUserForm from "./Users/NewUserForm";
+import { NewUserForm } from "./Users/NewUserForm";
 import NewSessionForm from "./Sessions/NewSessionForm";
 
 const Auth = ({
