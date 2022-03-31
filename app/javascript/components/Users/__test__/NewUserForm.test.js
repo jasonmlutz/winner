@@ -19,6 +19,16 @@ import { CurrentUserProvider } from "../../contexts/CurrentUserContext";
 // fixing The current testing environment is not configured to support act(...)
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
+const renderNewUserForm = () => {
+  createRoot(container).render(
+    <BrowserRouter>
+      <CurrentUserProvider>
+        <NewUserForm />
+      </CurrentUserProvider>
+    </BrowserRouter>
+  );
+};
+
 it("renders correctly from snapshot", () => {
   const tree = renderer
     .create(
@@ -47,19 +57,20 @@ afterEach(() => {
 
 it("displays register-themed messaging", () => {
   act(() => {
-    createRoot(container).render(
-      <BrowserRouter>
-        <CurrentUserProvider>
-          <NewUserForm />
-        </CurrentUserProvider>
-      </BrowserRouter>
-    );
+    renderNewUserForm();
   });
   expect(screen.getByText(/create a new account/i));
 });
 
 describe("username validation", () => {
-  test.todo("displays when username is unavailable");
+  test("initial state has no username message", () => {
+    act(() => {
+      renderNewUserForm();
+    });
+    const usernameAvailabilityText = screen.queryByText(/available!/i);
+    expect(usernameAvailabilityText).toBeNull();
+  });
+  test("displays when username is unavailable", () => {});
   test.todo("displays when username is available");
 });
 describe("password validation", () => {
@@ -72,13 +83,7 @@ describe("password validation", () => {
 describe("register button", () => {
   it("disabled on initial render", () => {
     act(() => {
-      createRoot(container).render(
-        <BrowserRouter>
-          <CurrentUserProvider>
-            <NewUserForm />
-          </CurrentUserProvider>
-        </BrowserRouter>
-      );
+      renderNewUserForm();
     });
     expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
   });
