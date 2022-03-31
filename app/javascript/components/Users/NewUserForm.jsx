@@ -250,13 +250,18 @@ export const NewUserForm = ({ source = "/profile", setType, message }) => {
               {message || "Create a new account"}
             </div>
             <span className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
-              Already have an account?{" "}
-              <div
+              Already have an account?
+              <br />
+              <a
+                href="#"
                 className="cursor-pointer text-sm text-blue-500 underline hover:text-white"
-                onClick={() => setType("login")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setType("login");
+                }}
               >
                 Sign in
-              </div>
+              </a>
             </span>
             <div className="p-6 mt-8">
               <form>
