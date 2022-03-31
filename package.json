@@ -41,6 +41,9 @@
     "roots": [
       "<rootDir>/app/javascript"
     ],
-    "verbose": true
+    "verbose": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ]
   }
 }
