@@ -6,7 +6,35 @@ const helmetData = new HelmetData({});
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const NewUserForm = ({ source = "/profile", setType, message }) => {
+export async function checkAvailability(
+  name,
+  setNameAvailable,
+  setRenderLoadingIcon,
+  setRenderNameStatus
+) {
+  if (name) {
+    const response = await fetch(`/api/check_availability/${name}`);
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.statusText}`;
+      window.alert(message);
+      setRenderLoadingIcon(false);
+      return;
+    }
+
+    const data = await response.json();
+    if (data.name_available) {
+      setNameAvailable(true);
+    } else {
+      setNameAvailable(false);
+    }
+
+    setRenderLoadingIcon(false);
+    setRenderNameStatus(true);
+  }
+}
+
+export const NewUserForm = ({ source = "/profile", setType, message }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
@@ -28,7 +56,12 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
       setRenderLoadingIcon(true);
       setRenderNameStatus(false);
       timeout = setTimeout(() => {
-        checkAvailability();
+        checkAvailability(
+          name,
+          setNameAvailable,
+          setRenderLoadingIcon,
+          setRenderNameStatus
+        );
       }, 1000);
     } else {
       setRenderLoadingIcon(false);
@@ -92,29 +125,6 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
       navigate("/profile?source=register");
     } else {
       navigate(source);
-    }
-  }
-
-  async function checkAvailability() {
-    if (name) {
-      const response = await fetch(`/api/check_availability/${name}`);
-
-      if (!response.ok) {
-        const message = `An error has occurred: ${response.statusText}`;
-        window.alert(message);
-        setRenderLoadingIcon(false);
-        return;
-      }
-
-      const data = await response.json();
-      if (data.name_available) {
-        setNameAvailable(true);
-      } else {
-        setNameAvailable(false);
-      }
-
-      setRenderLoadingIcon(false);
-      setRenderNameStatus(true);
     }
   }
 
@@ -309,5 +319,3 @@ const NewUserForm = ({ source = "/profile", setType, message }) => {
     </>
   );
 };
-
-export default NewUserForm;
