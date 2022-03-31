@@ -29,7 +29,7 @@ let container;
 beforeEach(() => {
   jest.clearAllTimers(); // without this, timers started by changing username will continue to run into other tests
   jest.clearAllMocks();
-  jest.useFakeTimers();
+  jest.useRealTimers();
   container = document.createElement("div");
   document.body.appendChild(container);
   act(() => {
@@ -210,7 +210,6 @@ describe("DYNAMIC TESTS", () => {
         fetchMock.mockResponseOnce(JSON.stringify({ foo: "bar" }));
         act(() => {
           fireEvent.change(nameInput, { target: { value: "userName" } });
-          jest.runOnlyPendingTimers();
         });
         // `ReferenceError: regeneratorRuntime is not defined` thrown if @babel/polyfill not included
         // `ReferenceError: fetch is not defined` thrown without fetchMock & enableFetchMocks
@@ -218,13 +217,13 @@ describe("DYNAMIC TESTS", () => {
         await expect(moduleNewUserForm.checkAvailability()).resolves.toBe(
           undefined
         );
+        // TODO it's not clear that the expect is actually catching what we want; i.e. is it just catching the resolves above?
         expect(moduleNewUserForm.checkAvailability).toHaveBeenCalledTimes(1);
       });
       test("username available message is correctly displayed", () => {
         fetchMock.mockResponseOnce(JSON.stringify({ name_available: true }));
         act(() => {
           fireEvent.change(nameInput, { target: { value: "userName" } });
-          jest.runOnlyPendingTimers();
         });
       });
       test("username unavailable message is correctly displayed", () => {
@@ -233,7 +232,6 @@ describe("DYNAMIC TESTS", () => {
           fireEvent.change(nameInput, {
             target: { value: "userName" },
           });
-          jest.runOnlyPendingTimers();
         });
       });
     });
