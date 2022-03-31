@@ -1,18 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
-
 import { CurrentUserProvider } from "./components/contexts/CurrentUserContext";
 
-import App from "./components/App";
+export const container = document.getElementById("root");
 
-ReactDOM.render(
+// Create a root.
+const root = ReactDOM.createRoot(container);
+
+// Initial render
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <CurrentUserProvider>
         <App />
       </CurrentUserProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
