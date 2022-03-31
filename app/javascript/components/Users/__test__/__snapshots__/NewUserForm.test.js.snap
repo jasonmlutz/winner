@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly from snapshot 1`] = `
+exports[`STATIC TESTS renders correctly from snapshot 1`] = `
 <div
   className="bg-indigo-900 relative overflow-hidden h-screen"
 >
@@ -26,13 +26,14 @@ exports[`renders correctly from snapshot 1`] = `
         className="self-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400"
       >
         Already have an account?
-         
-        <div
+        <br />
+        <a
           className="cursor-pointer text-sm text-blue-500 underline hover:text-white"
+          href="#"
           onClick={[Function]}
         >
           Sign in
-        </div>
+        </a>
       </span>
       <div
         className="p-6 mt-8"
