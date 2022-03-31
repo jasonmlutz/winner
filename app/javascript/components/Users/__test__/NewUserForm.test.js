@@ -82,5 +82,12 @@ describe("register button", () => {
     });
     expect(screen.getByRole("button", { name: /register/i })).toBeDisabled();
   });
+  test.todo("enabled for valid username and matching passwords");
 });
-test.todo("user can register");
+describe("navigation", () => {
+  test.todo("link to sign in page");
+  test.todo("button to browse as guest");
+});
+describe("registration", () => {
+  test.todo("user can register");
+});
