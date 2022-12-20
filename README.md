@@ -1,17 +1,12 @@
 # WINNER: Create surveys, pick a winner
 
-The main goal of this application is to allow users to create and respond to surveys. The stack consists of [Ruby on Rails](https://rubyonrails.org/) and [React](https://reactjs.org/) and it is deployed to [Heroku](https://www.heroku.com/).
+The main goal of this application is to allow users to create and respond to surveys. The stack consists of [Ruby on Rails](https://rubyonrails.org/) and [React](https://reactjs.org/).
 
 ## TABLE OF CONTENTS
 
-- [Demo](#Demo)
 - [Features](#Features)
 - [Tech](#Tech)
 - [User Interface](#User-Interface)
-
-## DEMO
-
-https://jml-winner.herokuapp.com/
 
 ## FEATURES
 
